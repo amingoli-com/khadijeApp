@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 
 import com.ermile.khadijehapp.Adaptor.Adaptor_Main;
@@ -316,8 +317,11 @@ public class MainActivity extends AppCompatActivity  {
                 String title_news = object_news.getString("title");
                 String content_news = object_news.getString("content");
                 String image_news = meta.getString("thumb");
+                    content_news.replace("\n","");
                 String id_news = object_news.getString("id");
                 String url_news = object_news.getString("link");
+
+                Spanned html_contentNews = Html.fromHtml(content_news);
 
                 itemMains.add(new item_Main(item_Main.NEWS,null,null,
                         null,null,null,null,
@@ -327,7 +331,7 @@ public class MainActivity extends AppCompatActivity  {
                         null,
                         null,null,null,
                         null,null,
-                        image_news,title_news,content_news,id_news,
+                        image_news,title_news,html_contentNews,id_news,
                         null,
                         null,null,null,null));
                 recylerview.setLayoutManager(LayoutManager);

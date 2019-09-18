@@ -1,15 +1,20 @@
 package com.ermile.khadijehapp.api;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.ermile.khadijehapp.Static.lookServer;
 import com.ermile.khadijehapp.Static.url;
 import com.ermile.khadijehapp.utility.Network;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class apiV6 {
 
@@ -97,7 +102,6 @@ public class apiV6 {
         Network.getInstance().addToRequestQueue(getToken);
     }
 
-
     public interface appListener{
         void lestener_link_1(String image,String url);
         void lestener_link_2(String link2Array);
@@ -112,4 +116,94 @@ public class apiV6 {
         void lestener_hr();
     }
 
+    /*Salavat*/
+
+    public static void salawat(final String apikey, final salawatListener salawatListener){
+        StringRequest getToken = new StringRequest(Request.Method.POST, url.salawat, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject mainObject = new JSONObject(response);
+
+                    boolean ok = mainObject.getBoolean("ok");
+                    if (ok){
+                        JSONArray msg = mainObject.getJSONArray("msg");
+                        JSONObject result = mainObject.getJSONObject("result");
+                        int count = result.getInt("count");
+                        salawatListener.saveSalawat(count, String.valueOf(msg));
+                    }else {
+                        JSONArray msg = mainObject.getJSONArray("msg");
+                        salawatListener.errorSalawat(String.valueOf(msg));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    salawatListener.errorSalawat("JSONException: "+e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                salawatListener.errorSalawat("onErrorResponse: "+e);
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("appkey", lookServer.appkey);
+                if (apikey !=null){
+                    headers.put("apikeey",apikey);
+                }
+                return headers;
+            }
+        };
+        Network.getInstance().addToRequestQueue(getToken);
+
+    }
+
+    public interface salawatListener{
+        void saveSalawat(int count,String msgArray);
+        void errorSalawat(String error);
+    }
+
+    /*News*/
+    public static void news(String id,final newsLinstener newsLinstener ){
+        StringRequest getToken = new StringRequest(Request.Method.GET, url.news+id, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject mainObject = new JSONObject(response);
+                    boolean ok = mainObject.getBoolean("ok");
+                    if (ok){
+                        JSONObject result = mainObject.getJSONObject("result");
+                        newsLinstener.resultValueNes(String.valueOf(result));
+                        JSONObject meta = result.getJSONObject("meta");
+                        if (!meta.isNull("gallery")){
+                            JSONArray gallery = meta.getJSONArray("gallery");
+                            newsLinstener.resultGaleryNws(String.valueOf(gallery));
+                        }
+                    }else {
+                        newsLinstener.failedValueNes("ok: "+ok);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    newsLinstener.failedValueNes("JSONException: "+e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                newsLinstener.failedValueNes("VolleyError: "+e);
+            }
+        });
+        Network.getInstance().addToRequestQueue(getToken);
+    }
+
+    public interface newsLinstener{
+        void resultValueNes(String respone);
+        void resultGaleryNws(String responeArray);
+        void failedValueNes(String error);
+    }
 }

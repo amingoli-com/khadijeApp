@@ -2,13 +2,14 @@ package com.ermile.khadijehapp.Item;
 
 public class item_slider {
 
-    String image,title,desc,url;
+    String image,title,desc,url,id;
 
-    public item_slider(String image, String title, String desc, String url) {
+    public item_slider(String image, String title, String desc, String url, String id) {
         this.image = image;
         this.title = title;
         this.desc = desc;
         this.url = url;
+        this.id = id;
     }
 
     public String getImage() {
@@ -41,5 +42,13 @@ public class item_slider {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

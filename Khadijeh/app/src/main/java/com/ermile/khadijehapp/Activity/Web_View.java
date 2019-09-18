@@ -21,7 +21,6 @@ public class Web_View extends AppCompatActivity {
     Map<String, String> sernd_headers = new HashMap<>();
     private String URL = null;
 
-    CollapsingToolbarLayout toolbar;
     SwipeRefreshLayout swipeRefreshLayout;
     WebView webView_object;
 
@@ -35,7 +34,6 @@ public class Web_View extends AppCompatActivity {
         URL = getIntent().getStringExtra("url");
         sernd_headers.put("x-app-request", "android");
 
-        toolbar = findViewById(R.id.tollbar_WebView);
         swipeRefreshLayout = findViewById(R.id.swipRefresh_WebView);
         webView_object = findViewById(R.id.webView_WebView);
 
