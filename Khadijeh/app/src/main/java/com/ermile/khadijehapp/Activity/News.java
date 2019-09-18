@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +20,7 @@ import org.json.JSONObject;
 public class News extends AppCompatActivity {
 
     TextView tite,text_news;
-    SwipeRefreshLayout swipeRefreshLayout;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +28,14 @@ public class News extends AppCompatActivity {
         setContentView(R.layout.activity_news);
 
         final String ID = getIntent().getStringExtra("id");
-        swipeRefreshLayout = findViewById(R.id.swipRefresh_news);
         tite = findViewById(R.id.title_news);
         text_news = findViewById(R.id.text_news);
+        progressBar = findViewById(R.id.progress_news);
 
         text_news.setMovementMethod(new ScrollingMovementMethod());
 
-        swipeRefreshLayout.setRefreshing(true);
         getNews(ID);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getNews(ID);
-            }
-        });
+
 
 
 
@@ -66,7 +62,7 @@ public class News extends AppCompatActivity {
                     JSONObject meta = result.getJSONObject("meta");
                     String thumb = meta.getString("thumb");
 
-                    swipeRefreshLayout.setRefreshing(false);
+                    progressBar.setVisibility(View.GONE);
 
                     tite.setText(title);
                     text_news.setText(html_content);

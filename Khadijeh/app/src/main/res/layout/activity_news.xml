@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.News">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <TextView
+    android:id="@+id/title_news"
+    android:textSize="24sp"
+    android:fontFamily="@font/iransans_bold"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:textColor="#000"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+    <ProgressBar
+        android:id="@+id/progress_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:ignore="ScrollViewCount">
+
+        <TextView
+            android:textColor="#000"
+            android:layout_margin="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:lineHeight="25sp"
+            android:justificationMode="inter_word"
+            android:id="@+id/text_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UnusedAttribute" />
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

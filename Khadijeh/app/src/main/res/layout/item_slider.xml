@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:orientation="vertical"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="210dp"
@@ -17,22 +18,28 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:padding="5dp"
-        android:layout_height="60dp">
+        android:layout_height="70dp">
 
 
         <TextView
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:maxLength="30"
+            android:fontFamily="@font/iransans_bold"
             android:id="@+id/slider_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/slider_desc"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="3dp"
             android:layout_marginRight="5dp"
+            android:textColor="#000"
             android:textSize="12sp"
             android:maxLength="50"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:ignore="RtlHardcoded" />
     </LinearLayout>
 
 </RelativeLayout>

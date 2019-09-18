@@ -4,4 +4,5 @@ public class url {
 
     public static String app = "https://khadije.com/api/v6/app";
     public static String salawat = "https://khadije.com/fa/api/v6/salawat";
+    public static String news = "https://khadije.com/fa/api/v6/posts/get?id=";
 }
