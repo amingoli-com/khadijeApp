@@ -1,6 +1,7 @@
 package com.ermile.khadijehapp.Adaptor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.ermile.khadijehapp.Activity.News;
 import com.ermile.khadijehapp.Item.item_slider;
 import com.ermile.khadijehapp.R;
 
@@ -38,15 +40,28 @@ public class Adaptor_slider extends RecyclerView.Adapter<Adaptor_slider.ViewHold
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         String image = itemSliderList.get(position).getImage();
         String title = itemSliderList.get(position).getTitle();
-        String content = itemSliderList.get(position).getTitle();
+        final String content = itemSliderList.get(position).getTitle();
         if (image != null){
             Glide.with(context).load(image).into(holder.imageViews);
         }
         holder.title.setText(title);
         holder.content.setText(content);
+
+        View.OnClickListener onclickSlied = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goNews = new Intent(context, News.class);
+                goNews.putExtra("id",itemSliderList.get(position).getId());
+                context.startActivity(goNews);
+            }
+        };
+
+        holder.title.setOnClickListener(onclickSlied);
+        holder.content.setOnClickListener(onclickSlied);
+        holder.imageViews.setOnClickListener(onclickSlied);
     }
 
     // total number of rows
@@ -66,6 +81,8 @@ public class Adaptor_slider extends RecyclerView.Adapter<Adaptor_slider.ViewHold
             imageViews = itemView.findViewById(R.id.slider_image);
             title = itemView.findViewById(R.id.slider_title);
             content = itemView.findViewById(R.id.slider_desc);
+
+
         }
 
         @Override
