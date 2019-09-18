@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
 
 import com.ermile.khadijehapp.Adaptor.Adaptor_Main;
 import com.ermile.khadijehapp.Adaptor.Adaptor_slider;
@@ -24,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
 
     RecyclerView recylerview;
@@ -47,69 +48,10 @@ public class MainActivity extends AppCompatActivity {
         adaptor_main = new Adaptor_Main(itemMains, this);
         LayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
 
-        itemMains.add(new item_Main(item_Main.NEWS,null,
-                null,null,
-                null,null,null,
-                null,null,null,null,
-                null,null,null,
-                null,
-                null,null,null,
-                null,null,
-                "https://parsroid.net/wp-content/uploads/2019/07/parsroid-12.png","خبر بخر", String.valueOf(Html.fromHtml("خبر خبر بخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخر")),
-                null,
-                null,null,null));
-        itemMains.add(new item_Main(item_Main.NEWS,null,
-                null,null,
-                null,null,null,
-                null,null,null,null,
-                null,null,null,
-                null,
-                null,null,null,
-                null,null,
-                "https://parsroid.net/wp-content/uploads/2019/07/parsroid-12.png","خبر بخر", String.valueOf(Html.fromHtml("خبر خبر بخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخر")),
-                null,
-                null,null,null));
-        itemMains.add(new item_Main(item_Main.NEWS,null,
-                null,null,
-                null,null,null,
-                null,null,null,null,
-                null,null,null,
-                null,
-                null,null,null,
-                null,null,
-                "https://parsroid.net/wp-content/uploads/2019/07/parsroid-12.png","خبر بخر", String.valueOf(Html.fromHtml("خبر خبر بخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخر")),
-                null,
-                null,null,null));
-        itemMains.add(new item_Main(item_Main.NEWS,null,
-                null,null,
-                null,null,null,
-                null,null,null,null,
-                null,null,null,
-                null,
-                null,null,null,
-                null,null,
-                "https://parsroid.net/wp-content/uploads/2019/07/parsroid-12.png","خبر بخر", String.valueOf(Html.fromHtml("خبر خبر بخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخر")),
-                null,
-                null,null,null));
-        itemMains.add(new item_Main(item_Main.NEWS,null,
-                null,null,
-                null,null,null,
-                null,null,null,null,
-                null,null,null,
-                null,
-                null,null,null,
-                null,null,
-                "https://parsroid.net/wp-content/uploads/2019/07/parsroid-12.png","خبر بخر", String.valueOf(Html.fromHtml("خبر خبر بخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخربخر")),
-                null,
-                null,null,null));
-        recylerview.setLayoutManager(LayoutManager);
-        recylerview.setItemAnimator(new DefaultItemAnimator());
-
-
         apiV6.app(new apiV6.appListener() {
             @Override
             public void lestener_link_1(String image, String url) {
-                Link_1(image);
+                Link_1(image,url);
             }
 
             @Override
@@ -119,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void lestener_link_3_desc(String title,String desc,String image,String url) {
-                Link_3_desc(image,title,desc);
+                Link_3_desc(image,title,desc, url);
             }
 
             @Override
@@ -176,34 +118,38 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     private void slaide(String responeArray){
-        itemMains.add(new item_Main(item_Main.SLIDE,null,
-                null,null,
-                null,null,null,
+
+        itemMains.add(new item_Main(item_Main.SLIDE,null,null,
                 null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
                 null,null,
-                null,null,null,
+                null,null,null,null,
                 null,
-                null,responeArray,null));
+                null,responeArray,null,null));
+
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
 
-    private void Link_1(String img_url){
-        itemMains.add(new item_Main(item_Main.LINK_1,img_url,
-                null,null,
-                null,null,null,
+    private void Link_1(String img_url,String link){
+        itemMains.add(new item_Main(item_Main.LINK_1,img_url,link,
                 null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
                 null,null,
-                null,null,null,
+                null,null,null,null,
                 null,
-                null,null,null));
+                null,null,null,null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -221,17 +167,17 @@ public class MainActivity extends AppCompatActivity {
                 itemLink4.add(new item_link_2_4(image,url));
             }
 
-            itemMains.add(new item_Main(item_Main.LINK_2,null,
-                    itemLink4.get(0).getImage(),itemLink4.get(1).getImage(),
-                    null,null,null,
+            itemMains.add(new item_Main(item_Main.LINK_2,null,null,
+                    itemLink4.get(0).getImage(),itemLink4.get(1).getImage(),itemLink4.get(0).getUrl(),itemLink4.get(1).getUrl(),
                     null,null,null,null,
+                    null,null,null,null,null,null,null,null,
                     null,null,null,
                     null,
                     null,null,null,
                     null,null,
-                    null,null,null,
+                    null,null,null,null,
                     null,
-                    null,null,null));
+                    null,null,null,null));
             recylerview.setLayoutManager(LayoutManager);
             recylerview.setItemAnimator(new DefaultItemAnimator());
 
@@ -244,18 +190,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void Link_3_desc(String img_url,String title,String desc){
-        itemMains.add(new item_Main(item_Main.LINK_Desc,null,
-                null,null,
-                img_url,title,desc,
+    private void Link_3_desc(String img_url,String title,String desc,String link){
+        itemMains.add(new item_Main(item_Main.LINK_Desc,null,null,
                 null,null,null,null,
+                img_url,title,desc,link,
+                null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
                 null,null,
-                null,null,null,
+                null,null,null,null,
                 null,
-                null,null,null));
+                null,null,null,null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -273,17 +219,18 @@ public class MainActivity extends AppCompatActivity {
                 itemLink4.add(new item_link_2_4(image,url));
             }
 
-            itemMains.add(new item_Main(item_Main.LINK_4,null,
-                    null,null,
-                    null,null,null,
-                    itemLink4.get(0).getImage(),itemLink4.get(1).getImage(),itemLink4.get(2).getImage(),itemLink4.get(3).getImage(),
-                    null,null,null,
-                    null,
-                    null,null,null,
-                    null,null,
+            itemMains.add(new item_Main(item_Main.LINK_4,null,null,
+                    null,null,null,null,
+                    null,null,null,null,
+                    itemLink4.get(0).getImage(), itemLink4.get(1).getImage(), itemLink4.get(2).getImage(), itemLink4.get(3).getImage(),
+                    itemLink4.get(0).getUrl(),itemLink4.get(1).getUrl(),itemLink4.get(2).getUrl(),itemLink4.get(3).getUrl(),
                     null,null,null,
                     null,
-                    null,null,null));
+                    null,null,null,
+                    null,null,
+                    null,null,null,null,
+                    null,
+                    null,null,null,null));
             recylerview.setLayoutManager(LayoutManager);
             recylerview.setItemAnimator(new DefaultItemAnimator());
 
@@ -296,65 +243,65 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Title_link(String title,String go,String url){
-        itemMains.add(new item_Main(item_Main.TITEL_link,null,
-                null,null,
-                null,null,null,
+        itemMains.add(new item_Main(item_Main.TITEL_link,null,null,
                 null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,
                 title,go,url,
                 null,
                 null,null,null,
                 null,null,
-                null,null,null,
+                null,null,null,null,
                 null,
-                null,null,null));
+                null,null,null,null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void Title_none(String title){
-        itemMains.add(new item_Main(item_Main.TITEL_NONE,null,
-                null,null,
-                null,null,null,
+        itemMains.add(new item_Main(item_Main.TITEL_NONE,null,null,
                 null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,
                 null,null,null,
                 title,
                 null,null,null,
                 null,null,
-                null,null,null,
+                null,null,null,null,
                 null,
-                null,null,null));
+                null,null,null,null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void salavat(String title,String count,String readText){
-        itemMains.add(new item_Main(item_Main.SALAVAT,null,
-                null,null,
-                null,null,null,
+        itemMains.add(new item_Main(item_Main.SALAVAT,null,null,
                 null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
-                count,readText,title,
+                title,count,readText,
                 null,null,
-                null,null,null,
+                null,null,null,null,
                 null,
-                null,null,null));
+                null,null,null,null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void hadith(String title,String text){
-        itemMains.add(new item_Main(item_Main.HADITH,null,
-                null,null,
-                null,null,null,
+        itemMains.add(new item_Main(item_Main.HADITH,null,null,
                 null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
                 title,text,
-                null,null,null,
+                null,null,null,null,
                 null,
-                null,null,null));
+                null,null,null,null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -369,19 +316,20 @@ public class MainActivity extends AppCompatActivity {
                 String title_news = object_news.getString("title");
                 String content_news = object_news.getString("content");
                 String image_news = meta.getString("thumb");
+                String id_news = object_news.getString("id");
                 String url_news = object_news.getString("link");
 
-                itemMains.add(new item_Main(item_Main.NEWS,null,
-                        null,null,
-                        null,null,null,
+                itemMains.add(new item_Main(item_Main.NEWS,null,null,
                         null,null,null,null,
+                        null,null,null,null,
+                        null,null,null,null,null,null,null,null,
                         null,null,null,
                         null,
                         null,null,null,
                         null,null,
-                        image_news,title_news, String.valueOf(Html.fromHtml(content_news)),
+                        image_news,title_news,content_news,id_news,
                         null,
-                        null,null,null));
+                        null,null,null,null));
                 recylerview.setLayoutManager(LayoutManager);
                 recylerview.setItemAnimator(new DefaultItemAnimator());
             }
@@ -396,17 +344,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void hr(String img_url){
-        itemMains.add(new item_Main(item_Main.HR,null,
-                null,null,
-                null,null,null,
+        itemMains.add(new item_Main(item_Main.HR,null,null,
                 null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
                 null,null,
-                null,null,null,
+                null,null,null,null,
                 img_url,
-                null,null,null));
+                null,null,null,null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
