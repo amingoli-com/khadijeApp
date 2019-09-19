@@ -363,4 +363,27 @@ public class apiV6 {
         void result(String respone);
         void error(String error);
     }
+
+
+    public static void getLanguage(final languageListener languageListener){
+
+        StringRequest getToken = new StringRequest(Request.Method.GET, url.language, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                languageListener.result(String.valueOf(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                languageListener.error("VolleyError: "+e);
+            }
+        });
+        Network.getInstance().addToRequestQueue(getToken);
+
+    }
+
+    public interface languageListener{
+        void result(String respone);
+        void error(String error);
+    }
 }

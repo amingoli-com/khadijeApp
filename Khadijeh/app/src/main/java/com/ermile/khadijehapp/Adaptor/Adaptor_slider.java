@@ -43,7 +43,7 @@ public class Adaptor_slider extends RecyclerView.Adapter<Adaptor_slider.ViewHold
     public void onBindViewHolder(ViewHolder holder, final int position) {
         String image = itemSliderList.get(position).getImage();
         String title = itemSliderList.get(position).getTitle();
-        final String content = itemSliderList.get(position).getTitle();
+        final String content = itemSliderList.get(position).getDesc();
         if (image != null){
             Glide.with(context).load(image).into(holder.imageViews);
         }
