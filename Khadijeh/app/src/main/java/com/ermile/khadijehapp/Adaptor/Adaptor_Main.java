@@ -176,17 +176,6 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-/*    public static class holder_ extends RecyclerView.ViewHolder {
-
-        ImageView imageView_1;
-
-        holder_(View itemView) {
-            super(itemView);
-
-            this.imageView_1 = itemView.findViewById(R.id.link4_imageView1);
-        }
-    }*/
-
     public Adaptor_Main(ArrayList<item_Main> data, Context context ) {
         this.itemMains = data;
         this.mContext = context;
@@ -447,18 +436,12 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                                             Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
                                         }
                                     } catch (JSONException e) {
-                                        int salawatError = Integer.parseInt(object.salavat_count);
-                                        salawatError++;
-                                        ((holder_salavet) holder).count.setText(salawatError);
                                         e.printStackTrace();
                                     }
                                 }
 
                                 @Override
                                 public void errorSalawat(String error) {
-                                    int salawatError = Integer.parseInt(object.salavat_count);
-                                    salawatError++;
-                                    ((holder_salavet) holder).count.setText(salawatError);
                                 }
                             });
                         }

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="25dp"
+    android:layout_marginRight="25dp"
+    android:background="@drawable/bg_radus"
+    android:gravity="center"
+    android:layoutDirection="rtl"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="45dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgSex_del"
+            android:layout_margin="5dp"
+            android:src="@drawable/woman"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"/>
+
+        <TextView
+            android:id="@+id/day_del"
+            android:textAlignment="center"
+            android:textSize="7sp"
+            android:textColor="#000"
+            android:text="7 ماه قبل"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            tools:ignore="SmallSp" />
+
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="12dp">
+
+            <TextView
+                android:id="@+id/plus_del"
+                android:textAlignment="center"
+                android:textSize="9sp"
+                android:textColor="#000"
+                android:text="۶۷۷ "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:padding="0.5dp"
+                android:src="@drawable/heart"
+                android:layout_width="10dp"
+                android:layout_height="10dp"/>
+
+        </LinearLayout>
+
+
+
+        <ImageButton
+            android:id="@+id/btn_like"
+            style="@style/Widget.AppCompat.Button"
+            android:background="#00DDDDDD"
+            android:src="@drawable/heart"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_del"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+
+
+
+
+
+</LinearLayout>

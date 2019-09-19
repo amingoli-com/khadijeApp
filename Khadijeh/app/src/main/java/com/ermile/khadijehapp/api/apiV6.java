@@ -206,4 +206,161 @@ public class apiV6 {
         void resultGaleryNws(String responeArray);
         void failedValueNes(String error);
     }
+
+
+    public static void del(final String apikey, final delListener delListener){
+        StringRequest getToken = new StringRequest(Request.Method.POST, url.del, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject mainObject = new JSONObject(response);
+                    boolean ok = mainObject.getBoolean("ok");
+                    if (ok){
+                        JSONObject result = mainObject.getJSONObject("result");
+                        delListener.result(String.valueOf(result));
+                    }else {
+                        delListener.error("ok: "+ok);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    delListener.error("JSONException: "+e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                delListener.error("VolleyError: "+e);
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("appkey", lookServer.appkey);
+                if (apikey !=null){
+                    headers.put("apikeey",apikey);
+                }
+                return headers;
+            }
+        };
+        Network.getInstance().addToRequestQueue(getToken);
+    }
+
+    public interface delListener{
+        void result(String respone);
+        void error(String error);
+    }
+
+
+    public static void like_del(final String apikey, final String id, final likeListener likeListener){
+        StringRequest getToken = new StringRequest(Request.Method.POST, url.del_like, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject mainObject = new JSONObject(response);
+
+                    boolean ok = mainObject.getBoolean("ok");
+                    if (ok){
+                        JSONArray msg = mainObject.getJSONArray("msg");
+                        JSONObject result = mainObject.getJSONObject("result");
+                        int count = result.getInt("count");
+                        likeListener.liked(String.valueOf(msg));
+                    }else {
+                        JSONArray msg = mainObject.getJSONArray("msg");
+                        likeListener.filed(String.valueOf(msg));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    likeListener.filed("JSONException: "+e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                likeListener.filed("onErrorResponse: "+e);
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("appkey", lookServer.appkey);
+                headers.put("like", id);
+                if (apikey !=null){
+                    headers.put("apikeey",apikey);
+                }
+                return headers;
+            }
+        };
+        Network.getInstance().addToRequestQueue(getToken);
+    }
+
+    public interface likeListener{
+        void liked(String respone);
+        void filed(String error);
+    }
+
+
+    public static void sendDel(final String apikey, final String text, final String mobile, final String switchGender, final sendelListener sendelListener){
+        StringRequest getToken = new StringRequest(Request.Method.POST, url.del_like, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject mainObject = new JSONObject(response);
+
+                    boolean ok = mainObject.getBoolean("ok");
+                    if (ok){
+                        JSONArray msg = mainObject.getJSONArray("msg");
+                        JSONObject result = mainObject.getJSONObject("result");
+                        int count = result.getInt("count");
+                        sendelListener.result(String.valueOf(msg));
+                    }else {
+                        JSONArray msg = mainObject.getJSONArray("msg");
+                        sendelListener.result(String.valueOf(msg));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    sendelListener.error("JSONException: "+e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                sendelListener.error("onErrorResponse: "+e);
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("appkey", lookServer.appkey);
+                if (apikey !=null){
+                    headers.put("apikeey",apikey);
+                }
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String,String> body = new HashMap<>();
+                body.put("desc",text);
+                if (mobile !=null){
+                    body.put("mobile",mobile);
+                }
+                if (switchGender !=null){
+                    body.put("switchGender",switchGender);
+                }
+                return body;
+            }
+        };
+        Network.getInstance().addToRequestQueue(getToken);
+    }
+
+    public interface sendelListener{
+        void result(String respone);
+        void error(String error);
+    }
 }

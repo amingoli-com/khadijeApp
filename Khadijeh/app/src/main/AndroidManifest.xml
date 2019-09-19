@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.Splash"></activity>
+        <activity android:name=".Activity.Add_Delneveshte"></activity>
+        <activity android:name=".Activity.Splash" />
         <activity android:name=".Activity.Intro" />
         <activity android:name=".Activity.Delneveshte" />
         <activity android:name=".Activity.ApiView" />
