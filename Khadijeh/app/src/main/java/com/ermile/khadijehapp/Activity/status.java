@@ -17,6 +17,5 @@ public class status extends AppCompatActivity {
         setContentView(R.layout.activity_status);
 
         finish();
-        startActivity(new Intent(this,Splash.class));
     }
 }

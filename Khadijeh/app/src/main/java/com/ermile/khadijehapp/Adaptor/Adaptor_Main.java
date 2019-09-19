@@ -558,7 +558,6 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 break;
             case "lang":
                 mContext.startActivity(new Intent(mContext,Language.class));
-                ((Activity)mContext).finish();
                 break;
 
             default:

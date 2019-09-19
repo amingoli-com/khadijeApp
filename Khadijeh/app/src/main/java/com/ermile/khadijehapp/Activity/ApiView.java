@@ -36,7 +36,8 @@ public class ApiView extends AppCompatActivity {
             @Override
             public void result(String respone) {
                 try {
-                    JSONObject result = new JSONObject(respone);
+                    JSONObject main = new JSONObject(respone);
+                    JSONObject result = main.getJSONObject("result");
                     String content = result.getString("content");
                     Spanned html_content = Html.fromHtml(content);
                     String title = result.getString("title");
