@@ -1,9 +1,17 @@
 package com.ermile.khadijehapp.Activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +24,7 @@ import com.ermile.khadijehapp.api.Token;
 import com.ermile.khadijehapp.utility.CheckVersion;
 import com.ermile.khadijehapp.utility.Dialog;
 import com.ermile.khadijehapp.utility.SaveManager;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -25,16 +34,24 @@ import static com.ermile.khadijehapp.utility.SaveManager.appLanguage;
 
 public class Splash extends AppCompatActivity {
 
-    Handler handler = new Handler();
-    Runnable runnable;
+    LinearLayout linearLayout;
+
+    final Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            finish();
+            startActivity(getIntent());
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         setAppLanguage();
-
+        linearLayout = findViewById(R.id.linear_splash);
     }
 
 
@@ -44,6 +61,7 @@ public class Splash extends AppCompatActivity {
             setFirstLanguages();
         }
         else {
+            setLocale(AppLanguage);
             setSettingApp();
         }
 
@@ -55,6 +73,7 @@ public class Splash extends AppCompatActivity {
             case "ar":
                 SaveManager.get(this).change_appLanguage(language_device);
                 SaveManager.get(this).change_LanguageByUser(false);
+                setLocale(language_device);
                 setSettingApp();
                 break;
             default:
@@ -63,6 +82,15 @@ public class Splash extends AppCompatActivity {
                 setSettingApp();
                 break;
         }
+    }
+
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
     }
     private void setSettingApp(){
         GetAndroidDetail.GetJson(new GetAndroidDetail.JsonLocalListener() {
@@ -73,6 +101,7 @@ public class Splash extends AppCompatActivity {
 
             @Override
             public void onGetJson_error(String error) {
+                SnackBar();
             }
 
         });
@@ -80,7 +109,6 @@ public class Splash extends AppCompatActivity {
     private void choseLanguage(String respone){
         Boolean changeLanguageByUser = SaveManager.get(this).getboolen_appINFO().get(SaveManager.changeLanguageByUser);
         if (changeLanguageByUser){
-            handler.removeCallbacks(runnable);
             finish();
             startActivity( new Intent(this, Language.class));
         }else {
@@ -109,7 +137,7 @@ public class Splash extends AppCompatActivity {
 
                 @Override
                 public void onTokenFailed(String error) {
-                    nextActivity();
+                    SnackBar();
                 }
             });
         }
@@ -126,7 +154,7 @@ public class Splash extends AppCompatActivity {
 
             @Override
             public void FiledUserAdd(Boolean FiledUserAdd) {
-                nextActivity();
+                SnackBar();
             }
         }, getApplicationContext(), Token);
     }
@@ -143,9 +171,21 @@ public class Splash extends AppCompatActivity {
         }
     }
 
-    /*private void errorNet(String title,String desc,String btnTitle){
-        new Dialog(Splash.this,title,desc,btnTitle,false,null);
-    }*/
+    private void SnackBar() {
+        Snackbar snackbar = Snackbar.make(linearLayout, getString(R.string.errorNet_title_snackBar), Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(R.string.errorNet_button_snackBar), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                        startActivity(getIntent());
+                    }
+                });
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.setDuration(10*1000);
+        snackbar.show();
+        handler.postDelayed(runnable,11*1000);
 
+
+    }
 
 }

@@ -154,6 +154,8 @@ public class Intro extends AppCompatActivity {
 
             @Override
             public void onGetJson_error(String error) {
+                finish();
+                startActivity(new Intent(getApplicationContext(),errorNet.class));
             }
 
         });

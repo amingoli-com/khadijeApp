@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.ermile.khadijehapp.Activity.ApiView;
+import com.ermile.khadijehapp.Activity.Language;
+import com.ermile.khadijehapp.Activity.ListNews;
 import com.ermile.khadijehapp.Activity.News;
 import com.ermile.khadijehapp.Activity.Web_View;
 import com.ermile.khadijehapp.Item.item_Main;
@@ -176,6 +180,20 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    public static class holder_language extends RecyclerView.ViewHolder {
+
+        ImageView imageView;
+        LinearLayout linearLayout;
+        TextView textView;
+
+        holder_language(View itemView) {
+            super(itemView);
+            this.textView = itemView.findViewById(R.id.text_language);
+            this.linearLayout = itemView.findViewById(R.id.line_language);
+            this.imageView = itemView.findViewById(R.id.img_language);
+        }
+    }
+
     public Adaptor_Main(ArrayList<item_Main> data, Context context ) {
         this.itemMains = data;
         this.mContext = context;
@@ -222,6 +240,9 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             case item_Main.HR:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hr, parent, false);
                 return new Adaptor_Main.holder_hr(view);
+            case item_Main.LANGUAGE:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_change_language, parent, false);
+                return new Adaptor_Main.holder_language(view);
 
         }
         return null;
@@ -256,6 +277,8 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 return item_Main.NEWS;
             case 0:
                 return item_Main.HR;
+            case 2000:
+                return item_Main.LANGUAGE;
             default:
                 return -1;
         }
@@ -270,10 +293,21 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         View.OnClickListener link = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                go.putExtra("url",view.getTag().toString());
-                mContext.startActivity(go);
+
+
+                switch (view.getTag().toString()){
+                    case "news":
+                        mContext.startActivity(new Intent(mContext, ListNews.class));
+                        break;
+                        default:
+                            go.putExtra("url",view.getTag().toString());
+                            mContext.startActivity(go);
+                            break;
+                }
             }
         };
+
+        final String url_salawat = mContext.getString(R.string.url_salawat);
 
         final item_Main object = itemMains.get(listPosition);
         if (object != null) {
@@ -324,8 +358,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_link1) holder).imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            go.putExtra("url",object.link1_url);
-                            mContext.startActivity(go);
+                            swiech(object.link1_url);
                         }
                     });
                     break;
@@ -337,15 +370,14 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_link2) holder).imageView_1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            go.putExtra("url",object.link2_url_1);
-                            mContext.startActivity(go);
+                            swiech(object.link2_url_1);
                         }
                     });
                     ((holder_link2) holder).imageView_2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            go.putExtra("url",object.link2_url_2);
-                            mContext.startActivity(go);
+                            swiech(object.link2_url_2);
+
                         }
                     });
                     break;
@@ -373,42 +405,44 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         ((holder_link4)holder).imageView_1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                go.putExtra("url",object.l4_url_1);
-                                mContext.startActivity(go);
+                                swiech(object.l4_url_1);
                             }
                         });
                         ((holder_link4)holder).imageView_2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                go.putExtra("url",object.l4_url_2);
-                                mContext.startActivity(go);
+                                swiech(object.l4_url_2);
                             }
                         });
                         ((holder_link4)holder).imageView_3.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                go.putExtra("url",object.l4_url_3);
-                                mContext.startActivity(go);
+                                swiech(object.l4_url_3);
                             }
                         });
                         ((holder_link4)holder).imageView_4.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                go.putExtra("url",object.l4_url_4);
-                                mContext.startActivity(go);
+                                swiech(object.l4_url_4);
                             }
                         });
                         break;
+
+
 
                 case item_Main.TITEL_link:
                     ((holder_title_link) holder).title.setText(object.titleLink_title);
                     ((holder_title_link) holder).go.setText(object.titleLink_go);
 
-                    ((holder_title_link) holder).title.setTag(object.titleLink_url);
-                    ((holder_title_link) holder).go.setTag(object.titleLink_url);
+                    View.OnClickListener links = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            swiech(object.titleLink_url);
+                        }
+                    };
 
-                    ((holder_title_link) holder).title.setOnClickListener(link);
-                    ((holder_title_link) holder).go.setOnClickListener(link);
+                    ((holder_title_link) holder).title.setOnClickListener(links);
+                    ((holder_title_link) holder).go.setOnClickListener(links);
 
                     break;
 
@@ -418,13 +452,13 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                 case item_Main.SALAVAT:
                     ((holder_salavet) holder).count.setText(object.salavat_count);
-                    ((holder_salavet) holder).readText.setText(object.salavat_readText);
+                    ((holder_salavet) holder).readText.setText(mContext.getString(R.string.say_salawat));
 
                     View.OnClickListener salawat = new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             String apikey = SaveManager.get(mContext).getstring_appINFO().get(SaveManager.apiKey);
-                            apiV6.salawat(apikey, new apiV6.salawatListener() {
+                            apiV6.salawat(url_salawat,apikey, new apiV6.salawatListener() {
                                 @Override
                                 public void saveSalawat(int count, String msgArray) {
                                     ((holder_salavet) holder).count.setText(String.valueOf(count));
@@ -482,6 +516,20 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 case item_Main.HR:
                     Glide.with(mContext).load(object.hr_url_img).into(((holder_hr) holder).imageView);
                     break;
+                case item_Main.LANGUAGE:
+
+                    View.OnClickListener langOnclick = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ((Activity)mContext).finish();
+                            mContext.startActivity(new Intent(mContext, Language.class));
+                        }
+                    };
+
+                    ((holder_language)holder).imageView.setOnClickListener(langOnclick);
+                    ((holder_language)holder).linearLayout.setOnClickListener(langOnclick);
+                    ((holder_language)holder).textView.setOnClickListener(langOnclick);
+                    break;
             }
         }
     }
@@ -489,6 +537,38 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemCount() {
         return itemMains.size();
+    }
+
+
+    private void swiech(String url){
+
+        Intent goApiView = new Intent(mContext, ApiView.class);
+        Intent goWebView = new Intent(mContext,Web_View.class);
+
+        switch (url){
+            case "mission":
+            case "about":
+            case "contact":
+            case "vision":
+                goApiView.putExtra("url",url);
+                mContext.startActivity(goApiView);
+                break;
+            case "news":
+                mContext.startActivity(new Intent(mContext,ListNews.class));
+                break;
+            case "lang":
+                mContext.startActivity(new Intent(mContext,Language.class));
+                ((Activity)mContext).finish();
+                break;
+
+            default:
+                goWebView.putExtra("url",url);
+                mContext.startActivity(goWebView);
+                break;
+
+
+        }
+
     }
 
 

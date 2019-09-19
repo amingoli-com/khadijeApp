@@ -1,5 +1,6 @@
 package com.ermile.khadijehapp.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -27,6 +28,8 @@ public class News extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
+        String url = getString(R.string.url_news);
+
         final String ID = getIntent().getStringExtra("id");
         tite = findViewById(R.id.title_news);
         text_news = findViewById(R.id.text_news);
@@ -34,7 +37,7 @@ public class News extends AppCompatActivity {
 
         text_news.setMovementMethod(new ScrollingMovementMethod());
 
-        getNews(ID);
+        getNews(url,ID);
 
 
 
@@ -45,8 +48,8 @@ public class News extends AppCompatActivity {
     }
 
 
-    private void getNews(String ID){
-        apiV6.news(ID,new apiV6.newsLinstener() {
+    private void getNews(String url,String ID){
+        apiV6.news(url,ID,new apiV6.newsLinstener() {
             @Override
             public void resultValueNes(String respone) {
                 try {
@@ -80,7 +83,8 @@ public class News extends AppCompatActivity {
 
             @Override
             public void failedValueNes(String error) {
-
+                finish();
+                startActivity(new Intent(getApplicationContext(),errorNet.class));
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.ermile.khadijehapp.api;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,8 +19,9 @@ import java.util.Map;
 
 public class apiV6 {
 
-    public static void app(final appListener appListener){
-        StringRequest getToken = new StringRequest(Request.Method.GET, url.app, new Response.Listener<String>(){
+    public static void app(String url ,final appListener appListener){
+
+        StringRequest mainRQ = new StringRequest(Request.Method.GET,url, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
@@ -60,12 +62,11 @@ public class apiV6 {
                                 appListener.lestener_link_4(String.valueOf(link4_homepage));
                                 break;
 
+                            case "inapplink":
                             case "titlelink":
-                                String titlelink_title,titlelink_image,titlelink_url;
-                                titlelink_title = object_homepage.getString("title");
-                                titlelink_image = object_homepage.getString("image");
-                                titlelink_url = object_homepage.getString("url");
-                                appListener.lestener_title_link(titlelink_title,titlelink_image,titlelink_url);
+                                String titlelink_title = object_homepage.getString("title");
+                                String titlelink_url = object_homepage.getString("link");
+                                appListener.lestener_title_link(titlelink_title,null,titlelink_url);
                                 break;
 
                             case "title":
@@ -86,20 +87,27 @@ public class apiV6 {
                             case "hr":
                                 appListener.lestener_hr();
                                 break;
+
+                            case "change_language":
+                                appListener.lestener_language();
+                                break;
                         }
                     }
 
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    appListener.error();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError e) {
+                appListener.error();
             }
-        });
-        Network.getInstance().addToRequestQueue(getToken);
+        });mainRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Network.getInstance().addToRequestQueue(mainRQ);
     }
 
     public interface appListener{
@@ -114,12 +122,46 @@ public class apiV6 {
         void lestener_slider(String respone);
         void lestener_news(String newsArray);
         void lestener_hr();
+        void lestener_language();
+        void error();
+    }
+
+
+    /*List News*/
+
+    public static void listNews(String url,String limit ,final listNewsListener listNewsListener){
+        StringRequest mainRQ = new StringRequest(Request.Method.GET,url+"?limit="+limit, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject mainObject = new JSONObject(response);
+                    JSONArray result = mainObject.getJSONArray("result");
+                    listNewsListener.lestener_news(String.valueOf(result));
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    listNewsListener.error();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                listNewsListener.error();
+            }
+        });mainRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Network.getInstance().addToRequestQueue(mainRQ);
+    }
+
+    public interface listNewsListener{
+        void lestener_news(String newsArray);
+        void error();
     }
 
     /*Salavat*/
-
-    public static void salawat(final String apikey, final salawatListener salawatListener){
-        StringRequest getToken = new StringRequest(Request.Method.POST, url.salawat, new Response.Listener<String>(){
+    public static void salawat(String url,final String apikey, final salawatListener salawatListener){
+        StringRequest salawayRQ = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
@@ -157,8 +199,8 @@ public class apiV6 {
                 }
                 return headers;
             }
-        };
-        Network.getInstance().addToRequestQueue(getToken);
+        };salawayRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Network.getInstance().addToRequestQueue(salawayRQ);
 
     }
 
@@ -168,8 +210,8 @@ public class apiV6 {
     }
 
     /*News*/
-    public static void news(String id,final newsLinstener newsLinstener ){
-        StringRequest getToken = new StringRequest(Request.Method.GET, url.news+id, new Response.Listener<String>(){
+    public static void news(String url,String id,final newsLinstener newsLinstener ){
+        StringRequest newsRQ = new StringRequest(Request.Method.GET, url+id, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
@@ -198,7 +240,8 @@ public class apiV6 {
                 newsLinstener.failedValueNes("VolleyError: "+e);
             }
         });
-        Network.getInstance().addToRequestQueue(getToken);
+        newsRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Network.getInstance().addToRequestQueue(newsRQ);
     }
 
     public interface newsLinstener{
@@ -208,8 +251,8 @@ public class apiV6 {
     }
 
 
-    public static void del(final String apikey, final delListener delListener){
-        StringRequest getToken = new StringRequest(Request.Method.POST, url.del, new Response.Listener<String>(){
+    public static void del(String url,final String apikey, final delListener delListener){
+        StringRequest getDelRQ = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
@@ -243,8 +286,8 @@ public class apiV6 {
                 }
                 return headers;
             }
-        };
-        Network.getInstance().addToRequestQueue(getToken);
+        };getDelRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Network.getInstance().addToRequestQueue(getDelRQ);
     }
 
     public interface delListener{
@@ -253,8 +296,8 @@ public class apiV6 {
     }
 
 
-    public static void like_del(final String apikey, final String id, final likeListener likeListener){
-        StringRequest getToken = new StringRequest(Request.Method.POST, url.del_like, new Response.Listener<String>(){
+    public static void like_del(String url,final String apikey, final String id, final likeListener likeListener){
+        StringRequest likeDelRQ = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
@@ -293,8 +336,8 @@ public class apiV6 {
                 }
                 return headers;
             }
-        };
-        Network.getInstance().addToRequestQueue(getToken);
+        };likeDelRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Network.getInstance().addToRequestQueue(likeDelRQ);
     }
 
     public interface likeListener{
@@ -303,8 +346,8 @@ public class apiV6 {
     }
 
 
-    public static void sendDel(final String apikey, final String text, final String mobile, final String switchGender, final sendelListener sendelListener){
-        StringRequest getToken = new StringRequest(Request.Method.POST, url.del_like, new Response.Listener<String>(){
+    public static void sendDel(String url,final String apikey, final String text, final String mobile, final String switchGender, final sendelListener sendelListener){
+        StringRequest sendDelRQ = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
@@ -318,7 +361,7 @@ public class apiV6 {
                         sendelListener.result(String.valueOf(msg));
                     }else {
                         JSONArray msg = mainObject.getJSONArray("msg");
-                        sendelListener.result(String.valueOf(msg));
+                        sendelListener.error(String.valueOf(msg));
                     }
 
                 } catch (JSONException e) {
@@ -356,7 +399,8 @@ public class apiV6 {
                 return body;
             }
         };
-        Network.getInstance().addToRequestQueue(getToken);
+        sendDelRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Network.getInstance().addToRequestQueue(sendDelRQ);
     }
 
     public interface sendelListener{
@@ -365,9 +409,9 @@ public class apiV6 {
     }
 
 
-    public static void getLanguage(final languageListener languageListener){
+    public static void getLanguage(String url,final languageListener languageListener){
 
-        StringRequest getToken = new StringRequest(Request.Method.GET, url.language, new Response.Listener<String>(){
+        StringRequest getLangRQ = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 languageListener.result(String.valueOf(response));
@@ -378,7 +422,8 @@ public class apiV6 {
                 languageListener.error("VolleyError: "+e);
             }
         });
-        Network.getInstance().addToRequestQueue(getToken);
+        getLangRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Network.getInstance().addToRequestQueue(getLangRQ);
 
     }
 
@@ -386,4 +431,28 @@ public class apiV6 {
         void result(String respone);
         void error(String error);
     }
+
+    public static void api(String url,final apiListener apiListener){
+
+        StringRequest apiRQ = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                apiListener.result(String.valueOf(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                apiListener.error("VolleyError: "+e);
+            }
+        });
+        apiRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Network.getInstance().addToRequestQueue(apiRQ);
+
+    }
+
+    public interface apiListener{
+        void result(String respone);
+        void error(String error);
+    }
+
 }

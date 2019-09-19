@@ -3,6 +3,7 @@ package com.ermile.khadijehapp.api;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,6 +33,7 @@ public class GetAndroidDetail {
                 jsonLocalListener.onGetJson_error("VolleyError: "+error);
             }
         });
+        get_local.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Network.getInstance().addToRequestQueue(get_local);
 
     }

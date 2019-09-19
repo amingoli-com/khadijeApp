@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.ermile.khadijehapp.Adaptor.Adaptor_del;
@@ -39,9 +40,10 @@ public class Delneveshte extends AppCompatActivity {
 
         recyclerView.setAdapter(adaptorDel);
 
+        String url = getString(R.string.url_del);
         String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
 
-        apiV6.del(apikey,new apiV6.delListener() {
+        apiV6.del(url,apikey,new apiV6.delListener() {
             @Override
             public void result(String respone) {
                 try {
@@ -63,6 +65,8 @@ public class Delneveshte extends AppCompatActivity {
 
             @Override
             public void error(String error) {
+                finish();
+                startActivity(new Intent(getApplicationContext(),errorNet.class));
 
             }
         });

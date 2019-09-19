@@ -3,6 +3,9 @@ package com.ermile.khadijehapp.Adaptor;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ermile.khadijehapp.Activity.Splash;
@@ -20,6 +24,7 @@ import com.ermile.khadijehapp.utility.SaveManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Locale;
 
 public class LanguageAdaptor extends RecyclerView.Adapter<LanguageAdaptor.MyViewHolder> {
 
@@ -55,10 +60,21 @@ public class LanguageAdaptor extends RecyclerView.Adapter<LanguageAdaptor.MyView
             public void onClick(View view) {
                 SaveManager.get(mContext).change_appLanguage(holder.titel.getTag().toString());
                 SaveManager.get(mContext).change_LanguageByUser(false);
+                setLocale(holder.titel.getTag().toString());
+                Intent refresh = new Intent(mContext, Splash.class);
                 ((Activity)mContext).finish();
-                mContext.startActivity(new Intent(mContext, Splash.class));
+                mContext.startActivity(refresh);
             }
         });
+
+    }
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = mContext.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
 
     }
 
@@ -73,7 +89,7 @@ public class LanguageAdaptor extends RecyclerView.Adapter<LanguageAdaptor.MyView
 /*
         ImageView checkLanguage;
 */
-        LinearLayout linrLnaguage;
+        CardView linrLnaguage;
 
 
         public MyViewHolder(View itemView) {

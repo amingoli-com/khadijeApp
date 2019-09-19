@@ -68,11 +68,12 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
                     break;
         }*/
 
+        final String url = context.getString(R.string.url_del_like);
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String apikey = SaveManager.get(context).getstring_appINFO().get(SaveManager.apiKey);
-                apiV6.like_del(apikey, mData.get(position).getId(), new apiV6.likeListener() {
+                apiV6.like_del(url,apikey, mData.get(position).getId(), new apiV6.likeListener() {
                     @Override
                     public void liked(String respone) {
                         try {

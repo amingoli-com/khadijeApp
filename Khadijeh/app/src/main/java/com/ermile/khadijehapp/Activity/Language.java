@@ -1,6 +1,10 @@
 package com.ermile.khadijehapp.Activity;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 public class Language extends AppCompatActivity {
 
@@ -35,6 +40,9 @@ public class Language extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language);
+
+        String url = getString(R.string.url_language);
+
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         /*add RecyclerView and Adapter*/
         relv_Language = findViewById(R.id.lv_Language);
@@ -46,12 +54,12 @@ public class Language extends AppCompatActivity {
         relv_Language.setItemAnimator(new DefaultItemAnimator());
         relv_Language.setHasFixedSize(true);
         relv_Language.setAdapter(mAdapter);
-        GetLanguage();
+        GetLanguage(url);
     }
 
     /*Get Language*/
-    void GetLanguage() {
-        apiV6.getLanguage(new apiV6.languageListener() {
+    void GetLanguage(String url) {
+        apiV6.getLanguage(url,new apiV6.languageListener() {
             @Override
             public void result(String respone) {
                 String appLanguage = SaveManager.get(getApplicationContext()).getstring_appINFO().get(SaveManager.appLanguage);
@@ -87,11 +95,14 @@ public class Language extends AppCompatActivity {
 
             @Override
             public void error(String error) {
-
+                finish();
+                startActivity(new Intent(getApplicationContext(),errorNet.class));
             }
         });
 
 
 
     }
+
+
 }

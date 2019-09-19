@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">موسسه حضرت خدیجه</string>
+
+    <string name="url_app" translatable="false">https://khadije.com/api/v6/app</string>
+    <string name="url_salawat" translatable="false">https://khadije.com/fa/api/v6/salawat</string>
+    <string name="url_news" translatable="false">https://khadije.com/fa/api/v6/posts/get?id=</string>
+    <string name="url_del" translatable="false">https://khadije.com/fa/api/v6/delneveshte</string>
+    <string name="url_add_del" translatable="false">https://khadije.com/fa/api/v6/delneveshte/add</string>
+    <string name="url_del_like" translatable="false">https://khadije.com/fa/api/v6/delneveshte/like</string>
+    <string name="url_token" translatable="false">https://khadije.com/fa/api/v6/token</string>
+    <string name="url_user_add" translatable="false">https://khadije.com/fa/api/v6/android/user/add</string>
+    <string name="url_language" translatable="false">https://khadije.com/fa/api/v6/language</string>
+    <string name="url_notif" translatable="false">https://khadije.com/fa/api/v6/notif</string>
+    <string name="url_smile" translatable="false">https://khadije.com/fa/api/v6/smile</string>
+
+    <string name="errorNet_title_snackBar" translatable="false">اینترنت خود را بررسی کنید!</string>
+    <string name="errorNet_button_snackBar" translatable="false">تلاش مجدد</string>
+
+    <string name="change_language">تغییر زبان</string>
+
+    <string name="say_salawat">صلوات بفرستید!</string>
+    <string name="flag_salawat">شما هم در ختم صلوات شریک باشید</string>
+    <string name="post">https://khadije.com/fa/api/v6/posts</string>
+    <string name="url_vision">https://khadije.com/fa/api/v6/vision</string>
+    <string name="url_mission">https://khadije.com/fa/api/v6/mission</string>
+    <string name="url_contact">https://khadije.com/api/v6/contact</string>
+    <string name="url_about">https://khadije.com/fa/api/v6/about</string>
+</resources>

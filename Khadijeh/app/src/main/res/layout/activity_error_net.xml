@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".Activity.errorNet">
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="250dp">
+
+            <ImageView
+                android:alpha="0.15"
+                android:layout_centerInParent="true"
+                android:src="@drawable/logo"
+                android:layout_width="200dp"
+                android:layout_height="200dp"/>
+
+            <LinearLayout
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:layout_width="150dp"
+                android:layout_height="180dp">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/errornet"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"/>
+
+                <TextView
+                    android:textColor="#E44D08"
+                    android:fontFamily="@font/iransans_bold"
+                    android:textAlignment="center"
+                    android:text="@string/errorNet_title_snackBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/btn_errorner"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_marginBottom="10dp"
+            android:text="@string/errorNet_button_snackBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</LinearLayout>

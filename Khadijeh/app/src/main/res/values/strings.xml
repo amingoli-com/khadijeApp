@@ -1,3 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Khadijeh</string>
+    <string name="app_name" translatable="false">Khadije Charity</string>
+
+    <string name="url_app">https://khadije.com/api/v6/app</string>
+    <string name="url_salawat">https://khadije.com/en/api/v6/salawat</string>
+    <string name="url_news">https://khadije.com/en/api/v6/posts/get?id=</string>
+    <string name="url_del">https://khadije.com/en/api/v6/delneveshte</string>
+    <string name="url_add_del">https://khadije.com/en/api/v6/delneveshte/add</string>
+    <string name="url_del_like">https://khadije.com/en/api/v6/delneveshte/like</string>
+    <string name="url_token">https://khadije.com/en/api/v6/token</string>
+    <string name="url_user_add">https://khadije.com/en/api/v6/android/user/add</string>
+    <string name="url_language">https://khadije.com/en/api/v6/language</string>
+    <string name="url_notif">https://khadije.com/en/api/v6/notif</string>
+    <string name="url_smile">https://khadije.com/enapi/v6/smile</string>
+
+    <string name="errorNet_title_snackBar">Check your internet!</string>
+    <string name="errorNet_button_snackBar">Try Again</string>
+
+    <string name="change_language" translatable="false">Change Language</string>
+
+    <string name="say_salawat" translatable="false">Say Salawat!</string>
+    <string name="flag_salawat" translatable="false">You also partake in salawat</string>
+    <string name="post" translatable="false">https://khadije.com/api/v6/posts</string>
+    <string name="url_mission" translatable="false">https://khadije.com/api/v6/mission</string>
+    <string name="url_vision" translatable="false">https://khadije.com/api/v6/vision</string>
+    <string name="url_contact" translatable="false">https://khadije.com/fa/api/v6/contact</string>
+    <string name="url_about" translatable="false">https://khadije.com/api/v6/about</string>
+
 </resources>

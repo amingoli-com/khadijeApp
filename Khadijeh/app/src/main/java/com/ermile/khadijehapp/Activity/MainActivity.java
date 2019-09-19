@@ -18,6 +18,7 @@ import com.ermile.khadijehapp.Item.item_link_2_4;
 import com.ermile.khadijehapp.Item.item_slider;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
+import com.ermile.khadijehapp.utility.Notif;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import org.json.JSONArray;
@@ -36,17 +37,23 @@ public class MainActivity extends AppCompatActivity  {
     ArrayList<item_Main> itemMains;
 
     @Override
+    protected void onResume() {
+        startService(new Intent(MainActivity.this, Notif.class));
+        super.onResume();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String url_app= getString(R.string.url_app);
         itemMains = new ArrayList<>();
         recylerview = findViewById(R.id.recyclerview);
 
         adaptor_main = new Adaptor_Main(itemMains, this);
         LayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-
-        apiV6.app(new apiV6.appListener() {
+        apiV6.app(url_app,new apiV6.appListener() {
             @Override
             public void lestener_link_1(String image, String url) {
                 Link_1(image,url);
@@ -69,7 +76,7 @@ public class MainActivity extends AppCompatActivity  {
 
             @Override
             public void lestener_title_link(String title,String image,String url) {
-                Title_link(title,"go",url);
+                Title_link(title,null,url);
             }
 
             @Override
@@ -79,7 +86,7 @@ public class MainActivity extends AppCompatActivity  {
 
             @Override
             public void lestener_salavat(int count) {
-                salavat("الهم صلی علی محمد و آل محمد",String.valueOf(count),"فرستاده شده");
+                salavat(getString(R.string.flag_salawat),String.valueOf(count),getString(R.string.say_salawat));
             }
 
             @Override
@@ -99,9 +106,18 @@ public class MainActivity extends AppCompatActivity  {
 
             @Override
             public void lestener_hr() {
-
                 hr(null);
+            }
 
+            @Override
+            public void lestener_language() {
+                changeLanguage();
+            }
+
+            @Override
+            public void error() {
+                finish();
+                startActivity(new Intent(getApplicationContext(),errorNet.class));
             }
         });
 
@@ -288,7 +304,7 @@ public class MainActivity extends AppCompatActivity  {
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
 
-    private void hadith(String title,String text){
+    private void hadith(String title,String link){
         itemMains.add(new item_Main(item_Main.HADITH,null,null,
                 null,null,null,null,
                 null,null,null,null,
@@ -296,7 +312,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 null,null,null,
-                title,text,
+                title,link,
                 null,null,null,null,
                 null,
                 null,null,null,null));
@@ -355,6 +371,22 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,
                 null,null,null,null,
                 img_url,
+                null,null,null,null));
+        recylerview.setLayoutManager(LayoutManager);
+        recylerview.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void changeLanguage(){
+        itemMains.add(new item_Main(item_Main.LANGUAGE,null,null,
+                null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,
+                null,null,null,
+                null,
+                null,null,null,
+                null,null,
+                null,null,null,null,
+                null,
                 null,null,null,null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());

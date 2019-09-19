@@ -5,6 +5,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -97,6 +98,7 @@ public class SingUpUser {
             }
 
         };
+        post_user_add.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Network.getInstance().addToRequestQueue(post_user_add);
     }
 

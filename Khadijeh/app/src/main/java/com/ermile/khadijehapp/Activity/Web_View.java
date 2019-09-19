@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -53,7 +55,8 @@ public class Web_View extends AppCompatActivity {
             webView_object.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
-                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    finish();
+                    startActivity(new Intent(getApplicationContext(),errorNet.class));
                 }
                 // in refresh send header
                 @Override
@@ -61,6 +64,18 @@ public class Web_View extends AppCompatActivity {
                     HashMap<String, String> headerMap = new HashMap<>();
                     headerMap.put("x-app-request", "android");
                     view.loadUrl(url, headerMap);
+
+                    if (url.startsWith("https://khadije.com/pay/") ||
+                            url.startsWith("https://khadije.com/ar/pay/") ||
+                            url.startsWith("https://khadije.com/en/pay/"))
+                    {
+                        Intent browser = new Intent(Intent.ACTION_VIEW);
+                        browser.setData(Uri.parse(url));
+                        startActivity(browser);
+                        finish();
+                        return true;
+                    }
+
 
                     return false;
                 }
