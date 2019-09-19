@@ -41,23 +41,12 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:background="@null"
-        android:text=""
         android:textColor="#1a1414" />
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btn_prav"
         android:visibility="gone"
         android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="@null"
-        android:text=""
-        android:textColor="#1a1414" />
-
-    <Button
-        android:id="@+id/btn_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
