@@ -33,8 +33,10 @@
             <ImageView
                 android:id="@+id/img_salawat"
                 android:src="@drawable/salavat"
+                android:clickable="true"
                 android:layout_width="160dp"
-                android:layout_height="110dp"/>
+                android:layout_height="110dp"
+                android:focusable="true" />
 
 
             <LinearLayout

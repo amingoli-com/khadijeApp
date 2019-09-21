@@ -369,7 +369,7 @@ public class apiV6 {
     }
 
 
-    public static void sendDel(String url,final String apikey, final String text, final String mobile, final String switchGender, final sendelListener sendelListener){
+    public static void sendDel(String url, final String apikey, final String name, final String text, final String mobile, final String switchGender, final sendelListener sendelListener){
         StringRequest sendDelRQ = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
@@ -379,8 +379,6 @@ public class apiV6 {
                     boolean ok = mainObject.getBoolean("ok");
                     if (ok){
                         JSONArray msg = mainObject.getJSONArray("msg");
-                        JSONObject result = mainObject.getJSONObject("result");
-                        int count = result.getInt("count");
                         sendelListener.result(String.valueOf(msg));
                     }else {
                         JSONArray msg = mainObject.getJSONArray("msg");
@@ -418,6 +416,9 @@ public class apiV6 {
                 }
                 if (switchGender !=null){
                     body.put("switchGender",switchGender);
+                }
+                if (switchGender !=null){
+                    body.put("name",name);
                 }
                 return body;
             }

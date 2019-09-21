@@ -33,30 +33,6 @@ public class Add_Delneveshte extends AppCompatActivity {
         sex = findViewById(R.id.sex_del);
         send = findViewById(R.id.send_del);
 
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(Add_Delneveshte.this, getText(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(Add_Delneveshte.this, getNumber(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(Add_Delneveshte.this, getSex(), Toast.LENGTH_SHORT).show();
-
-                apiV6.sendDel(url,apikey, getText(), getNumber(), getSex(), new apiV6.sendelListener() {
-                    @Override
-                    public void result(String respone) {
-                        Toast.makeText(Add_Delneveshte.this, respone, Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void error(String error) {
-                        finish();
-                        startActivity(new Intent(getApplicationContext(),errorNet.class));
-
-                    }
-                });
-            }
-        });
-
-
 
     }
 

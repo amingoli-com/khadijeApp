@@ -28,4 +28,8 @@
     <string name="url_about">https://khadije.com/ar/api/v6/about</string>
     <string name="sex_female">أنثى</string>
     <string name="sex_male">الذكر</string>
+    <string name="edt_name">الإسم اختياري</string>
+    <string name="edt_mobile">الجوال اختياري</string>
+    <string name="edt_writ_del">كتب أصوات قلبك</string>
+    <string name="send">الإرسال</string>
 </resources>

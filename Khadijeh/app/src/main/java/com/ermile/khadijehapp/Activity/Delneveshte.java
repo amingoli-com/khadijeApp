@@ -1,18 +1,33 @@
 package com.ermile.khadijehapp.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Checkable;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ermile.khadijehapp.Adaptor.Adaptor_del;
 import com.ermile.khadijehapp.Item.item_del;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
+import com.ermile.khadijehapp.utility.Database;
 import com.ermile.khadijehapp.utility.SaveManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.nex3z.togglebuttongroup.MultiSelectToggleGroup;
+import com.nex3z.togglebuttongroup.SingleSelectToggleGroup;
+import com.nex3z.togglebuttongroup.button.OnCheckedChangeListener;
+import com.nex3z.togglebuttongroup.button.ToggleButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,11 +42,24 @@ public class Delneveshte extends AppCompatActivity {
     RecyclerView recyclerView;
     Adaptor_del adaptorDel;
     LinearLayoutManager LayoutManager;
+    boolean men = false;
+    String sex = "famale";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delneveshte);
+
+
+        FloatingActionButton fab_del = findViewById(R.id.fab);
+
+        fab_del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                runAlert();
+            }
+        });
+
 
         itemDels = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview_del);
@@ -81,5 +109,92 @@ public class Delneveshte extends AppCompatActivity {
         });
 
 
+    }
+
+
+    private void runAlert() {
+
+        LayoutInflater aInflater = getLayoutInflater();
+        View alertLayout = aInflater.inflate(R.layout.add_del, null);
+
+        final EditText name = alertLayout.findViewById(R.id.addel_edt_name);
+        final EditText number = alertLayout.findViewById(R.id.addel_edt_number);
+        final EditText text = alertLayout.findViewById(R.id.addel_edt_text);
+
+        final ToggleButton a = alertLayout.findViewById(R.id.choice_a);
+        final ToggleButton b = alertLayout.findViewById(R.id.choice_b);
+        a.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public <T extends View & Checkable> void onCheckedChanged(T view, boolean isChecked) {
+
+                if (isChecked){
+                    men = false;
+                    b.setChecked(false);
+                }
+            }
+        });
+
+        b.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public <T extends View & Checkable> void onCheckedChanged(T view, boolean isChecked) {
+
+                if (isChecked){
+                    men = true;
+                    a.setChecked(false);
+                }
+            }
+        });
+
+        new AlertDialog.Builder(this)
+                .setCancelable(true)
+                .setView(alertLayout)
+                .setPositiveButton(getString(R.string.send), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (men){
+                            sex = "male";
+                        }else {
+                            sex = "famale";
+                        }
+
+                        String names = name.getText().toString();
+                        String numbers = number.getText().toString();
+                        String texts = text.getText().toString();
+                        add_del(names,numbers,texts,sex);
+
+                    }
+                })
+
+                .create()
+                .show();
+
+    }
+
+    private void add_del(String name,String number,String text,String sexs){
+
+        Toast.makeText(this, ""+sexs, Toast.LENGTH_SHORT).show();
+        String url = getString(R.string.url_add_del);
+        String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
+        apiV6.sendDel(url, apikey,name, text, number, sexs, new apiV6.sendelListener() {
+            @Override
+            public void result(String respone) {
+                try {
+                    JSONArray array = new JSONArray(respone);
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        String text = object.getString("text");
+                        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void error(String error) {
+
+            }
+        });
     }
 }

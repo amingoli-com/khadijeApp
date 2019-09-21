@@ -10,13 +10,14 @@
     tools:context=".Activity.Add_Delneveshte">
 
 
+
     <EditText
         android:id="@+id/edt_del"
         android:textSize="16dp"
         android:hint="صدای قلبت را بنویس..."
         android:background="@drawable/bg_radus"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="wrap_content"/>
 
 
     <LinearLayout

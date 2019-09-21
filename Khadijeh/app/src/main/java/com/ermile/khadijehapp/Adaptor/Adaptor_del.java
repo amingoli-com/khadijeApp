@@ -117,7 +117,6 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
                                 e.printStackTrace();
                             }
                         }
-
                         @Override
                         public void filed(String error) {
 
