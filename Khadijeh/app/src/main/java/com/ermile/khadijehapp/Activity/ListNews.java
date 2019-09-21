@@ -66,21 +66,29 @@ public class ListNews extends AppCompatActivity {
                 JSONObject object_news = newsArray.getJSONObject(i);
                 String title_news = object_news.getString("title");
                 String content_news = object_news.getString("content");
-                content_news.replace("\n","");
+                content_news.replace("\n -  ","");
                 String id_news = object_news.getString("id");
                 String url_news = object_news.getString("link");
 
+                JSONObject meta = object_news.getJSONObject("meta");
+                String image_news = meta.getString("thumb");
+
                 Spanned html_contentNews = Html.fromHtml(content_news);
+                String text_news = String.valueOf(html_contentNews);
+                if (text_news.length() > 110){
+                    text_news = text_news.substring(0,110) + " ...";
+                }
 
                 itemMains.add(new item_Main(item_Main.NEWS,null,null,
+                        null,null,
                         null,null,null,null,
                         null,null,null,null,
-                        null,null,null,null,null,null,null,null,
+                        null,null,null,null,null,null,null,null,null,null,null,null,
                         null,null,null,
                         null,
                         null,null,null,
                         null,null,
-                        null,title_news,html_contentNews,id_news,
+                        image_news,title_news,text_news,id_news,
                         null,
                         null,null,null,null));
                 recylerview_listNews.setLayoutManager(LayoutManager_list);

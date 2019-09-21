@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="25dp"
     android:layout_marginRight="25dp"
     android:background="@drawable/bg_radus"
-    android:gravity="center"
+    android:gravity="center|top"
     android:layoutDirection="rtl"
     android:layout_height="wrap_content">
 
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="45dp"
-        android:layout_height="match_parent">
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imgSex_del"
@@ -23,64 +25,74 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"/>
 
-        <TextView
-            android:id="@+id/day_del"
-            android:textAlignment="center"
-            android:textSize="7sp"
-            android:textColor="#000"
-            android:text="7 ماه قبل"
-            android:layout_width="match_parent"
-            android:layout_height="12dp"
-            tools:ignore="SmallSp" />
 
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="12dp">
+            android:layout_width="30dp"
+            android:layout_height="30dp">
 
-            <TextView
-                android:id="@+id/plus_del"
-                android:textAlignment="center"
-                android:textSize="9sp"
-                android:textColor="#000"
-                android:text="۶۷۷ "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+
             <ImageView
+                android:layout_centerInParent="true"
                 android:padding="0.5dp"
                 android:src="@drawable/heart"
-                android:layout_width="10dp"
-                android:layout_height="10dp"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_centerInParent="true"
+                android:id="@+id/plus_del"
+                android:textAlignment="center"
+                android:textSize="8sp"
+                android:text="100"
+                android:fontFamily="@font/iransans_bold"
+                android:textColor="#FFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-
-
-        <ImageButton
-            android:id="@+id/btn_like"
-            style="@style/Widget.AppCompat.Button"
-            android:background="#00DDDDDD"
-            android:src="@drawable/heart"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
 
 
 
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/name_del"
+            android:textColor="#000"
+            android:maxLines="1"
+            android:fontFamily="@font/iransans_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <TextView
             android:id="@+id/text_del"
-            android:padding="10dp"
+            android:padding="3dp"
             android:textColor="#000"
+            android:textSize="14sp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 
+    <ImageButton
+        android:id="@+id/btn_like"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:background="#00DDDDDD"
+        android:src="@drawable/heart"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"/>
 
 
 

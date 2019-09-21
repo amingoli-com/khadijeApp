@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center|top"
     android:orientation="vertical"
-    android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp"
+    android:padding="0dp"
+    android:layout_margin="0dp"
     android:layoutDirection="rtl"
-    android:layout_height="80dp">
+    android:layout_height="90dp">
 
 
     <LinearLayout
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:padding="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <RelativeLayout
-            android:layout_marginTop="2dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:layout_margin="0dp"
+                android:padding="0dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -27,10 +34,14 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:padding="0dp"
+                    android:layout_marginRight="3dp"
                     app:cardCornerRadius="7dp"
                     android:layout_width="80dp"
-                    android:layout_height="75dp">
+                    android:layout_height="77dp">
                     <ImageView
+                        android:layout_margin="0dp"
+                        android:padding="0dp"
                         android:scaleType="centerCrop"
                         android:id="@+id/news_img"
                         android:src="@drawable/test"
@@ -42,39 +53,43 @@
                 <LinearLayout
                     android:background="@drawable/btn_style"
                     android:gravity="center"
-                    android:paddingRight="5dp"
-                    android:paddingLeft="7dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="7dp"
+                    android:paddingBottom="0dp"
+                    android:paddingTop="0dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp">
+                    android:layout_height="70dp">
 
                     <LinearLayout
                         android:background="@drawable/btn_style"
-
-                        android:paddingRight="5dp"
-                        android:paddingLeft="7dp"
+                        android:paddingEnd="5dp"
+                        android:paddingStart="7dp"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="5"
-                        android:layout_height="75dp">
+                        android:layout_height="match_parent">
                         <TextView
+                            android:maxLength="40"
                             android:id="@+id/news_title"
-                            android:text="خبر"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
+                            android:textSize="11sp"
+                            android:fontFamily="@font/iransans_bold"
                             android:textColor="#000"
                             android:maxLines="1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            tools:ignore="SmallSp" />
 
                         <TextView
                             android:id="@+id/news_desc"
-                            android:text="متنش"
-                            android:textSize="10sp"
+                            android:textSize="9sp"
                             android:maxLength="120"
                             android:textColor="#000"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            tools:ignore="SmallSp" />
                     </LinearLayout>
 
 

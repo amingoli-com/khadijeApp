@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ermile.khadijehapp.Activity.ApiView;
+import com.ermile.khadijehapp.Activity.Delneveshte;
 import com.ermile.khadijehapp.Activity.Language;
 import com.ermile.khadijehapp.Activity.ListNews;
 import com.ermile.khadijehapp.Activity.News;
@@ -45,6 +46,16 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private Context mContext;
     private int total_types;
 
+
+    public static class holder_baner extends RecyclerView.ViewHolder {
+
+        ImageView baner;
+
+        holder_baner(View itemView) {
+            super(itemView);
+            this.baner = itemView.findViewById(R.id.baner_imageView);
+        }
+    }
 
     public static class holder_slide extends RecyclerView.ViewHolder {
 
@@ -97,22 +108,29 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public static class holder_link4 extends RecyclerView.ViewHolder {
 
         ImageView imageView_1,imageView_2,imageView_3,imageView_4 ;
+        TextView textView_1,textView_2,textView_3,textView_4 ;
         holder_link4(View itemView) {
             super(itemView);
             this.imageView_1 = itemView.findViewById(R.id.link4_imageView1);
             this.imageView_2 = itemView.findViewById(R.id.link4_imageView2);
             this.imageView_3 = itemView.findViewById(R.id.link4_imageView3);
             this.imageView_4 = itemView.findViewById(R.id.link4_imageView4);
+
+            this.textView_1 = itemView.findViewById(R.id.link4_text_1);
+            this.textView_2 = itemView.findViewById(R.id.link4_text_2);
+            this.textView_3 = itemView.findViewById(R.id.link4_text_3);
+            this.textView_4 = itemView.findViewById(R.id.link4_text_4);
         }
     }
 
     public static class holder_title_link extends RecyclerView.ViewHolder {
 
-        TextView title,go;
+        TextView title,go,space;
 
         holder_title_link(View itemView) {
             super(itemView);
 
+            this.space = itemView.findViewById(R.id.titleLink_space);
             this.title = itemView.findViewById(R.id.titleLink_title);
             this.go = itemView.findViewById(R.id.titleLink_go);
         }
@@ -207,6 +225,9 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         View view;
         switch (viewType) {
+            case item_Main.BANER :
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_baner, parent, false);
+                return new holder_baner(view);
             case item_Main.SLIDE :
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_slide_viewpager, parent, false);
                 return new holder_slide(view);
@@ -255,6 +276,8 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public int getItemViewType(int position) {
 
         switch (itemMains.get(position).type) {
+            case 500:
+                return item_Main.BANER;
             case 100:
                 return item_Main.SLIDE;
             case 1:
@@ -312,6 +335,17 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         final item_Main object = itemMains.get(listPosition);
         if (object != null) {
             switch (object.type) {
+                case item_Main.BANER:
+                    Glide.with(mContext).load(object.baner_img).into(((holder_baner) holder).baner);
+
+                    ((holder_baner) holder).baner.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            swiech(object.baner_url);
+                        }
+                    });
+                    break;
+
                 case item_Main.SLIDE:
                     ((holder_slide)holder).context = mContext;
                     ((holder_slide)holder).itemSliderArrayList = new ArrayList<item_slider>();
@@ -402,6 +436,11 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         Glide.with(mContext).load(object.link4_url_img3).into(((holder_link4) holder).imageView_3);
                         Glide.with(mContext).load(object.link4_url_img4).into(((holder_link4) holder).imageView_4);
 
+                        ((holder_link4) holder).textView_1.setText(object.link4_text_1);
+                        ((holder_link4) holder).textView_2.setText(object.link4_text_2);
+                        ((holder_link4) holder).textView_3.setText(object.link4_text_3);
+                        ((holder_link4) holder).textView_4.setText(object.link4_text_4);
+
                         ((holder_link4)holder).imageView_1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -434,6 +473,12 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_title_link) holder).title.setText(object.titleLink_title);
                     ((holder_title_link) holder).go.setText(object.titleLink_go);
 
+                    ((holder_title_link) holder).space.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            swiech(object.titleLink_url);
+                        }
+                    });
                     View.OnClickListener links = new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -452,7 +497,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                 case item_Main.SALAVAT:
                     ((holder_salavet) holder).count.setText(object.salavat_count);
-                    ((holder_salavet) holder).readText.setText(mContext.getString(R.string.say_salawat));
+                    ((holder_salavet) holder).readText.setText(mContext.getString(R.string.flag_salawat));
 
                     View.OnClickListener salawat = new View.OnClickListener() {
                         @Override
@@ -460,8 +505,8 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             String apikey = SaveManager.get(mContext).getstring_appINFO().get(SaveManager.apiKey);
                             apiV6.salawat(url_salawat,apikey, new apiV6.salawatListener() {
                                 @Override
-                                public void saveSalawat(int count, String msgArray) {
-                                    ((holder_salavet) holder).count.setText(String.valueOf(count));
+                                public void saveSalawat(String count, String msgArray) {
+                                    ((holder_salavet) holder).count.setText(count);
                                     try {
                                         JSONArray msg = new JSONArray(msgArray);
                                         for (int i = 0; i < msg.length(); i++) {
@@ -558,6 +603,9 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 break;
             case "lang":
                 mContext.startActivity(new Intent(mContext,Language.class));
+                break;
+            case "delneveshte":
+                mContext.startActivity(new Intent(mContext, Delneveshte.class));
                 break;
 
             default:

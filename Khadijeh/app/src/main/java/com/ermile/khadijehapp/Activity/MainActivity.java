@@ -55,6 +55,11 @@ public class MainActivity extends AppCompatActivity  {
         LayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         apiV6.app(url_app,new apiV6.appListener() {
             @Override
+            public void lestener_baner(String image, String url) {
+                Baner(image,url);
+            }
+
+            @Override
             public void lestener_link_1(String image, String url) {
                 Link_1(image,url);
             }
@@ -85,8 +90,8 @@ public class MainActivity extends AppCompatActivity  {
             }
 
             @Override
-            public void lestener_salavat(int count) {
-                salavat(getString(R.string.flag_salawat),String.valueOf(count),getString(R.string.say_salawat));
+            public void lestener_salavat(String count) {
+                salavat(null,count,null);
             }
 
             @Override
@@ -132,14 +137,31 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
+    private void Baner(String img_url,String link){
+        itemMains.add(new item_Main(item_Main.BANER,img_url,link,
+                null,null,
+                null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,
+                null,
+                null,null,null,
+                null,null,
+                null,null,null,null,
+                null,
+                null,null,null,null));
+        recylerview.setLayoutManager(LayoutManager);
+        recylerview.setItemAnimator(new DefaultItemAnimator());
+    }
 
     private void slaide(String responeArray){
 
-        itemMains.add(new item_Main(item_Main.SLIDE,null,null,
+        itemMains.add(new item_Main(item_Main.SLIDE,
+                null,null,
+                null,null,
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -153,10 +175,11 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void Link_1(String img_url,String link){
-        itemMains.add(new item_Main(item_Main.LINK_1,img_url,link,
+        itemMains.add(new item_Main(item_Main.LINK_1,null,null,
+                img_url,link,
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -178,13 +201,16 @@ public class MainActivity extends AppCompatActivity  {
                 JSONObject object_link4 = link4Array.getJSONObject(i);
                 String image = object_link4.getString("image");
                 String url = object_link4.getString("url");
-                itemLink4.add(new item_link_2_4(image,url));
+                itemLink4.add(new item_link_2_4(image,null,url));
             }
 
             itemMains.add(new item_Main(item_Main.LINK_2,null,null,
-                    itemLink4.get(0).getImage(),itemLink4.get(1).getImage(),itemLink4.get(0).getUrl(),itemLink4.get(1).getUrl(),
+                    null,null,
+
+                    itemLink4.get(0).getImage(),itemLink4.get(1).getImage(),
+                    itemLink4.get(0).getUrl(),itemLink4.get(1).getUrl(),
                     null,null,null,null,
-                    null,null,null,null,null,null,null,null,
+                    null,null,null,null,null,null,null,null,null,null,null,null,
                     null,null,null,
                     null,
                     null,null,null,
@@ -205,10 +231,12 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void Link_3_desc(String img_url,String title,String desc,String link){
-        itemMains.add(new item_Main(item_Main.LINK_Desc,null,null,
+        itemMains.add(new item_Main(item_Main.LINK_Desc,
+                null,null,
+                null,null,
                 null,null,null,null,
                 img_url,title,desc,link,
-                null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -229,15 +257,20 @@ public class MainActivity extends AppCompatActivity  {
             for (int i = 0; i < link4Array.length(); i++) {
                 JSONObject object_link4 = link4Array.getJSONObject(i);
                 String image = object_link4.getString("image");
+                String text = object_link4.getString("text");
                 String url = object_link4.getString("url");
-                itemLink4.add(new item_link_2_4(image,url));
+                itemLink4.add(new item_link_2_4(image,text,url));
             }
 
-            itemMains.add(new item_Main(item_Main.LINK_4,null,null,
+            itemMains.add(new item_Main(item_Main.LINK_4,
+                    null,null,
+                    null,null,
                     null,null,null,null,
                     null,null,null,null,
-                    itemLink4.get(0).getImage(), itemLink4.get(1).getImage(), itemLink4.get(2).getImage(), itemLink4.get(3).getImage(),
-                    itemLink4.get(0).getUrl(),itemLink4.get(1).getUrl(),itemLink4.get(2).getUrl(),itemLink4.get(3).getUrl(),
+                    itemLink4.get(0).getImage(),itemLink4.get(0).getTex(),itemLink4.get(0).getUrl(),
+                    itemLink4.get(1).getImage(),itemLink4.get(1).getTex(),itemLink4.get(1).getUrl(),
+                    itemLink4.get(2).getImage(),itemLink4.get(2).getTex(),itemLink4.get(2).getUrl(),
+                    itemLink4.get(3).getImage(),itemLink4.get(3).getTex(),itemLink4.get(3).getUrl(),
                     null,null,null,
                     null,
                     null,null,null,
@@ -258,9 +291,11 @@ public class MainActivity extends AppCompatActivity  {
 
     private void Title_link(String title,String go,String url){
         itemMains.add(new item_Main(item_Main.TITEL_link,null,null,
+                null,null,
+
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
                 title,go,url,
                 null,
                 null,null,null,
@@ -274,9 +309,11 @@ public class MainActivity extends AppCompatActivity  {
 
     private void Title_none(String title){
         itemMains.add(new item_Main(item_Main.TITEL_NONE,null,null,
+                null,null,
+
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 title,
                 null,null,null,
@@ -290,12 +327,14 @@ public class MainActivity extends AppCompatActivity  {
 
     private void salavat(String title,String count,String readText){
         itemMains.add(new item_Main(item_Main.SALAVAT,null,null,
+                null,null,
+
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
-                title,count,readText,
+                count,readText,title,
                 null,null,
                 null,null,null,null,
                 null,
@@ -306,9 +345,11 @@ public class MainActivity extends AppCompatActivity  {
 
     private void hadith(String title,String link){
         itemMains.add(new item_Main(item_Main.HADITH,null,null,
+                null,null,
+
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -335,16 +376,22 @@ public class MainActivity extends AppCompatActivity  {
                 String url_news = object_news.getString("link");
 
                 Spanned html_contentNews = Html.fromHtml(content_news);
+                String text_news = String.valueOf(html_contentNews);
+                if (text_news.length() > 110){
+                    text_news = text_news.substring(0,110) + " ...";
+                }
 
                 itemMains.add(new item_Main(item_Main.NEWS,null,null,
+                        null,null,
+
                         null,null,null,null,
                         null,null,null,null,
-                        null,null,null,null,null,null,null,null,
+                        null,null,null,null,null,null,null,null,null,null,null,null,
                         null,null,null,
                         null,
                         null,null,null,
                         null,null,
-                        image_news,title_news,html_contentNews,id_news,
+                        image_news,title_news,text_news,id_news,
                         null,
                         null,null,null,null));
                 recylerview.setLayoutManager(LayoutManager);
@@ -362,9 +409,11 @@ public class MainActivity extends AppCompatActivity  {
 
     private void hr(String img_url){
         itemMains.add(new item_Main(item_Main.HR,null,null,
+                null,null,
+
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -378,9 +427,11 @@ public class MainActivity extends AppCompatActivity  {
 
     private void changeLanguage(){
         itemMains.add(new item_Main(item_Main.LANGUAGE,null,null,
+                null,null,
+
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,

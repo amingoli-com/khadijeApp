@@ -49,12 +49,21 @@ public class Delneveshte extends AppCompatActivity {
                 try {
                     JSONArray array = new JSONArray(respone);
                     for (int i = 0; i < array.length(); i++) {
+                        String plus = "0";
+                        String name = null;
                         JSONObject object = array.getJSONObject(i);
                         String id = object.getString("id");
+                        String sex = object.getString("gender");
                         String content = object.getString("content");
-                        String plus = object.getString("plus");
 
-                        itemDels.add(new item_del(content,"70"+i,plus,"",id));
+                        if (!object.isNull("plus")){
+                            plus = object.getString("plus");
+                        }
+                        if (!object.isNull("name")){
+                            name = object.getString("name");
+                        }
+
+                        itemDels.add(new item_del(name,content,null,plus,sex,id));
                         recyclerView.setLayoutManager(LayoutManager);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
                     }

@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/title_api"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:fontFamily="@font/iransans_bold"
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
@@ -31,6 +31,7 @@
         tools:ignore="ScrollViewCount">
 
         <TextView
+            android:textSize="14sp"
             android:textColor="#000"
             android:layout_margin="10dp"
             android:paddingLeft="20dp"

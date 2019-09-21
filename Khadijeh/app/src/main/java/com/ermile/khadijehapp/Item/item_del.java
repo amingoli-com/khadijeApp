@@ -1,14 +1,23 @@
 package com.ermile.khadijehapp.Item;
 
 public class item_del {
-    String text,day,plus,sex,id;
+    String name,text,day,plus,sex,id;
 
-    public item_del(String text, String day, String plus, String sex, String id) {
+    public item_del(String name, String text, String day, String plus, String sex, String id) {
+        this.name = name;
         this.text = text;
         this.day = day;
         this.plus = plus;
         this.sex = sex;
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getText() {

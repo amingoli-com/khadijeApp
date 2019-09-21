@@ -2,10 +2,11 @@ package com.ermile.khadijehapp.Item;
 
 public class item_link_2_4 {
 
-    String image,url;
+    String image,tex,url;
 
-    public item_link_2_4(String image, String url) {
+    public item_link_2_4(String image, String tex, String url) {
         this.image = image;
+        this.tex = tex;
         this.url = url;
     }
 
@@ -15,6 +16,14 @@ public class item_link_2_4 {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getTex() {
+        return tex;
+    }
+
+    public void setTex(String tex) {
+        this.tex = tex;
     }
 
     public String getUrl() {

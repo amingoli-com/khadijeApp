@@ -33,6 +33,11 @@ public class apiV6 {
                         String type = object_homepage.getString("type");
 
                         switch (type){
+                            case "banner":
+                                String baner_image = object_homepage.getString("image");
+                                String baner_url = object_homepage.getString("url");
+                                appListener.lestener_baner(baner_image,baner_url);
+                                break;
                             case "slider":
                                 JSONArray slider_homepage = object_homepage.getJSONArray("slider");
                                 appListener.lestener_slider(String.valueOf(slider_homepage));
@@ -75,8 +80,15 @@ public class apiV6 {
                                 break;
 
                             case "salawat":
-                                int count = object_homepage.getInt("count");
-                                appListener.lestener_salavat(count);
+                                String count_salawat = null;
+                                if (!object_homepage.isNull("fit_count")){
+                                    count_salawat =  object_homepage.getString("fit_count");
+                                }
+                                else if (!object_homepage.isNull("count")){
+                                    count_salawat = String.valueOf(object_homepage.getInt("count"));
+                                }
+                                if (!object_homepage.isNull("")){}
+                                appListener.lestener_salavat(count_salawat);
                                 break;
 
                             case "news":
@@ -111,13 +123,14 @@ public class apiV6 {
     }
 
     public interface appListener{
+        void lestener_baner(String image,String url);
         void lestener_link_1(String image,String url);
         void lestener_link_2(String link2Array);
         void lestener_link_3_desc(String title,String desc,String image,String url);
         void lestener_link_4(String link4Array);
         void lestener_title_link(String title,String image,String url);
         void lestener_title_none(String title);
-        void lestener_salavat(int count);
+        void lestener_salavat(String count);
         void lestener_hadith();
         void lestener_slider(String respone);
         void lestener_news(String newsArray);
@@ -171,8 +184,14 @@ public class apiV6 {
                     if (ok){
                         JSONArray msg = mainObject.getJSONArray("msg");
                         JSONObject result = mainObject.getJSONObject("result");
-                        int count = result.getInt("count");
-                        salawatListener.saveSalawat(count, String.valueOf(msg));
+                        String count_salawat = null;
+                        if (!result.isNull("fit_count")){
+                            count_salawat =  result.getString("fit_count");
+                        }
+                        else if (!result.isNull("count")){
+                            count_salawat = String.valueOf(result.getInt("count"));
+                        }
+                        salawatListener.saveSalawat(count_salawat, String.valueOf(msg));
                     }else {
                         JSONArray msg = mainObject.getJSONArray("msg");
                         salawatListener.errorSalawat(String.valueOf(msg));
@@ -205,7 +224,7 @@ public class apiV6 {
     }
 
     public interface salawatListener{
-        void saveSalawat(int count,String msgArray);
+        void saveSalawat(String count,String msgArray);
         void errorSalawat(String error);
     }
 
@@ -252,14 +271,14 @@ public class apiV6 {
 
 
     public static void del(String url,final String apikey, final delListener delListener){
-        StringRequest getDelRQ = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
+        StringRequest getDelRQ = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject mainObject = new JSONObject(response);
                     boolean ok = mainObject.getBoolean("ok");
                     if (ok){
-                        JSONObject result = mainObject.getJSONObject("result");
+                        JSONArray result = mainObject.getJSONArray("result");
                         delListener.result(String.valueOf(result));
                     }else {
                         delListener.error("ok: "+ok);
@@ -306,8 +325,6 @@ public class apiV6 {
                     boolean ok = mainObject.getBoolean("ok");
                     if (ok){
                         JSONArray msg = mainObject.getJSONArray("msg");
-                        JSONObject result = mainObject.getJSONObject("result");
-                        int count = result.getInt("count");
                         likeListener.liked(String.valueOf(msg));
                     }else {
                         JSONArray msg = mainObject.getJSONArray("msg");
@@ -330,11 +347,17 @@ public class apiV6 {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("appkey", lookServer.appkey);
-                headers.put("like", id);
                 if (apikey !=null){
                     headers.put("apikeey",apikey);
                 }
                 return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> body = new HashMap<>();
+                body.put("like", id);
+                return body;
             }
         };likeDelRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Network.getInstance().addToRequestQueue(likeDelRQ);
