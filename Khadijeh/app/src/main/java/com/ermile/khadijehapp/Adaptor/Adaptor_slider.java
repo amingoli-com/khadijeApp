@@ -50,18 +50,22 @@ public class Adaptor_slider extends RecyclerView.Adapter<Adaptor_slider.ViewHold
         holder.title.setText(title);
         holder.content.setText(content);
 
-        View.OnClickListener onclickSlied = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goNews = new Intent(context, News.class);
-                goNews.putExtra("id",itemSliderList.get(position).getId());
-                context.startActivity(goNews);
-            }
-        };
+        if (itemSliderList.get(position).getId() != null){
+            View.OnClickListener onclickSlied = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goNews = new Intent(context, News.class);
+                    goNews.putExtra("id",itemSliderList.get(position).getId());
+                    context.startActivity(goNews);
+                }
+            };
+            holder.title.setOnClickListener(onclickSlied);
+            holder.content.setOnClickListener(onclickSlied);
+            holder.imageViews.setOnClickListener(onclickSlied);
+        }
 
-        holder.title.setOnClickListener(onclickSlied);
-        holder.content.setOnClickListener(onclickSlied);
-        holder.imageViews.setOnClickListener(onclickSlied);
+
+
     }
 
     // total number of rows

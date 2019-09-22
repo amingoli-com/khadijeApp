@@ -9,18 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
-import android.view.View;
 
 import com.ermile.khadijehapp.Adaptor.Adaptor_Main;
-import com.ermile.khadijehapp.Adaptor.Adaptor_slider;
 import com.ermile.khadijehapp.Item.item_Main;
 import com.ermile.khadijehapp.Item.item_link_2_4;
-import com.ermile.khadijehapp.Item.item_slider;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
 import com.ermile.khadijehapp.utility.Dialog;
-import com.ermile.khadijehapp.utility.Notif;
-import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -153,7 +148,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 null,null,null,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 null,
                 null,null,null,null));
@@ -172,7 +167,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 null,null,null,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 null,
                 null,responeArray,null,null));
@@ -190,7 +185,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 null,null,null,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 null,
                 null,null,null,null));
@@ -221,7 +216,7 @@ public class MainActivity extends AppCompatActivity  {
                     null,null,null,
                     null,
                     null,null,null,
-                    null,null,
+                    null,null,null,
                     null,null,null,null,
                     null,
                     null,null,null,null));
@@ -247,7 +242,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 null,null,null,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 null,
                 null,null,null,null));
@@ -287,7 +282,7 @@ public class MainActivity extends AppCompatActivity  {
                     null,null,null,
                     null,
                     null,null,null,
-                    null,null,
+                    null,null,null,
                     null,null,null,null,
                     null,
                     null,null,null,null));
@@ -312,7 +307,7 @@ public class MainActivity extends AppCompatActivity  {
                 title,go,url,
                 null,
                 null,null,null,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 null,
                 null,null,null,null));
@@ -330,7 +325,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 title,
                 null,null,null,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 null,
                 null,null,null,null));
@@ -348,7 +343,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 count,readText,title,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 null,
                 null,null,null,null));
@@ -357,7 +352,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void hadith(String title,String link){
-        itemMains.add(new item_Main(item_Main.HADITH,null,null,
+        itemMains.add(new item_Main(item_Main.NEWS_TEXT,null,null,
                 null,null,
 
                 null,null,null,null,
@@ -366,7 +361,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 null,null,null,
-                title,link,
+                title,link,null,
                 null,null,null,null,
                 null,
                 null,null,null,null));
@@ -403,7 +398,7 @@ public class MainActivity extends AppCompatActivity  {
                         null,null,null,
                         null,
                         null,null,null,
-                        null,null,
+                        null,null,null,
                         image_news,title_news,text_news,id_news,
                         null,
                         null,null,null,null));
@@ -430,7 +425,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 null,null,null,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 img_url,
                 null,null,null,null));
@@ -448,7 +443,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 null,null,null,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 null,
                 null,null,null,null));
@@ -466,7 +461,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,
                 null,null,null,
-                null,null,
+                null,null,null,
                 null,null,null,null,
                 null,
                 null,null,null,null));

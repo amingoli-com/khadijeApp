@@ -8,7 +8,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,7 +26,6 @@ import com.ermile.khadijehapp.Activity.ListNews;
 import com.ermile.khadijehapp.Activity.News;
 import com.ermile.khadijehapp.Activity.Web_View;
 import com.ermile.khadijehapp.Item.item_Main;
-import com.ermile.khadijehapp.Item.item_link_2_4;
 import com.ermile.khadijehapp.Item.item_slider;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
@@ -39,7 +37,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -162,15 +159,30 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public static class holder_hadith extends RecyclerView.ViewHolder {
+    public static class holder_show_news extends RecyclerView.ViewHolder {
 
-        TextView title,hadith;
+        TextView title, desc;
+        ImageView imageView_news;
 
-        holder_hadith(View itemView) {
+        holder_show_news(View itemView) {
             super(itemView);
 
-            this.title = itemView.findViewById(R.id.hadith_title);
-            this.hadith = itemView.findViewById(R.id.hadith_desc);
+            this.title = itemView.findViewById(R.id.title_show_news);
+            this.desc = itemView.findViewById(R.id.text_show_news);
+            this.imageView_news = itemView.findViewById(R.id.imag_show_news);
+        }
+    }
+
+    public static class holder_slide_news extends RecyclerView.ViewHolder {
+
+        Context context;
+        RecyclerViewPager recyclerViewPager;
+        Adaptor_slider adaptorSlider;
+        ArrayList<item_slider> itemSliderArrayList;
+
+        holder_slide_news(View itemView) {
+            super(itemView);
+            this.recyclerViewPager = itemView.findViewById(R.id.recyclerViewPager);
         }
     }
 
@@ -258,9 +270,12 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             case item_Main.SALAVAT:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_salavat, parent, false);
                 return new Adaptor_Main.holder_salavet(view);
-            case item_Main.HADITH:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hadith, parent, false);
-                return new Adaptor_Main.holder_hadith(view);
+            case item_Main.NEWS_TEXT:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_show_news, parent, false);
+                return new holder_show_news(view);
+            case item_Main.SLIDE_NEWS :
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_slide_viewpager, parent, false);
+                return new holder_slide_news(view);
             case item_Main.NEWS:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
                 return new Adaptor_Main.holder_news(view);
@@ -304,7 +319,9 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             case 20:
                 return item_Main.SALAVAT;
             case 21:
-                return item_Main.HADITH;
+                return item_Main.NEWS_TEXT;
+            case 210:
+                return item_Main.SLIDE_NEWS;
             case 30:
                 return item_Main.NEWS;
             case 0:
@@ -542,9 +559,44 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_salavet)holder).imgSalawat.setOnClickListener(salawat);
                     break;
 
-                case item_Main.HADITH:
-                    ((holder_hadith) holder).title.setText(object.hadith_title);
-                    ((holder_hadith) holder).hadith.setText(object.hadith_desc);
+                case item_Main.NEWS_TEXT:
+                    if (object.newsText_img != null){
+                        Glide.with(mContext).load(object.newsText_img).into(((holder_show_news) holder).imageView_news);
+                    }
+                    ((holder_show_news) holder).title.setText(object.newsText_title);
+                    ((holder_show_news) holder).desc.setText(object.newsText_desc);
+                    break;
+
+
+                case item_Main.SLIDE_NEWS:
+                    ((holder_slide_news)holder).context = mContext;
+                    ((holder_slide_news)holder).itemSliderArrayList = new ArrayList<item_slider>();
+
+                    ((holder_slide_news)holder).adaptorSlider = new Adaptor_slider(((holder_slide_news)holder).context,((holder_slide_news)holder).itemSliderArrayList);
+                    ((holder_slide_news)holder).recyclerViewPager.setAdapter(((holder_slide_news)holder).adaptorSlider);
+
+                    final LinearLayoutManager layouts = new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
+
+                    try {
+                        JSONArray link4Array = new JSONArray(object.slide_title);
+
+                        for (int i = 0; i < link4Array.length(); i++) {
+                            String url_image = link4Array.getString(i);
+
+                            ((holder_slide_news)holder).itemSliderArrayList.add(new item_slider(url_image,null,null,null,null));
+                            ((holder_slide_news)holder).recyclerViewPager.setLayoutManager(layouts);
+                            ((holder_slide_news)holder).recyclerViewPager.setItemAnimator(new DefaultItemAnimator());
+                        }
+
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
                     break;
 
                 case item_Main.NEWS:

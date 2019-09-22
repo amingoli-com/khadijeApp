@@ -88,7 +88,7 @@ public class ListNews extends AppCompatActivity {
                         null,null,null,
                         null,
                         null,null,null,
-                        null,null,
+                        null,null,null,
                         image_news,title_news,text_news,id_news,
                         null,
                         null,null,null,null));

@@ -9,47 +9,13 @@
     tools:context=".Activity.News">
 
 
-
-
-    <TextView
-        android:textAlignment="center"
-        android:background="@drawable/semicircular"
-    android:id="@+id/title_news"
-    android:textSize="17sp"
-    android:fontFamily="@font/iransans_bold"
-    android:paddingRight="20dp"
-    android:paddingLeft="20dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:textColor="#FFFFFF"
-        android:minHeight="70dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
-    <ProgressBar
-        android:id="@+id/progress_news"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginBottom="10dp"
+        android:id="@+id/recyclerview_news"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        tools:ignore="ScrollViewCount">
+        android:layout_height="match_parent"/>
 
-        <TextView
-            android:textColor="#000"
-            android:layout_margin="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:lineHeight="25sp"
-            android:justificationMode="inter_word"
-            android:id="@+id/text_news"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="UnusedAttribute" />
 
-    </ScrollView>
 
 
 
