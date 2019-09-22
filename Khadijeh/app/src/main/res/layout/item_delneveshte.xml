@@ -23,7 +23,7 @@
             android:layout_margin="5dp"
             android:src="@drawable/woman"
             android:layout_width="match_parent"
-            android:layout_height="45dp"/>
+            android:layout_height="@dimen/_32sdp"/>
 
 
         <RelativeLayout
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="30dp"
-            android:layout_height="30dp">
+            android:layout_height="@dimen/_20sdp">
 
 
             <ImageView
@@ -69,6 +69,7 @@
             android:visibility="gone"
             android:id="@+id/name_del"
             android:textColor="#000"
+            android:textSize="@dimen/_10sdp"
             android:maxLines="1"
             android:fontFamily="@font/iransans_bold"
             android:layout_width="match_parent"
@@ -78,7 +79,7 @@
             android:id="@+id/text_del"
             android:padding="3dp"
             android:textColor="#000"
-            android:textSize="14sp"
+            android:textSize="@dimen/_12sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -86,6 +87,7 @@
 
 
     <ImageButton
+        android:visibility="gone"
         android:id="@+id/btn_like"
         style="@style/Widget.AppCompat.ImageButton"
         android:background="#00DDDDDD"

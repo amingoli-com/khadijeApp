@@ -13,14 +13,14 @@
         android:textAlignment="center"
         android:background="@drawable/semicircular"
         android:id="@+id/title_show_news"
-        android:textSize="17sp"
+        android:textSize="@dimen/_14sdp"
         android:fontFamily="@font/iransans_bold"
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColor="#FFFFFF"
-        android:minHeight="70dp"
+        android:minHeight="@dimen/_60sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -29,10 +29,11 @@
         app:cardCornerRadius="15dp"
         android:layout_margin="14sp"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="@dimen/_220sdp">
 
 
         <ImageView
+            android:scaleType="fitXY"
             android:id="@+id/imag_show_news"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -54,7 +55,7 @@
             android:paddingRight="20dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:lineHeight="25sp"
+            android:textSize="@dimen/_12sdp"
             android:justificationMode="inter_word"
             android:id="@+id/text_show_news"
             android:layout_width="match_parent"

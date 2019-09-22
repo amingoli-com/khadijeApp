@@ -8,7 +8,7 @@
     android:padding="0dp"
     android:layout_margin="0dp"
     android:layoutDirection="rtl"
-    android:layout_height="90dp">
+    android:layout_height="@dimen/_72sdp">
 
 
     <LinearLayout
@@ -37,8 +37,8 @@
                     android:padding="0dp"
                     android:layout_marginRight="3dp"
                     app:cardCornerRadius="7dp"
-                    android:layout_width="80dp"
-                    android:layout_height="77dp">
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_65sdp">
                     <ImageView
                         android:layout_margin="0dp"
                         android:padding="0dp"
@@ -59,7 +59,7 @@
                     android:paddingTop="0dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp">
+                    android:layout_height="@dimen/_55sdp">
 
                     <LinearLayout
                         android:background="@drawable/btn_style"
@@ -74,7 +74,7 @@
                         <TextView
                             android:maxLength="40"
                             android:id="@+id/news_title"
-                            android:textSize="11sp"
+                            android:textSize="@dimen/_9sdp"
                             android:fontFamily="@font/iransans_bold"
                             android:textColor="#000"
                             android:maxLines="1"
@@ -84,7 +84,8 @@
 
                         <TextView
                             android:id="@+id/news_desc"
-                            android:textSize="9sp"
+                            android:textSize="@dimen/_7sdp"
+                            android:text="asdadd"
                             android:maxLength="120"
                             android:textColor="#000"
                             android:layout_width="match_parent"
@@ -94,8 +95,8 @@
 
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:src="@drawable/ic_flesh_r" />
 
                 </LinearLayout>

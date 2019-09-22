@@ -16,15 +16,18 @@
 
         <com.nex3z.togglebuttongroup.button.CircularToggle
             android:id="@+id/choice_a"
-            android:layout_marginEnd="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:textSize="@dimen/_9sdp"
             android:text="@string/sex_female"/>
 
         <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:textSize="@dimen/_9sdp"
+            android:layout_margin="@dimen/_10sdp"
             android:id="@+id/choice_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
             android:text="@string/sex_male"/>
 
 
@@ -39,7 +42,7 @@
             android:id="@+id/addel_edt_name"
             android:hint="@string/edt_name"
             android:maxLines="1"
-            android:textSize="14sp"
+            android:textSize="@dimen/_10sdp"
             android:nextFocusDown="@id/addel_edt_number"
             android:inputType="textPersonName"
             android:layout_width="match_parent"
@@ -54,7 +57,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:textSize="14sp"
+            android:textSize="@dimen/_10sdp"
             android:inputType="number"
             android:maxLines="1"
             android:id="@+id/addel_edt_number"
@@ -71,7 +74,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:textSize="14sp"
+            android:textSize="@dimen/_10sdp"
             android:inputType="textLongMessage"
             android:maxLines="1"
             android:id="@+id/addel_edt_text"

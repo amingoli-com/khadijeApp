@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layoutDirection="rtl"
     android:background="@drawable/bg"
-    android:alpha="0.6"
+    android:alpha="0.8"
     tools:context=".Activity.Delneveshte">
 
 

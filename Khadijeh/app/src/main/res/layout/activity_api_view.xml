@@ -12,9 +12,9 @@
     <TextView
         android:background="@drawable/semicircular"
         android:textAlignment="center"
-        android:minHeight="55dp"
+        android:minHeight="@dimen/_55sdp"
         android:id="@+id/title_api"
-        android:textSize="18sp"
+        android:textSize="@dimen/_12sdp"
         android:fontFamily="@font/iransans_bold"
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
@@ -34,14 +34,13 @@
         tools:ignore="ScrollViewCount">
 
         <TextView
-            android:textSize="14sp"
+            android:textSize="@dimen/_10sdp"
             android:textColor="#000"
             android:layout_margin="10dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:lineHeight="25sp"
             android:justificationMode="inter_word"
             android:id="@+id/text_api"
             android:layout_width="match_parent"

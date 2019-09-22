@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="52dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="20dp"
@@ -12,7 +12,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="1dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="@dimen/_38sdp">
 
         <LinearLayout
             android:id="@+id/line_language"
@@ -26,13 +26,13 @@
                 android:id="@+id/img_language"
                 android:padding="5dp"
                 android:src="@drawable/language"
-                android:layout_width="50dp"
+                android:layout_width="@dimen/_35sdp"
                 android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/text_language"
                 android:fontFamily="@font/iransans_bold"
-                android:textSize="15sp"
+                android:textSize="@dimen/_10sdp"
                 android:textColor="#000"
                 android:textAlignment="center"
                 android:text="@string/change_language"

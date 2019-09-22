@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ public class Web_View extends AppCompatActivity {
     WebView webView_object;
 
 
-    @SuppressLint("NewApi")
+    @SuppressLint({"NewApi", "SetJavaScriptEnabled"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,8 @@ public class Web_View extends AppCompatActivity {
 
         swipeRefreshLayout = findViewById(R.id.swipRefresh_WebView);
         webView_object = findViewById(R.id.webView_WebView);
+        WebSettings webSettings = webView_object.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
 
 

@@ -9,7 +9,7 @@
     android:layout_marginEnd="3dp"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="120dp">
+    android:layout_height="@dimen/_90sdp">
 
 
 
@@ -34,8 +34,8 @@
                 android:id="@+id/img_salawat"
                 android:src="@drawable/salavat"
                 android:clickable="true"
-                android:layout_width="160dp"
-                android:layout_height="110dp"
+                android:layout_width="@dimen/_135sdp"
+                android:layout_height="@dimen/_95sdp"
                 android:focusable="true" />
 
 
@@ -52,7 +52,7 @@
                     android:text="278,299"
                     android:id="@+id/salavat_cunt"
                     android:textAlignment="center"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/_15sdp"
                     android:textStyle="bold"
                     android:paddingTop="2dp"
                     android:paddingStart="10dp"
@@ -68,7 +68,7 @@
                     android:text="@string/flag_salawat"
                     android:fontFamily="@font/iransans_bold"
                     android:textStyle="bold"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="5dp"
                     android:textColor="#000"
                     android:layout_width="wrap_content"
