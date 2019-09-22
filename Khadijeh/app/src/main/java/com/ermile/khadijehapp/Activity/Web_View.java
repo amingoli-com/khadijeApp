@@ -129,7 +129,7 @@ public class Web_View extends AppCompatActivity {
         }
         webView_object.goBack();
         doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "برای خروج مجددا کلید برگشت را لمس کنید", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.tost_exit), Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
