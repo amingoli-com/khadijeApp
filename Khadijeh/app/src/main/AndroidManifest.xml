@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ermile.khadijehapp">
+    package="com.ermile.khadijeapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".utility.Network"
+        android:name="com.ermile.khadijeapp.utility.Network"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
@@ -16,59 +16,59 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".Activity.ListNews"
+            android:name="com.ermile.khadijeapp.Activity.ListNews"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.errorNet"
+        <activity android:name="com.ermile.khadijeapp.Activity.errorNet"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Activity.Language"
+            android:name="com.ermile.khadijeapp.Activity.Language"
             tools:ignore="InnerclassSeparator" />
 
-        <activity android:name=".Activity.Add_Delneveshte"
+        <activity android:name="com.ermile.khadijeapp.Activity.Add_Delneveshte"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activity.MainActivity"
+        <activity android:name="com.ermile.khadijeapp.Activity.MainActivity"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activity.Intro"
+        <activity android:name="com.ermile.khadijeapp.Activity.Intro"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activity.Delneveshte"
+        <activity android:name="com.ermile.khadijeapp.Activity.Delneveshte"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activity.ApiView"
+        <activity android:name="com.ermile.khadijeapp.Activity.ApiView"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activity.Video_View"
+        <activity android:name="com.ermile.khadijeapp.Activity.Video_View"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activity.News"
+        <activity android:name="com.ermile.khadijeapp.Activity.News"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activity.Web_View"
+        <activity android:name="com.ermile.khadijeapp.Activity.Web_View"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activity.Splash"
+        <activity android:name="com.ermile.khadijeapp.Activity.Splash"
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
@@ -80,7 +80,7 @@
         </activity>
 
         <service
-            android:name=".utility.Notif"
+            android:name="com.ermile.khadijeapp.utility.Notif"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="com.ermile.khadije.NotificationService" />
@@ -90,7 +90,7 @@
         </service>
 
         <activity
-            android:name=".Activity.status"
+            android:name="com.ermile.khadijeapp.Activity.status"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator">

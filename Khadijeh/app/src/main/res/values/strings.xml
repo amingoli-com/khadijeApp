@@ -37,5 +37,6 @@
     <string name="version">Version 35</string>
     <string name="send_delneveshteh">Send Self</string>
     <string name="tost_exit">Please click BACK again to exit</string>
+    <string name="update_now">Update Now</string>
 
 </resources>
