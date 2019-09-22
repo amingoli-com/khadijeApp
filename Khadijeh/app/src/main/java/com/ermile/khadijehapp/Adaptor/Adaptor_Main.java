@@ -3,6 +3,7 @@ package com.ermile.khadijehapp.Adaptor;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -341,7 +342,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_baner) holder).baner.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            swiech(object.baner_url);
+                            swiech(object.baner_url,null);
                         }
                     });
                     break;
@@ -392,7 +393,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_link1) holder).imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            swiech(object.link1_url);
+                            swiech(object.link1_url,null);
                         }
                     });
                     break;
@@ -404,13 +405,13 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_link2) holder).imageView_1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            swiech(object.link2_url_1);
+                            swiech(object.link2_url_1,null);
                         }
                     });
                     ((holder_link2) holder).imageView_2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            swiech(object.link2_url_2);
+                            swiech(object.link2_url_2,null);
 
                         }
                     });
@@ -444,25 +445,25 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         ((holder_link4)holder).imageView_1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                swiech(object.l4_url_1);
+                                swiech(object.l4_url_1,object.link4_type_1);
                             }
                         });
                         ((holder_link4)holder).imageView_2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                swiech(object.l4_url_2);
+                                swiech(object.l4_url_2,object.link4_type_2);
                             }
                         });
                         ((holder_link4)holder).imageView_3.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                swiech(object.l4_url_3);
+                                swiech(object.l4_url_3,object.link4_type_3);
                             }
                         });
                         ((holder_link4)holder).imageView_4.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                swiech(object.l4_url_4);
+                                swiech(object.l4_url_4,object.link4_type_4);
                             }
                         });
                         break;
@@ -476,13 +477,13 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_title_link) holder).space.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            swiech(object.titleLink_url);
+                            swiech(object.titleLink_url,null);
                         }
                     });
                     View.OnClickListener links = new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            swiech(object.titleLink_url);
+                            swiech(object.titleLink_url,null);
                         }
                     };
 
@@ -585,7 +586,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-    private void swiech(String url){
+    private void swiech(String url,String type){
 
         Intent goApiView = new Intent(mContext, ApiView.class);
         Intent goWebView = new Intent(mContext,Web_View.class);
@@ -609,11 +610,17 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 break;
 
             default:
-                goWebView.putExtra("url",url);
-                mContext.startActivity(goWebView);
-                break;
-
-
+                if (type!=null && type.equals("browser")){
+                    Toast.makeText(mContext, ""+type, Toast.LENGTH_SHORT).show();
+                    Intent browser = new Intent(Intent.ACTION_VIEW);
+                    browser.setData(Uri.parse(url));
+                    mContext.startActivity(browser);
+                    break;
+                }else {
+                    goWebView.putExtra("url",url);
+                    mContext.startActivity(goWebView);
+                    break;
+                }
         }
 
     }

@@ -6,26 +6,23 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Checkable;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ermile.khadijehapp.Adaptor.Adaptor_del;
 import com.ermile.khadijehapp.Item.item_del;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
-import com.ermile.khadijehapp.utility.Database;
 import com.ermile.khadijehapp.utility.SaveManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.nex3z.togglebuttongroup.MultiSelectToggleGroup;
-import com.nex3z.togglebuttongroup.SingleSelectToggleGroup;
 import com.nex3z.togglebuttongroup.button.OnCheckedChangeListener;
 import com.nex3z.togglebuttongroup.button.ToggleButton;
 
@@ -45,18 +42,23 @@ public class Delneveshte extends AppCompatActivity {
     boolean men = false;
     String sex = "famale";
 
+    ProgressBar progressBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delneveshte);
 
+        progressBar = findViewById(R.id.progress_del);
 
-        FloatingActionButton fab_del = findViewById(R.id.fab);
+
+        final FloatingActionButton fab_del = findViewById(R.id.fab);
 
         fab_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                runAlert();
+                sendDelneveshte();
             }
         });
 
@@ -65,16 +67,19 @@ public class Delneveshte extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview_del);
         adaptorDel = new Adaptor_del(this,itemDels);
         LayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-
         recyclerView.setAdapter(adaptorDel);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(10);
 
         String url = getString(R.string.url_del);
         String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
 
         apiV6.del(url,apikey,new apiV6.delListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void result(String respone) {
                 try {
+
                     JSONArray array = new JSONArray(respone);
                     for (int i = 0; i < array.length(); i++) {
                         String plus = "0";
@@ -95,6 +100,9 @@ public class Delneveshte extends AppCompatActivity {
                         recyclerView.setLayoutManager(LayoutManager);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
                     }
+                    fab_del.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -112,7 +120,7 @@ public class Delneveshte extends AppCompatActivity {
     }
 
 
-    private void runAlert() {
+    private void sendDelneveshte() {
 
         LayoutInflater aInflater = getLayoutInflater();
         View alertLayout = aInflater.inflate(R.layout.add_del, null);
@@ -171,8 +179,6 @@ public class Delneveshte extends AppCompatActivity {
     }
 
     private void add_del(String name,String number,String text,String sexs){
-
-        Toast.makeText(this, ""+sexs, Toast.LENGTH_SHORT).show();
         String url = getString(R.string.url_add_del);
         String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
         apiV6.sendDel(url, apikey,name, text, number, sexs, new apiV6.sendelListener() {

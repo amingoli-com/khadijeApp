@@ -7,18 +7,27 @@
     android:orientation="vertical"
     android:layoutDirection="rtl"
     android:background="@drawable/bg"
-    android:alpha="0.8"
+    android:alpha="0.6"
     tools:context=".Activity.Delneveshte">
 
 
 
+    <ProgressBar
+        android:id="@+id/progress_del"
+        android:layout_marginBottom="200dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:id="@+id/recyclerview_del"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:visibility="gone"
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

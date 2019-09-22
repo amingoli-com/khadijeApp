@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity  {
                 img_url,link,
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity  {
                 JSONObject object_link4 = link4Array.getJSONObject(i);
                 String image = object_link4.getString("image");
                 String url = object_link4.getString("url");
-                itemLink4.add(new item_link_2_4(image,null,url));
+                itemLink4.add(new item_link_2_4(image,null,url,null));
             }
 
             itemMains.add(new item_Main(item_Main.LINK_2,null,null,
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity  {
                     itemLink4.get(0).getImage(),itemLink4.get(1).getImage(),
                     itemLink4.get(0).getUrl(),itemLink4.get(1).getUrl(),
                     null,null,null,null,
-                    null,null,null,null,null,null,null,null,null,null,null,null,
+                    null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                     null,null,null,
                     null,
                     null,null,null,
@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,
                 null,null,null,null,
                 img_url,title,desc,link,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -255,11 +255,17 @@ public class MainActivity extends AppCompatActivity  {
 
             List<item_link_2_4> itemLink4 = new ArrayList<>();
             for (int i = 0; i < link4Array.length(); i++) {
+                String type_link4 = null;
                 JSONObject object_link4 = link4Array.getJSONObject(i);
                 String image = object_link4.getString("image");
                 String text = object_link4.getString("text");
                 String url = object_link4.getString("url");
-                itemLink4.add(new item_link_2_4(image,text,url));
+                if (!object_link4.isNull("type")){
+                    type_link4 = object_link4.getString("type");
+                }
+
+
+                itemLink4.add(new item_link_2_4(image,text,url,type_link4));
             }
 
             itemMains.add(new item_Main(item_Main.LINK_4,
@@ -267,10 +273,10 @@ public class MainActivity extends AppCompatActivity  {
                     null,null,
                     null,null,null,null,
                     null,null,null,null,
-                    itemLink4.get(0).getImage(),itemLink4.get(0).getTex(),itemLink4.get(0).getUrl(),
-                    itemLink4.get(1).getImage(),itemLink4.get(1).getTex(),itemLink4.get(1).getUrl(),
-                    itemLink4.get(2).getImage(),itemLink4.get(2).getTex(),itemLink4.get(2).getUrl(),
-                    itemLink4.get(3).getImage(),itemLink4.get(3).getTex(),itemLink4.get(3).getUrl(),
+                    itemLink4.get(0).getImage(),itemLink4.get(0).getTex(),itemLink4.get(0).getUrl(),itemLink4.get(0).getType(),
+                    itemLink4.get(1).getImage(),itemLink4.get(1).getTex(),itemLink4.get(1).getUrl(),itemLink4.get(1).getType(),
+                    itemLink4.get(2).getImage(),itemLink4.get(2).getTex(),itemLink4.get(2).getUrl(),itemLink4.get(2).getType(),
+                    itemLink4.get(3).getImage(),itemLink4.get(3).getTex(),itemLink4.get(3).getUrl(),itemLink4.get(3).getType(),
                     null,null,null,
                     null,
                     null,null,null,
@@ -295,7 +301,7 @@ public class MainActivity extends AppCompatActivity  {
 
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 title,go,url,
                 null,
                 null,null,null,
@@ -313,7 +319,7 @@ public class MainActivity extends AppCompatActivity  {
 
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 title,
                 null,null,null,
@@ -331,7 +337,7 @@ public class MainActivity extends AppCompatActivity  {
 
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 count,readText,title,
@@ -349,7 +355,7 @@ public class MainActivity extends AppCompatActivity  {
 
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -386,7 +392,7 @@ public class MainActivity extends AppCompatActivity  {
 
                         null,null,null,null,
                         null,null,null,null,
-                        null,null,null,null,null,null,null,null,null,null,null,null,
+                        null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                         null,null,null,
                         null,
                         null,null,null,
@@ -413,7 +419,7 @@ public class MainActivity extends AppCompatActivity  {
 
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,
@@ -431,7 +437,7 @@ public class MainActivity extends AppCompatActivity  {
 
                 null,null,null,null,
                 null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
                 null,
                 null,null,null,

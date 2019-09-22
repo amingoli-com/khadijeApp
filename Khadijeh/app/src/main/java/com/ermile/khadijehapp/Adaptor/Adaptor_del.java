@@ -73,19 +73,6 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
 
         final String id = mData.get(position).getId();
 
-
-/*        switch (avatar){
-            case "women":
-
-                break;
-            case "men":
-
-                break;
-                default:
-
-                    break;
-        }*/
-
         final String url = context.getString(R.string.url_del_like);
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override

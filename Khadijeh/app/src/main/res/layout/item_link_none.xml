@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"/>
 
     <ImageView
-        android:alpha="0.2"
+        android:alpha="0"
         android:paddingLeft="5dp"
         android:src="@drawable/ic_flesh_r"
         android:layout_width="wrap_content"

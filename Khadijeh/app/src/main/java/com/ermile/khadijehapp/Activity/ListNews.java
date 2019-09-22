@@ -83,7 +83,7 @@ public class ListNews extends AppCompatActivity {
                         null,null,
                         null,null,null,null,
                         null,null,null,null,
-                        null,null,null,null,null,null,null,null,null,null,null,null,
+                        null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                         null,null,null,
                         null,
                         null,null,null,

@@ -32,5 +32,6 @@
     <string name="edt_mobile">Mobile optional</string>
     <string name="edt_writ_del">Wrote your heart sounds</string>
     <string name="send">Send</string>
+    <string name="full_list" translatable="false">Full List</string>
 
 </resources>
