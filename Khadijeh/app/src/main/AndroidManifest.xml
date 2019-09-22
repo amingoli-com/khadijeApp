@@ -15,20 +15,63 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.ListNews"></activity>
-        <activity android:name=".Activity.errorNet" />
+        <activity
+            android:name=".Activity.ListNews"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activity.errorNet"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.Language"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Activity.Add_Delneveshte" />
-        <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.Intro" />
-        <activity android:name=".Activity.Delneveshte" />
-        <activity android:name=".Activity.ApiView" />
-        <activity android:name=".Activity.Video_View" />
-        <activity android:name=".Activity.News" />
-        <activity android:name=".Activity.Web_View" />
-        <activity android:name=".Activity.Splash">
+
+        <activity android:name=".Activity.Add_Delneveshte"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Activity.MainActivity"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Activity.Intro"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Activity.Delneveshte"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Activity.ApiView"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Activity.Video_View"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Activity.News"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Activity.Web_View"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Activity.Splash"
+            tools:ignore="InnerclassSeparator"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

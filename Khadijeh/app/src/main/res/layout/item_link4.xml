@@ -22,13 +22,13 @@
         android:layout_height="wrap_content" >
 
         <androidx.cardview.widget.CardView
-            android:minHeight="@dimen/_65sdp"
-            android:layout_margin="3dp"
+            android:minHeight="@dimen/_70sdp"
+            android:layout_margin="2.5dp"
             app:cardCornerRadius="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         <ImageView
-            android:minHeight="@dimen/_65sdp"
+            android:minHeight="@dimen/_70sdp"
             android:scaleType="fitXY"
             android:id="@+id/link4_imageView1"
             android:src="@drawable/test"
@@ -57,13 +57,13 @@
         android:layout_height="wrap_content" >
 
         <androidx.cardview.widget.CardView
-            android:layout_margin="3dp"
-            android:minHeight="@dimen/_65sdp"
+            android:layout_margin="2.5dp"
+            android:minHeight="@dimen/_70sdp"
             app:cardCornerRadius="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         <ImageView
-            android:minHeight="@dimen/_65sdp"
+            android:minHeight="@dimen/_70sdp"
             android:scaleType="fitXY"
             android:id="@+id/link4_imageView2"
             android:src="@drawable/logo"
@@ -89,13 +89,13 @@
         android:layout_height="wrap_content" >
 
         <androidx.cardview.widget.CardView
-            android:minHeight="@dimen/_65sdp"
-            android:layout_margin="3dp"
+            android:minHeight="@dimen/_70sdp"
+            android:layout_margin="2.5dp"
             app:cardCornerRadius="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         <ImageView
-            android:minHeight="@dimen/_65sdp"
+            android:minHeight="@dimen/_70sdp"
             android:scaleType="fitXY"
             android:id="@+id/link4_imageView3"
             android:src="@drawable/logo"
@@ -121,14 +121,14 @@
         android:layout_height="wrap_content" >
 
         <androidx.cardview.widget.CardView
-            android:minHeight="@dimen/_65sdp"
-            android:layout_margin="3dp"
+            android:minHeight="@dimen/_70sdp"
+            android:layout_margin="2.5dp"
             app:cardCornerRadius="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:minHeight="@dimen/_65sdp"
+                android:minHeight="@dimen/_70sdp"
                 android:scaleType="fitXY"
                 android:id="@+id/link4_imageView4"
                 android:src="@drawable/logo"

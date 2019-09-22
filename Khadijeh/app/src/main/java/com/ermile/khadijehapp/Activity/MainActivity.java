@@ -1,6 +1,7 @@
 package com.ermile.khadijehapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ermile.khadijehapp.Adaptor.Adaptor_Main;
@@ -18,6 +20,7 @@ import com.ermile.khadijehapp.Item.item_link_2_4;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
 import com.ermile.khadijehapp.utility.Dialog;
+import com.ermile.khadijehapp.utility.SaveManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +48,13 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        LinearLayout main_lay = findViewById(R.id.main_layout);
+        String AppLanguage = SaveManager.get(this).getstring_appINFO().get(SaveManager.appLanguage);
+        if (AppLanguage.equals("fa") || AppLanguage.equals("ar")){
+            ViewCompat.setLayoutDirection(main_lay,ViewCompat.LAYOUT_DIRECTION_RTL);
+        }else {
+            ViewCompat.setLayoutDirection(main_lay,ViewCompat.LAYOUT_DIRECTION_LTR);
+        }
 
         String url_app= getString(R.string.url_app);
         itemMains = new ArrayList<>();
