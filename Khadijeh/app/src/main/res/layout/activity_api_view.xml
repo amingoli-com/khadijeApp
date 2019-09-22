@@ -10,6 +10,9 @@
 
 
     <TextView
+        android:background="@drawable/semicircular"
+        android:textAlignment="center"
+        android:minHeight="55dp"
         android:id="@+id/title_api"
         android:textSize="18sp"
         android:fontFamily="@font/iransans_bold"
@@ -17,7 +20,7 @@
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <ProgressBar
