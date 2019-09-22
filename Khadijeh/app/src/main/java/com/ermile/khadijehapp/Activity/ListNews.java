@@ -44,7 +44,7 @@ public class ListNews extends AppCompatActivity {
         LayoutManager_list = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recylerview_listNews.setAdapter(adaptor_main_list);
 
-        apiV6.listNews(url_app,"20", new apiV6.listNewsListener() {
+        apiV6.listNews(url_app,"50", new apiV6.listNewsListener() {
 
             @Override
             public void lestener_news(String newsArray) {

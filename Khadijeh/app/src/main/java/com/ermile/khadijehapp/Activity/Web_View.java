@@ -120,21 +120,14 @@ public class Web_View extends AppCompatActivity {
 
     }
 
-    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
+        if(webView_object.canGoBack())
+        {
+            webView_object.goBack();
         }
-        webView_object.goBack();
-        doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, getString(R.string.tost_exit), Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 1500);
+        else {
+            super.onBackPressed();
+        }
     }
 }

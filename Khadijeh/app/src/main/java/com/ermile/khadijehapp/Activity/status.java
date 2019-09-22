@@ -18,13 +18,13 @@ public class status extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
 
-
-        Uri data = getIntent().getData();
+        finish();
+       /* Uri data = getIntent().getData();
         Uri uri = Uri.parse(String.valueOf(data));
         if (uri.getQueryParameter("status") != null){
             status = uri.getQueryParameter("status");
             amount = uri.getQueryParameter("amount");
             Toast.makeText(this, status+"|"+amount, Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 }

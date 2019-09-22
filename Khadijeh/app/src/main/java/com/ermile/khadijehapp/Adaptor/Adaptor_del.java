@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
         }
 
         if (last_liked){
-            holder.isLiked.setVisibility(View.VISIBLE);
+            holder.bg_img_plus.setColorFilter(Color.RED);
         }
 
         final String id = mData.get(position).getId();
@@ -90,7 +91,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
                     int plusApp = Integer.valueOf(getPlusApp);
                     ++plusApp;
                     holder.plus.setText(String.valueOf(plusApp));
-                    holder.isLiked.setVisibility(View.VISIBLE);
+                    holder.bg_img_plus.setColorFilter(Color.RED);
 
                     String apikey = SaveManager.get(context).getstring_appINFO().get(SaveManager.apiKey);
                     apiV6.like_del(url,apikey, id, new apiV6.likeListener() {
@@ -136,7 +137,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name,text,plus;
-        ImageView avatar,isLiked,bg_img_plus;
+        ImageView avatar,bg_img_plus;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -145,7 +146,6 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
             plus = itemView.findViewById(R.id.plus_del);
             bg_img_plus = itemView.findViewById(R.id.img_like);
             avatar = itemView.findViewById(R.id.imgSex_del);
-            isLiked = itemView.findViewById(R.id.is_liked);
         }
 
     }

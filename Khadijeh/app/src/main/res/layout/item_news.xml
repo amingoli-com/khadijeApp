@@ -83,14 +83,14 @@
                             tools:ignore="SmallSp" />
 
                         <TextView
+                            android:justificationMode="inter_word"
                             android:id="@+id/news_desc"
                             android:textSize="@dimen/_7sdp"
-                            android:text="asdadd"
                             android:maxLength="120"
                             android:textColor="#000"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            tools:ignore="SmallSp" />
+                            tools:ignore="SmallSp,UnusedAttribute" />
                     </LinearLayout>
 
 

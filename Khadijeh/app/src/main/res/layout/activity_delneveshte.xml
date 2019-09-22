@@ -43,26 +43,15 @@
             android:background="@drawable/bg_btn_send_del_static"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_20sdp">
+            android:layout_height="@dimen/_30sdp">
 
             <ImageView
-                android:layout_marginEnd="@dimen/_1sdp"
-                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:layout_gravity="right|center"
                 android:src="@drawable/ic_add_plus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="match_parent"/>
 
-            <TextView
-                android:layout_gravity="center|left"
-                android:textColor="#fff"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:fontFamily="@font/iransans_bold"
-                android:textSize="@dimen/_8sdp"
-                android:text="@string/send_delneveshteh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
         </LinearLayout>
     </LinearLayout>
