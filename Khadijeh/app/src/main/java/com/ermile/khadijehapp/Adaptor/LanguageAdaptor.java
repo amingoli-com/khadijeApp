@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ermile.khadijehapp.Activity.MainActivity;
 import com.ermile.khadijehapp.Activity.Splash;
 import com.ermile.khadijehapp.Item.item_Language;
 import com.ermile.khadijehapp.R;

@@ -14,6 +14,7 @@ public class item_Main {
     public static final int NEWS  = 30;
     public static final int HR = 0;
     public static final int LANGUAGE = 2000;
+    public static final int VERSION = 3000;
 
 
 

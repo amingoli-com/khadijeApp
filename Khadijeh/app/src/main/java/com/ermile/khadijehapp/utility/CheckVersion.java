@@ -1,5 +1,6 @@
 package com.ermile.khadijehapp.utility;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,7 +14,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class CheckVersion {
-    public static Boolean Deprecated(Context context,String respones){
+    public static Boolean Deprecated(Activity activity,Context context, String respones){
         try {
             JSONObject respone = new JSONObject(respones);
             JSONObject result = respone.getJSONObject("result");
@@ -36,7 +37,7 @@ public class CheckVersion {
                 SaveManager.get(context).change_deprecatedVersion(true);
                 Intent openURL = new Intent ( Intent.ACTION_VIEW );
                 openURL.setData (Uri.parse( urlUpdate ));
-                new Dialog(context,deprecated_title,deprecated_desc,deprecated_btnTitle,false,openURL);
+                new Dialog(activity,deprecated_title,deprecated_desc,deprecated_btnTitle,false,openURL);
                 return true;
 
             }else {

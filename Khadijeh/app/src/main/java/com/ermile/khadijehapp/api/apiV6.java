@@ -104,6 +104,10 @@ public class apiV6 {
                                 appListener.lestener_language();
                                 break;
                         }
+
+                        if (i == homepage.length()-1){
+                            appListener.lestener_versionApp();
+                        }
                     }
 
 
@@ -136,6 +140,7 @@ public class apiV6 {
         void lestener_news(String newsArray);
         void lestener_hr();
         void lestener_language();
+        void lestener_versionApp();
         void error();
     }
 

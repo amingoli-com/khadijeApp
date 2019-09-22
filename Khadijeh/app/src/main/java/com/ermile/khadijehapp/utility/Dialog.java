@@ -8,11 +8,8 @@ import android.content.Intent;
 import androidx.appcompat.app.AlertDialog;
 
 public class Dialog {
-    Context context;
-
-    public Dialog(final Context context, String title, String desc, String btnTitle, boolean Cancelable, final Intent intent) {
-        this.context = context;
-        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(context);
+    public Dialog(final Activity activity, String title, String desc, String btnTitle, boolean Cancelable, final Intent intent) {
+        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(activity);
         /*Title*/
         builderSingle.setTitle(title);
         /*Message*/
@@ -24,11 +21,11 @@ public class Dialog {
                     public void onClick(DialogInterface dialog, int which) {
                         if (intent == null){
                             dialog.dismiss();
-                            ((Activity)context).finish();
+                            activity.finish();
                         }else {
                             dialog.dismiss();
-                            ((Activity)context).finish();
-                            context.startActivity(intent);
+                            activity.finish();
+                            activity.startActivity(activity.getIntent());
                         }
 
                     }

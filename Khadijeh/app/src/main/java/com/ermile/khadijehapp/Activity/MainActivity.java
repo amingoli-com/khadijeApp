@@ -18,6 +18,7 @@ import com.ermile.khadijehapp.Item.item_link_2_4;
 import com.ermile.khadijehapp.Item.item_slider;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
+import com.ermile.khadijehapp.utility.Dialog;
 import com.ermile.khadijehapp.utility.Notif;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onResume() {
-        startService(new Intent(MainActivity.this, Notif.class));
+
+        //startService(new Intent(MainActivity.this, Notif.class));
         super.onResume();
     }
 
@@ -120,9 +122,14 @@ public class MainActivity extends AppCompatActivity  {
             }
 
             @Override
+            public void lestener_versionApp() {
+                version();
+            }
+
+            @Override
             public void error() {
-                finish();
-                startActivity(new Intent(getApplicationContext(),errorNet.class));
+                Intent getintent = getIntent();
+                new Dialog(MainActivity.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
             }
         });
 
@@ -433,6 +440,24 @@ public class MainActivity extends AppCompatActivity  {
 
     private void changeLanguage(){
         itemMains.add(new item_Main(item_Main.LANGUAGE,null,null,
+                null,null,
+
+                null,null,null,null,
+                null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,
+                null,
+                null,null,null,
+                null,null,
+                null,null,null,null,
+                null,
+                null,null,null,null));
+        recylerview.setLayoutManager(LayoutManager);
+        recylerview.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void version(){
+        itemMains.add(new item_Main(item_Main.VERSION,null,null,
                 null,null,
 
                 null,null,null,null,

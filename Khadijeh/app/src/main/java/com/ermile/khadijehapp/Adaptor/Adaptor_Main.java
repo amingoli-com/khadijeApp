@@ -212,6 +212,11 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             this.imageView = itemView.findViewById(R.id.img_language);
         }
     }
+    public static class holder_version extends RecyclerView.ViewHolder {
+        holder_version(View itemView) {
+            super(itemView);
+        }
+    }
 
     public Adaptor_Main(ArrayList<item_Main> data, Context context ) {
         this.itemMains = data;
@@ -265,6 +270,9 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             case item_Main.LANGUAGE:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_change_language, parent, false);
                 return new Adaptor_Main.holder_language(view);
+            case item_Main.VERSION:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_version, parent, false);
+                return new Adaptor_Main.holder_version(view);
 
         }
         return null;
@@ -303,6 +311,8 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 return item_Main.HR;
             case 2000:
                 return item_Main.LANGUAGE;
+            case 3000:
+                return item_Main.VERSION;
             default:
                 return -1;
         }
@@ -576,6 +586,8 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_language)holder).linearLayout.setOnClickListener(langOnclick);
                     ((holder_language)holder).textView.setOnClickListener(langOnclick);
                     break;
+                case item_Main.VERSION:
+                    break;
             }
         }
     }
@@ -603,6 +615,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 mContext.startActivity(new Intent(mContext,ListNews.class));
                 break;
             case "lang":
+                ((Activity)mContext).finish();
                 mContext.startActivity(new Intent(mContext,Language.class));
                 break;
             case "delneveshte":

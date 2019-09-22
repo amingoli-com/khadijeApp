@@ -1,5 +1,6 @@
 package com.ermile.khadijehapp.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -18,6 +19,7 @@ import com.ermile.khadijehapp.Adaptor.LanguageAdaptor;
 import com.ermile.khadijehapp.Item.item_Language;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
+import com.ermile.khadijehapp.utility.Dialog;
 import com.ermile.khadijehapp.utility.SaveManager;
 
 import org.json.JSONException;
@@ -95,8 +97,8 @@ public class Language extends AppCompatActivity {
 
             @Override
             public void error(String error) {
-                finish();
-                startActivity(new Intent(getApplicationContext(),errorNet.class));
+                Intent getintent = getIntent();
+                new Dialog(Language.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
             }
         });
 
@@ -104,5 +106,10 @@ public class Language extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        startActivity(new Intent(this,MainActivity.class));
+    }
 }

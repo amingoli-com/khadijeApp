@@ -13,6 +13,7 @@ import com.ermile.khadijehapp.Adaptor.Adaptor_Intro;
 import com.ermile.khadijehapp.Item.item_intro;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.GetAndroidDetail;
+import com.ermile.khadijehapp.utility.Dialog;
 import com.ermile.khadijehapp.utility.SaveManager;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
@@ -154,8 +155,8 @@ public class Intro extends AppCompatActivity {
 
             @Override
             public void onGetJson_error(String error) {
-                finish();
-                startActivity(new Intent(getApplicationContext(),errorNet.class));
+                Intent getintent = getIntent();
+                new Dialog(Intro.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
             }
 
         });

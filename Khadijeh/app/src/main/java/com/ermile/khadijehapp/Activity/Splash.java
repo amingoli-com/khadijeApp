@@ -112,7 +112,7 @@ public class Splash extends AppCompatActivity {
             finish();
             startActivity( new Intent(this, Language.class));
         }else {
-            if (!CheckVersion.Deprecated(this,respone)){
+            if (!CheckVersion.Deprecated(Splash.this,getApplicationContext(),respone)){
                 singUpTemp();
             }
         }

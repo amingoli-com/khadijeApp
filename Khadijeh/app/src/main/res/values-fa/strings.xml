@@ -33,4 +33,7 @@
     <string name="edt_mobile">موبایل اختیاری</string>
     <string name="send">ارسال</string>
     <string name="full_list">لیست کامل</string>
+
+    <string name="aa">اپلیکیشن موسسه حضرت خدیجه نسخه ۱</string>
+    <string name="version">نسخه ۳۵</string>
 </resources>

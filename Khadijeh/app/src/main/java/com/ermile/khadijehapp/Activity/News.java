@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
+import com.ermile.khadijehapp.utility.Dialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -83,8 +84,8 @@ public class News extends AppCompatActivity {
 
             @Override
             public void failedValueNes(String error) {
-                finish();
-                startActivity(new Intent(getApplicationContext(),errorNet.class));
+                Intent getintent = getIntent();
+                new Dialog(News.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
             }
         });
     }

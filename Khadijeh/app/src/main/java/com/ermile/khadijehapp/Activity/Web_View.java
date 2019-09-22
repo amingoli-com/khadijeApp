@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.ermile.khadijehapp.R;
+import com.ermile.khadijehapp.utility.Dialog;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.HashMap;
@@ -55,8 +56,8 @@ public class Web_View extends AppCompatActivity {
             webView_object.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
-                    finish();
-                    startActivity(new Intent(getApplicationContext(),errorNet.class));
+                    Intent getintent = getIntent();
+                    new Dialog(Web_View.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
                 }
                 // in refresh send header
                 @Override

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
+import com.ermile.khadijehapp.utility.Dialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,8 +55,8 @@ public class ApiView extends AppCompatActivity {
 
             @Override
             public void error(String error) {
-                finish();
-                startActivity(new Intent(getApplicationContext(),errorNet.class));
+                Intent getintent = getIntent();
+                new Dialog(ApiView.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
 
             }
         });

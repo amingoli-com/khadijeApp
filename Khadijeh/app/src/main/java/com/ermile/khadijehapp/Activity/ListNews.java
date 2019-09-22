@@ -16,6 +16,7 @@ import com.ermile.khadijehapp.Adaptor.Adaptor_Main;
 import com.ermile.khadijehapp.Item.item_Main;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
+import com.ermile.khadijehapp.utility.Dialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,8 +53,8 @@ public class ListNews extends AppCompatActivity {
 
             @Override
             public void error() {
-                finish();
-                startActivity(new Intent(getApplicationContext(),errorNet.class));
+                Intent getintent = getIntent();
+                new Dialog(ListNews.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
             }
         });
     }
