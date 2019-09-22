@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
+import android.widget.Toast;
 
 import com.ermile.khadijehapp.Adaptor.Adaptor_Main;
 import com.ermile.khadijehapp.Item.item_Main;
@@ -467,6 +469,23 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "برای خروج مجددا کلید برگشت را لمس کنید", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 1500);
     }
 
 

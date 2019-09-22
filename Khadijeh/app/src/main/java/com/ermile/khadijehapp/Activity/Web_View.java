@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -24,9 +25,15 @@ import java.util.Map;
 public class Web_View extends AppCompatActivity {
     Map<String, String> sernd_headers = new HashMap<>();
     private String URL = null;
+    int a = 0;
 
     SwipeRefreshLayout swipeRefreshLayout;
     WebView webView_object;
+
+    String[] url_pay = {"https://khadije.com/pay/","https://khadije.com/ar/pay/","https://khadije.com/en/pay/","https://khadije.com/pay/"};
+    String[] url_del = {"https://khadije.com/delneveshte","https://khadije.com/ar/delneveshte","https://khadije.com/en/delneveshte","https://khadije.com/delneveshte"};
+    String[] url_news = {"https://khadije.com/blog/","https://khadije.com/ar/blog/","https://khadije.com/en/blog/","https://khadije.com/blog/"};
+    String url_site = "https://khadije.com";
 
 
     @SuppressLint({"NewApi", "SetJavaScriptEnabled"})
@@ -59,8 +66,11 @@ public class Web_View extends AppCompatActivity {
             webView_object.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
-                    Intent getintent = getIntent();
-                    new Dialog(Web_View.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
+                    finish();
+                    if (a == 0){
+                        Toast.makeText(Web_View.this, getString(R.string.errorNet_title_snackBar), Toast.LENGTH_SHORT).show();
+                        a++;
+                    }
                 }
                 // in refresh send header
                 @Override
@@ -69,15 +79,30 @@ public class Web_View extends AppCompatActivity {
                     headerMap.put("x-app-request", "android");
                     view.loadUrl(url, headerMap);
 
-                    if (url.startsWith("https://khadije.com/pay/") ||
-                            url.startsWith("https://khadije.com/ar/pay/") ||
-                            url.startsWith("https://khadije.com/en/pay/"))
-                    {
-                        Intent browser = new Intent(Intent.ACTION_VIEW);
-                        browser.setData(Uri.parse(url));
-                        startActivity(browser);
-                        finish();
-                        return true;
+
+                    for (int i = 0; i < 3; i++) {
+                        if (url.startsWith(url_pay[i])) {
+                            Intent browser = new Intent(Intent.ACTION_VIEW);
+                            browser.setData(Uri.parse(url));
+                            startActivity(browser);
+                            finish();
+                            return true;
+                        }
+                        else if (!url.substring(0,19).startsWith(url_site)){
+                            Intent browser = new Intent(Intent.ACTION_VIEW);
+                            browser.setData(Uri.parse(url));
+                            startActivity(browser);
+                            finish();
+                        }
+                        else if (url.startsWith(url_del[i])){
+                            startActivity(new Intent(Web_View.this,Delneveshte.class));
+                            finish();
+                        }
+                        else if ((url.startsWith(url_news[i])))
+                        {
+                            startActivity(new Intent(Web_View.this,ListNews.class));
+                            finish();
+                        }
                     }
 
 
@@ -93,5 +118,23 @@ public class Web_View extends AppCompatActivity {
         }
 
 
+    }
+
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        webView_object.goBack();
+        doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "برای خروج مجددا کلید برگشت را لمس کنید", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 1500);
     }
 }
