@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Checkable;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import com.ermile.khadijehapp.Adaptor.Adaptor_del;
 import com.ermile.khadijehapp.Item.item_del;
 import com.ermile.khadijehapp.R;
 import com.ermile.khadijehapp.api.apiV6;
+import com.ermile.khadijehapp.utility.Database;
 import com.ermile.khadijehapp.utility.SaveManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nex3z.togglebuttongroup.button.OnCheckedChangeListener;
@@ -53,9 +57,9 @@ public class Delneveshte extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_del);
 
 
-        final FloatingActionButton fab_del = findViewById(R.id.fab);
+        final LinearLayout send_del_acdel = findViewById(R.id.send_del_acdel);
 
-        fab_del.setOnClickListener(new View.OnClickListener() {
+        send_del_acdel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendDelneveshte();
@@ -79,7 +83,6 @@ public class Delneveshte extends AppCompatActivity {
             @Override
             public void result(String respone) {
                 try {
-
                     JSONArray array = new JSONArray(respone);
                     for (int i = 0; i < array.length(); i++) {
                         String plus = "0";
@@ -88,7 +91,6 @@ public class Delneveshte extends AppCompatActivity {
                         String id = object.getString("id");
                         String sex = object.getString("gender");
                         String content = object.getString("content");
-
                         if (!object.isNull("plus")){
                             plus = object.getString("plus");
                         }
@@ -96,11 +98,25 @@ public class Delneveshte extends AppCompatActivity {
                             name = object.getString("name");
                         }
 
-                        itemDels.add(new item_del(name,content,null,plus,sex,id));
-                        recyclerView.setLayoutManager(LayoutManager);
-                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        SQLiteDatabase databases = new Database(getApplicationContext()).getReadableDatabase();
+                        @SuppressLint("Recycle") Cursor checkID_del = databases.rawQuery(Database.select_del(id),null);
+
+                        if (checkID_del.getCount() == 0){
+                            itemDels.add(new item_del(name,content,null,plus,sex,id,false));
+                            recyclerView.setLayoutManager(LayoutManager);
+                            recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        }else {
+                            itemDels.add(new item_del(name,content,null,plus,sex,id,true));
+                            recyclerView.setLayoutManager(LayoutManager);
+                            recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        }
+                        databases.close();
+                        checkID_del.close();
+
+
+
                     }
-                    fab_del.setVisibility(View.VISIBLE);
+                    send_del_acdel.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
                 } catch (JSONException e) {

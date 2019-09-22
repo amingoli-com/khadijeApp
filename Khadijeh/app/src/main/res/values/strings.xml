@@ -34,7 +34,7 @@
     <string name="send">Send</string>
     <string name="full_list" translatable="false">Full List</string>
 
-    <string name="aa">اپلیکیشن موسسه حضرت خدیجه نسخه ۱</string>
     <string name="version">Version 35</string>
+    <string name="send_delneveshteh">Send Self</string>
 
 </resources>

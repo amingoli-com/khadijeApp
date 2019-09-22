@@ -55,6 +55,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
         String text = mData.get(position).getText();
         String sex = mData.get(position).getSex();
         String name = mData.get(position).getName();
+        Boolean last_liked = mData.get(position).isLast_liked();
 
         if (name != null){
             holder.name.setVisibility(View.VISIBLE);
@@ -71,10 +72,15 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
             holder.avatar.setImageResource(R.drawable.man);
         }
 
+        if (last_liked){
+            holder.isLiked.setVisibility(View.VISIBLE);
+        }
+
         final String id = mData.get(position).getId();
 
         final String url = context.getString(R.string.url_del_like);
-        holder.btnLike.setOnClickListener(new View.OnClickListener() {
+
+        View.OnClickListener clickLike = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SQLiteDatabase databases = new Database(context).getReadableDatabase();
@@ -84,6 +90,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
                     int plusApp = Integer.valueOf(getPlusApp);
                     ++plusApp;
                     holder.plus.setText(String.valueOf(plusApp));
+                    holder.isLiked.setVisibility(View.VISIBLE);
 
                     String apikey = SaveManager.get(context).getstring_appINFO().get(SaveManager.apiKey);
                     apiV6.like_del(url,apikey, id, new apiV6.likeListener() {
@@ -113,7 +120,10 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
                 databases.close();
                 checkID_del.close();
             }
-        });
+        };
+
+        holder.bg_img_plus.setOnClickListener(clickLike);
+        holder.plus.setOnClickListener(clickLike);
     }
 
     // total number of rows
@@ -126,15 +136,16 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name,text,plus;
-        ImageView avatar,btnLike;
+        ImageView avatar,isLiked,bg_img_plus;
 
         ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name_del);
             text = itemView.findViewById(R.id.text_del);
             plus = itemView.findViewById(R.id.plus_del);
+            bg_img_plus = itemView.findViewById(R.id.img_like);
             avatar = itemView.findViewById(R.id.imgSex_del);
-            btnLike = itemView.findViewById(R.id.btn_like);
+            isLiked = itemView.findViewById(R.id.is_liked);
         }
 
     }

@@ -30,7 +30,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_width="30dp"
+            android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp">
 
 
@@ -38,13 +38,14 @@
                 android:layout_centerInParent="true"
                 android:padding="0.5dp"
                 android:src="@drawable/heart"
+                android:id="@+id/img_like"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <TextView
                 android:layout_centerInParent="true"
                 android:id="@+id/plus_del"
                 android:textAlignment="center"
-                android:textSize="8sp"
+                android:textSize="@dimen/_5sdp"
                 android:text="100"
                 android:fontFamily="@font/iransans_bold"
                 android:textColor="#FFFFFF"
@@ -87,8 +88,8 @@
 
 
     <ImageButton
-        android:visibility="gone"
-        android:id="@+id/btn_like"
+        android:visibility="invisible"
+        android:id="@+id/is_liked"
         style="@style/Widget.AppCompat.ImageButton"
         android:background="#00DDDDDD"
         android:src="@drawable/heart"
