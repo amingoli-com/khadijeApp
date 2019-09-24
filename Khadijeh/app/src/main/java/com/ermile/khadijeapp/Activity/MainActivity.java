@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ermile.khadijeapp.Adaptor.Adaptor_Main;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity  {
     Adaptor_Main adaptor_main;
     LinearLayoutManager LayoutManager;
     ArrayList<item_Main> itemMains;
+    ProgressBar progressBar;
 
     @Override
     protected void onResume() {
@@ -48,6 +51,9 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        progressBar = findViewById(R.id.progress_main);
+
         LinearLayout main_lay = findViewById(R.id.main_layout);
         String AppLanguage = SaveManager.get(this).getstring_appINFO().get(SaveManager.appLanguage);
         if (AppLanguage.equals("fa") || AppLanguage.equals("ar")){
@@ -130,13 +136,17 @@ public class MainActivity extends AppCompatActivity  {
 
             @Override
             public void lestener_versionApp() {
+                progressBar.setVisibility(View.GONE);
+                recylerview.setVisibility(View.VISIBLE);
                 version();
             }
 
             @Override
             public void error() {
+                progressBar.setVisibility(View.VISIBLE);
+                recylerview.setVisibility(View.GONE);
                 Intent getintent = getIntent();
-                new Dialog(MainActivity.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
+                new Dialog(MainActivity.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),true,getintent);
             }
         });
 

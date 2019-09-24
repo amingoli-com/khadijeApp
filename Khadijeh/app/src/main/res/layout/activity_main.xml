@@ -6,9 +6,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/main_layout"
+    android:gravity="center"
     tools:context=".Activity.MainActivity">
 
+
+
+    <ProgressBar
+        android:id="@+id/progress_main"
+        android:alpha="0.3"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:background="#61DDDDDD"
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"

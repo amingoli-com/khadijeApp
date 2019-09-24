@@ -27,11 +27,17 @@
             app:cardCornerRadius="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
+
+            <ProgressBar
+                android:alpha="0.3"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         <ImageView
             android:minHeight="@dimen/_70sdp"
             android:scaleType="fitXY"
             android:id="@+id/link4_imageView1"
-            android:src="@drawable/test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -62,11 +68,17 @@
             app:cardCornerRadius="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
+
+            <ProgressBar
+                android:alpha="0.3"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         <ImageView
             android:minHeight="@dimen/_70sdp"
             android:scaleType="fitXY"
             android:id="@+id/link4_imageView2"
-            android:src="@drawable/logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </androidx.cardview.widget.CardView>
@@ -94,11 +106,17 @@
             app:cardCornerRadius="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
+
+            <ProgressBar
+                android:alpha="0.3"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         <ImageView
             android:minHeight="@dimen/_70sdp"
             android:scaleType="fitXY"
             android:id="@+id/link4_imageView3"
-            android:src="@drawable/logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </androidx.cardview.widget.CardView>
@@ -127,11 +145,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
+            <ProgressBar
+                android:alpha="0.3"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
             <ImageView
                 android:minHeight="@dimen/_70sdp"
                 android:scaleType="fitXY"
                 android:id="@+id/link4_imageView4"
-                android:src="@drawable/logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

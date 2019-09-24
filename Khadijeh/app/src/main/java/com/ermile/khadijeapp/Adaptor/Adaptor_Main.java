@@ -676,7 +676,6 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             default:
                 if (type!=null && type.equals("browser")){
-                    Toast.makeText(mContext, ""+type, Toast.LENGTH_SHORT).show();
                     Intent browser = new Intent(Intent.ACTION_VIEW);
                     browser.setData(Uri.parse(url));
                     mContext.startActivity(browser);
