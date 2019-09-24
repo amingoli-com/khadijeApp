@@ -15,6 +15,8 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.ermile.khadijeapp.R;
+import com.ermile.khadijeapp.Static.value;
+import com.ermile.khadijeapp.utility.SaveManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,8 +41,19 @@ public class Web_View extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
 
+
+        String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
+        String usercode = SaveManager.get(this).getstring_appINFO().get(SaveManager.userCode);
+        String zonid = SaveManager.get(this).getstring_appINFO().get(SaveManager.zoneID);
+
+
         URL = getIntent().getStringExtra("url");
         sernd_headers.put("x-app-request", "android");
+        sernd_headers.put("apikey",apikey);
+        sernd_headers.put("usercode",usercode);
+        sernd_headers.put("zonid",zonid);
+        sernd_headers.put("versionCode",String.valueOf(value.versionCode));
+        sernd_headers.put("versionName",value.versionName);
 
         swipeRefreshLayout = findViewById(R.id.swipRefresh_WebView);
         webView_object = findViewById(R.id.webView_WebView);
@@ -72,9 +85,7 @@ public class Web_View extends AppCompatActivity {
                 // in refresh send header
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    HashMap<String, String> headerMap = new HashMap<>();
-                    headerMap.put("x-app-request", "android");
-                    view.loadUrl(url, headerMap);
+                    view.loadUrl(url, sernd_headers);
 
 
                     for (int i = 0; i < 3; i++) {
