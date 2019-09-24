@@ -152,7 +152,7 @@ public class Notif extends Service {
     // get Notification and run for user > Yes Notif is ..
     public void Notif_is(String url, final String apikey){
         // Post Method
-        StringRequest Notif_is_Request = new StringRequest(Request.Method.POST, url , new Response.Listener<String>(){
+        StringRequest Notif_is_Request = new StringRequest(Request.Method.POST, this.getString(R.string.url_notif) , new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {

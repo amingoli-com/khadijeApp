@@ -13,8 +13,20 @@ import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.ermile.khadijeapp.R;
 import com.ermile.khadijeapp.Static.tag;
+import com.ermile.khadijeapp.utility.Network;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Notification extends Service {
 
@@ -26,7 +38,6 @@ public class Notification extends Service {
         public void run() {
             if (powerServic){
                 Log.d(tag.service_notification, "------------------------------------ runnable");
-                post_smile();
                 handler.postDelayed(runnable, 30000);
             }
         }
@@ -75,13 +86,92 @@ public class Notification extends Service {
     }
 
 
-    private void post_smile(){
-        Log.d(tag.service_notification, "------------------------------------ post_smile VOID");
-        send_Notif("test",
-                "defencelessness's\n" +
-                "defencelessness's\n" +
-                "defencelessness's\n" +
-                "defencelessness's","info");
+    // Notification send header and user Token > new Notif for me?
+    public void post_smile(String url_postSmail, final String url_nitif, final String apikey){
+        // Json <Post Smile> Method
+        StringRequest PostSmile_Request = new StringRequest(Request.Method.POST, this.getString(R.string.smile), new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONObject get_postRequest = new JSONObject(response);
+
+                    // Check New Notif
+                    boolean ok_notif = get_postRequest.getBoolean("ok");
+                    if (ok_notif){
+                        JSONObject result = get_postRequest.getJSONObject("result");
+                        boolean new_notif = result.getBoolean("notif_new");
+                        if (new_notif){
+                            Notif_is(url_nitif,apikey);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        })
+                // Send Header
+        {
+            @Override
+            public Map<String, String> getHeaders()  {
+                HashMap<String, String> headers_postSmile = new HashMap<>();
+                headers_postSmile.put("apikey", apikey);
+                return headers_postSmile;
+            }
+        }
+                ;
+        Network.getInstance().addToRequestQueue(PostSmile_Request);
+    }
+
+    // get Notification and run for user > Yes Notif is ..
+    public void Notif_is(String url, final String apikey){
+        // Post Method
+        StringRequest Notif_is_Request = new StringRequest(Request.Method.POST, url , new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject mainObject = new JSONObject(response);
+                    boolean ok_getnotif = mainObject.getBoolean("ok");
+                    if (ok_getnotif) {
+                        JSONArray result = mainObject.getJSONArray("result");
+                        for (int j = 0; j < result.length(); j++) {
+                            JSONObject jsonObject = result.getJSONObject(j);
+
+                            String title = jsonObject.getString("title");
+                            String desc = jsonObject.getString("text");
+                            String info = getApplicationContext().getString(R.string.app_name);
+
+                            send_Notif(title,desc,info);
+                        }
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        })
+                // Send Headers
+        {
+            @Override
+            public Map<String, String> getHeaders()  {
+                HashMap<String, String> headers_postSmile = new HashMap<>();
+                headers_postSmile.put("apikey",apikey );
+                return headers_postSmile;
+            }
+        };
+        Network.getInstance().addToRequestQueue(Notif_is_Request);
     }
 
     private void send_Notif(String title,String desc,String info){
