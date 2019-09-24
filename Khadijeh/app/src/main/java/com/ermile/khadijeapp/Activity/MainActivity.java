@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -20,8 +21,11 @@ import com.ermile.khadijeapp.Adaptor.Adaptor_Main;
 import com.ermile.khadijeapp.Item.item_Main;
 import com.ermile.khadijeapp.Item.item_link_2_4;
 import com.ermile.khadijeapp.R;
+import com.ermile.khadijeapp.Service.Notification;
+import com.ermile.khadijeapp.Static.tag;
 import com.ermile.khadijeapp.api.apiV6;
 import com.ermile.khadijeapp.utility.Dialog;
+import com.ermile.khadijeapp.Service.Notif;
 import com.ermile.khadijeapp.utility.SaveManager;
 
 import org.json.JSONArray;
@@ -42,8 +46,7 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onResume() {
-
-        //startService(new Intent(MainActivity.this, Notif.class));
+        startService(new Intent(MainActivity.this, Notification.class));
         super.onResume();
     }
 
@@ -51,6 +54,15 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
+        String usercode = SaveManager.get(this).getstring_appINFO().get(SaveManager.userCode);
+        String zonid = SaveManager.get(this).getstring_appINFO().get(SaveManager.zoneID);
+
+        Log.d(tag.get_info_login,
+                "\n Api Key: "+apikey+
+                "\n User Code: "+usercode+
+                "\n Zon ID: "+zonid);
 
         progressBar = findViewById(R.id.progress_main);
 

@@ -1,4 +1,4 @@
-package com.ermile.khadijeapp.utility;
+package com.ermile.khadijeapp.Service;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -19,6 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.ermile.khadijeapp.Activity.MainActivity;
 import com.ermile.khadijeapp.R;
+import com.ermile.khadijeapp.utility.Network;
+import com.ermile.khadijeapp.utility.SaveManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -143,7 +145,8 @@ public class Notif extends Service {
                 return headers_postSmile;
             }
         }
-                ;Network.getInstance().addToRequestQueue(PostSmile_Request);
+                ;
+        Network.getInstance().addToRequestQueue(PostSmile_Request);
     }
 
     // get Notification and run for user > Yes Notif is ..

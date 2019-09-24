@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.ermile.khadijeapp.Static.lookServer;
+import com.ermile.khadijeapp.Static.value;
 import com.ermile.khadijeapp.utility.Network;
 
 import org.json.JSONArray;
@@ -120,7 +121,18 @@ public class apiV6 {
             public void onErrorResponse(VolleyError e) {
                 appListener.error();
             }
-        });mainRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> sernd_headers = new HashMap<>();
+                sernd_headers.put("x-app-request", "android");
+                sernd_headers.put("versionCode",String.valueOf(value.versionCode));
+                sernd_headers.put("versionName",value.versionName);
+                return sernd_headers;
+            }
+        }
+        ;mainRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         Network.getInstance().addToRequestQueue(mainRQ);
     }
