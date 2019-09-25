@@ -2,8 +2,13 @@ package com.ermile.khadijeapp.Service;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -12,14 +17,17 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.ermile.khadijeapp.Activity.Splash;
 import com.ermile.khadijeapp.R;
 import com.ermile.khadijeapp.Static.tag;
 import com.ermile.khadijeapp.utility.Network;
+import com.ermile.khadijeapp.utility.SaveManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +35,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+
+import static com.ermile.khadijeapp.utility.Firebase.Attribuites.FCM_ACTION_CLICK_NOTIFICATION;
 
 public class Notification extends Service {
 
@@ -37,6 +48,7 @@ public class Notification extends Service {
         @Override
         public void run() {
             if (powerServic){
+                post_smile();
                 Log.d(tag.service_notification, "------------------------------------ runnable");
                 handler.postDelayed(runnable, 30000);
             }
@@ -87,7 +99,8 @@ public class Notification extends Service {
 
 
     // Notification send header and user Token > new Notif for me?
-    public void post_smile(String url_postSmail, final String url_nitif, final String apikey){
+    public void post_smile(){
+        final String apikey = SaveManager.get(getApplicationContext()).getstring_appINFO().get(SaveManager.apiKey);
         // Json <Post Smile> Method
         StringRequest PostSmile_Request = new StringRequest(Request.Method.POST, this.getString(R.string.smile), new Response.Listener<String>()
         {
@@ -103,7 +116,7 @@ public class Notification extends Service {
                         JSONObject result = get_postRequest.getJSONObject("result");
                         boolean new_notif = result.getBoolean("notif_new");
                         if (new_notif){
-                            Notif_is(url_nitif,apikey);
+                            Notif_is(apikey);
                         }
                     }
                 } catch (JSONException e) {
@@ -130,9 +143,9 @@ public class Notification extends Service {
     }
 
     // get Notification and run for user > Yes Notif is ..
-    public void Notif_is(String url, final String apikey){
+    public void Notif_is(final String apikey){
         // Post Method
-        StringRequest Notif_is_Request = new StringRequest(Request.Method.POST, url , new Response.Listener<String>(){
+        StringRequest Notif_is_Request = new StringRequest(Request.Method.POST, getString(R.string.url_notif) , new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
@@ -142,12 +155,26 @@ public class Notification extends Service {
                         JSONArray result = mainObject.getJSONArray("result");
                         for (int j = 0; j < result.length(); j++) {
                             JSONObject jsonObject = result.getJSONObject(j);
-
-                            String title = jsonObject.getString("title");
-                            String desc = jsonObject.getString("text");
+                            String title = null;
+                            String excerpt = null;
+                            String desc = null;
                             String info = getApplicationContext().getString(R.string.app_name);
 
-                            send_Notif(title,desc,info);
+                            if (!jsonObject.isNull("title")){
+                                title = jsonObject.getString("title");
+                            }
+                            if (!jsonObject.isNull("excerpt")){
+                                excerpt = jsonObject.getString("excerpt");
+                            }
+
+                            if (!jsonObject.isNull("text")){
+                                desc = jsonObject.getString("text");
+                            }
+                            else if (!jsonObject.isNull("excerpt")){
+                                desc = excerpt;
+                            }
+
+                            send_Notif(title,excerpt,desc,info,j);
                         }
 
                     }
@@ -174,18 +201,37 @@ public class Notification extends Service {
         Network.getInstance().addToRequestQueue(Notif_is_Request);
     }
 
-    private void send_Notif(String title,String desc,String info){
+    private void send_Notif(String title,String excerpt,String desc,String info,int id){
+
+        Intent intent = new Intent(this, Splash.class); //Open activity if clicked on notification
+        PendingIntent pendingIntent;
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setAction(FCM_ACTION_CLICK_NOTIFICATION);
+        pendingIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        int randomNumber = new Random().nextInt(976431 ) + 20;
         builder = new NotificationCompat.Builder(this,CHANNEL_ID);
 
-        notificationManager = NotificationManagerCompat.from(getApplicationContext());
+        long[] pattern = {500,500,500,500,500}; //Notification vibration pattern
 
-        builder.setContentTitle(title)
-                .setContentText(desc)
-                .setStyle(new NotificationCompat
-                        .BigTextStyle()
-                        .bigText(desc))
+        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION); //Notification alert sound
+
+
+        notificationManager = NotificationManagerCompat.from(getApplicationContext());
+        builder
+                .setContentTitle(title)
+                .setContentText(excerpt)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(desc))
+                .setAutoCancel(true)
+                .setVibrate(pattern)
+                .setLights(Color.BLUE,1,1)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent)
                 .setContentInfo(info)
-                .setSmallIcon(R.drawable.logo_xml);
-        notificationManager.notify(100, builder.build());
+                .setSmallIcon(R.drawable.logo_xml)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
+                .setColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        notificationManager.notify(100+randomNumber+id, builder.build());
     }
 }

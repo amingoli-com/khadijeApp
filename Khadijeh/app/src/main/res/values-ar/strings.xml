@@ -39,4 +39,6 @@
     <string name="tost_exit">للخروج المس زر الرجوع مرة أخرى</string>
     <string name="update_now">تحديث الان</string>
     <string name="smile">https://khadije.com/ar/api/v6/smile</string>
+    <string name="msg_token_fmt">msg_token_fmt</string>
+
 </resources>

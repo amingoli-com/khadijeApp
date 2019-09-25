@@ -25,7 +25,6 @@ import com.ermile.khadijeapp.Service.Notification;
 import com.ermile.khadijeapp.Static.tag;
 import com.ermile.khadijeapp.api.apiV6;
 import com.ermile.khadijeapp.utility.Dialog;
-import com.ermile.khadijeapp.Service.Notif;
 import com.ermile.khadijeapp.utility.SaveManager;
 
 import org.json.JSONArray;
