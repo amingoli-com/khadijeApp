@@ -3,8 +3,12 @@ package com.ermile.khadijeapp.utility;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
+
+import com.ermile.khadijeapp.R;
 
 public class Dialog {
     public Dialog(final Activity activity, String title, String desc, String btnTitle, boolean Cancelable, final Intent intent) {
@@ -29,6 +33,14 @@ public class Dialog {
 
                     }
                 });
+
+        builderSingle.setNeutralButton(activity.getString(R.string.later), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                activity.finish();
+
+            }
+        });
         builderSingle.setCancelable(Cancelable);
         builderSingle.show();
     }

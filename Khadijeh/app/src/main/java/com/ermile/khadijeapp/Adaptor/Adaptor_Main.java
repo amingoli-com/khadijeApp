@@ -225,8 +225,15 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
     public static class holder_version extends RecyclerView.ViewHolder {
+        LinearLayout linearLayout;
+        ImageView imageView;
+        TextView title,version;
         holder_version(View itemView) {
             super(itemView);
+            linearLayout = itemView.findViewById(R.id.item_version_linear);
+            imageView = itemView.findViewById(R.id.item_version_img);
+            title = itemView.findViewById(R.id.item_version_title);
+            version = itemView.findViewById(R.id.item_version_version);
         }
     }
 
@@ -639,6 +646,18 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_language)holder).textView.setOnClickListener(langOnclick);
                     break;
                 case item_Main.VERSION:
+                    View.OnClickListener clickVersion = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent browser = new Intent(Intent.ACTION_VIEW);
+                            browser.setData(Uri.parse(mContext.getString(R.string.website)));
+                            mContext.startActivity(browser);
+                        }
+                    };
+                    ((holder_version)holder).linearLayout.setOnClickListener(clickVersion);
+                    ((holder_version)holder).imageView.setOnClickListener(clickVersion);
+                    ((holder_version)holder).title.setOnClickListener(clickVersion);
+
                     break;
             }
         }

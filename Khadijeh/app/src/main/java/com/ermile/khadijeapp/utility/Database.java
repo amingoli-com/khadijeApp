@@ -34,7 +34,7 @@ public class Database extends SQLiteAssetHelper {
     public static String select_del(String id){
         return "SELECT * FROM "+table_del+
                 " WHERE "+del_id + " = '"+id+"' "+
-                " AND "+del_liked + " = 'true' ";
+                " AND "+del_liked + " = 'true' limit 1";
 
 
     }

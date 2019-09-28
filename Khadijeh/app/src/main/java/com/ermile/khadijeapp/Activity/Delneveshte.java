@@ -1,16 +1,7 @@
 package com.ermile.khadijeapp.Activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +11,17 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.ermile.khadijeapp.Adaptor.Adaptor_del;
 import com.ermile.khadijeapp.Item.item_del;
 import com.ermile.khadijeapp.R;
 import com.ermile.khadijeapp.api.apiV6;
-import com.ermile.khadijeapp.utility.Database;
+import com.ermile.khadijeapp.utility.Dialog;
 import com.ermile.khadijeapp.utility.SaveManager;
 import com.nex3z.togglebuttongroup.button.OnCheckedChangeListener;
 import com.nex3z.togglebuttongroup.button.ToggleButton;
@@ -38,26 +35,32 @@ import java.util.List;
 
 public class Delneveshte extends AppCompatActivity {
 
-    List<item_del> itemDels;
     RecyclerView recyclerView;
     Adaptor_del adaptorDel;
     LinearLayoutManager LayoutManager;
+    List<item_del> itemDels;
     boolean men = false;
     String sex = "famale";
-
     ProgressBar progressBar;
-
+    LinearLayout send_del_acdel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delneveshte);
 
+        String url = getString(R.string.url_del);
+        itemDels = new ArrayList<>();
+        recyclerView = findViewById(R.id.recyclerview_del);
+        adaptorDel = new Adaptor_del(this,itemDels);
+        LayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        recyclerView.setAdapter(adaptorDel);
+
+
+
+
         progressBar = findViewById(R.id.progress_del);
-
-
-        final LinearLayout send_del_acdel = findViewById(R.id.send_del_acdel);
-
+        send_del_acdel = findViewById(R.id.send_del_acdel);
         send_del_acdel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,20 +68,9 @@ public class Delneveshte extends AppCompatActivity {
             }
         });
 
-
-        itemDels = new ArrayList<>();
-        recyclerView = findViewById(R.id.recyclerview_del);
-        adaptorDel = new Adaptor_del(this,itemDels);
-        LayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        recyclerView.setAdapter(adaptorDel);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setItemViewCacheSize(10);
-
-        String url = getString(R.string.url_del);
         String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
 
         apiV6.del(url,apikey,new apiV6.delListener() {
-            @SuppressLint("RestrictedApi")
             @Override
             public void result(String respone) {
                 try {
@@ -97,20 +89,10 @@ public class Delneveshte extends AppCompatActivity {
                             name = object.getString("name");
                         }
 
-                        SQLiteDatabase databases = new Database(getApplicationContext()).getReadableDatabase();
-                        @SuppressLint("Recycle") Cursor checkID_del = databases.rawQuery(Database.select_del(id),null);
+                        itemDels.add(new item_del(name,content,null,plus,sex,id,false));
+                        recyclerView.setLayoutManager(LayoutManager);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-                        if (checkID_del.getCount() == 0){
-                            itemDels.add(new item_del(name,content,null,plus,sex,id,false));
-                            recyclerView.setLayoutManager(LayoutManager);
-                            recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        }else {
-                            itemDels.add(new item_del(name,content,null,plus,sex,id,true));
-                            recyclerView.setLayoutManager(LayoutManager);
-                            recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        }
-                        databases.close();
-                        checkID_del.close();
 
 
 
@@ -125,8 +107,8 @@ public class Delneveshte extends AppCompatActivity {
 
             @Override
             public void error(String error) {
-                finish();
-                startActivity(new Intent(getApplicationContext(),errorNet.class));
+                Intent getintent = getIntent();
+                new Dialog(Delneveshte.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
 
             }
         });
@@ -214,8 +196,15 @@ public class Delneveshte extends AppCompatActivity {
 
             @Override
             public void error(String error) {
-
+                Toast.makeText(Delneveshte.this, getString(R.string.errorNet_title_snackBar), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -24,7 +24,7 @@
     <string name="post">https://khadije.com/api/v6/posts</string>
     <string name="url_mission">https://khadije.com/api/v6/mission</string>
     <string name="url_vision">https://khadije.com/api/v6/vision</string>
-    <string name="url_contact">https://khadije.com/fa/api/v6/contact</string>
+    <string name="url_contact">https://khadije.com/api/v6/contact</string>
     <string name="url_about">https://khadije.com/api/v6/about</string>
     <string name="sex_female">female</string>
     <string name="sex_male">male</string>
@@ -32,13 +32,15 @@
     <string name="edt_mobile">Mobile optional</string>
     <string name="edt_writ_del">Wrote your heart sounds</string>
     <string name="send">Send</string>
-    <string name="full_list" translatable="false">Full List</string>
+    <string name="full_list">Full List</string>
 
-    <string name="version">Version 37</string>
+    <string name="version">Version 38</string>
     <string name="send_delneveshteh">Send Self</string>
     <string name="tost_exit">Please click BACK again to exit</string>
     <string name="update_now">Update Now</string>
     <string name="smile">https://khadije.com/en/api/v6/smile</string>
     <string name="msg_token_fmt">msg_token_fmt</string>
+    <string name="later">Later</string>
+    <string name="website">https://khadije.com/en</string>
 
 </resources>

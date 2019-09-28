@@ -20,18 +20,9 @@
             tools:ignore="InnerclassSeparator"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name="com.ermile.khadijeapp.Activity.errorNet"
-            tools:ignore="InnerclassSeparator"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"/>
         <activity
             android:name="com.ermile.khadijeapp.Activity.Language"
             tools:ignore="InnerclassSeparator" />
-
-        <activity android:name="com.ermile.khadijeapp.Activity.Add_Delneveshte"
-            tools:ignore="InnerclassSeparator"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"/>
 
         <activity android:name="com.ermile.khadijeapp.Activity.MainActivity"
             tools:ignore="InnerclassSeparator"

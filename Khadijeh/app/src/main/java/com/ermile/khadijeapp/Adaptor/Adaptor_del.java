@@ -55,7 +55,9 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
         String text = mData.get(position).getText();
         String sex = mData.get(position).getSex();
         String name = mData.get(position).getName();
-        Boolean last_liked = mData.get(position).isLast_liked();
+//        boolean last_liked = mData.get(position).isLast_liked();
+        final String id = mData.get(position).getId();
+        holder.bg_img_plus.setColorFilter(Color.parseColor("#757474"));
 
         if (name != null){
             holder.name.setVisibility(View.VISIBLE);
@@ -72,11 +74,15 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
             holder.avatar.setImageResource(R.drawable.man);
         }
 
-        if (last_liked){
+        SQLiteDatabase databases = new Database(context).getReadableDatabase();
+        Cursor checkID_del = databases.rawQuery(Database.select_del(id),null);
+
+
+        if (checkID_del.getCount() == 1){
             holder.bg_img_plus.setColorFilter(Color.RED);
         }
-
-        final String id = mData.get(position).getId();
+        databases.close();
+        checkID_del.close();
 
         final String url = context.getString(R.string.url_del_like);
 
