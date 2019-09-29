@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -48,8 +49,13 @@ public class LanguageAdaptor extends RecyclerView.Adapter<LanguageAdaptor.MyView
 
         item_Language aItem = itemList.get(position);
 
+        holder.tik.setVisibility(View.GONE);
         holder.titel.setText(aItem.getTitle());
         holder.titel.setTag(aItem.getTag());
+
+        if (aItem.isChBoxVisibel()){
+            holder.tik.setVisibility(View.VISIBLE);
+        }
 /*
         holder.checkLanguage.setVisibility(aItem.getChBoxVisibel());
 */
@@ -84,6 +90,7 @@ public class LanguageAdaptor extends RecyclerView.Adapter<LanguageAdaptor.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView titel;
+        ImageView tik;
 /*
         ImageView checkLanguage;
 */
@@ -94,6 +101,7 @@ public class LanguageAdaptor extends RecyclerView.Adapter<LanguageAdaptor.MyView
             super(itemView);
             linrLnaguage = itemView.findViewById(R.id.linrLnaguage);
             titel = itemView.findViewById(R.id.titleLanguage);
+            tik = itemView.findViewById(R.id.language_tik);
 /*
             checkLanguage = itemView.findViewById(R.id.checkLanguage);
 */

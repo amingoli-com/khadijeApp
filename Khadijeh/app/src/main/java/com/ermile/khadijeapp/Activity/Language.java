@@ -28,7 +28,7 @@ public class Language extends AppCompatActivity {
 
 
     RecyclerView relv_Language;
-    List<item_Language> mItem = new ArrayList<>();
+    List<item_Language> mItem ;
     LanguageAdaptor mAdapter;
 
     @Override
@@ -36,6 +36,7 @@ public class Language extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language);
 
+        mItem = new ArrayList<>();
         String url = getString(R.string.url_language);
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -68,17 +69,17 @@ public class Language extends AppCompatActivity {
                         String key = (String) keys.next();
                         JSONObject lang_key = lang_list.getJSONObject(key);
                         if (lang_list.get(key) instanceof JSONObject) {
-                            if (appLanguage == lang_key.getString("name")) {
+                            if (appLanguage.equals(lang_key.getString("name"))) {
                                 mItem.add(new item_Language(
                                         lang_key.getString("localname"),
                                         lang_key.getString("name"),
-                                        View.VISIBLE));
+                                        true));
                                 mAdapter.notifyDataSetChanged();
                             } else {
                                 mItem.add(new item_Language(
                                         lang_key.getString("localname"),
                                         lang_key.getString("name"),
-                                        View.INVISIBLE));
+                                        false));
                                 mAdapter.notifyDataSetChanged();
                             }
                         }

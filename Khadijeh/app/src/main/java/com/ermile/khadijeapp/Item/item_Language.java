@@ -4,9 +4,9 @@ public class item_Language {
 
     private String title;
     private String tag;
-    private int chBoxVisibel;
+    private boolean chBoxVisibel;
 
-    public item_Language(String title, String tag, int chBoxVisibel) {
+    public item_Language(String title, String tag, boolean chBoxVisibel) {
         this.title = title;
         this.tag = tag;
         this.chBoxVisibel = chBoxVisibel;
@@ -28,11 +28,11 @@ public class item_Language {
         this.tag = tag;
     }
 
-    public int getChBoxVisibel() {
+    public boolean isChBoxVisibel() {
         return chBoxVisibel;
     }
 
-    public void setChBoxVisibel(int chBoxVisibel) {
+    public void setChBoxVisibel(boolean chBoxVisibel) {
         this.chBoxVisibel = chBoxVisibel;
     }
 }
