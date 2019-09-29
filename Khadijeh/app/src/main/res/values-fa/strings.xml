@@ -33,8 +33,8 @@
     <string name="edt_mobile">موبایل اختیاری</string>
     <string name="send">ارسال</string>
     <string name="full_list">لیست کامل</string>
-
-    <string name="version">نسخه ۳۸</string>
+    <string name="update_android">اندروید شما خیلی قدیمی است!</string>
+    <string name="version">نسخه ۴۰</string>
     <string name="send_delneveshteh">ارسال دل نوشته</string>
     <string name="tost_exit">برای خروج مجددا کلید برگشت را لمس کنید</string>
     <string name="update_now">بروزرسانی</string>

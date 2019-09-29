@@ -26,6 +26,7 @@ import com.ermile.khadijeapp.Static.tag;
 import com.ermile.khadijeapp.api.apiV6;
 import com.ermile.khadijeapp.utility.Dialog;
 import com.ermile.khadijeapp.utility.SaveManager;
+import com.ermile.khadijeapp.utility.set_language_device;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onResume() {
+        new set_language_device(this);
         startService(new Intent(MainActivity.this, Notification.class));
         super.onResume();
     }

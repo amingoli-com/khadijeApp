@@ -11,8 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ermile.khadijeapp.R;
+import com.ermile.khadijeapp.Service.Notification;
 import com.ermile.khadijeapp.api.apiV6;
 import com.ermile.khadijeapp.utility.Dialog;
+import com.ermile.khadijeapp.utility.set_language_device;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +23,12 @@ public class ApiView extends AppCompatActivity {
 
     TextView tite,text_news;
     ProgressBar progressBar;
+
+    @Override
+    protected void onResume() {
+        new set_language_device(this);
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -34,7 +34,7 @@
     <string name="send">الإرسال</string>
     <string name="full_list">قائمة كاملة</string>
 
-    <string name="version">النسخة ۳۸</string>
+    <string name="version">النسخة ۴۰</string>
     <string name="send_delneveshteh">ارسال التعبير</string>
     <string name="tost_exit">للخروج المس زر الرجوع مرة أخرى</string>
     <string name="update_now">تحديث الان</string>
@@ -42,5 +42,7 @@
     <string name="msg_token_fmt">msg_token_fmt</string>
     <string name="later">بعداً</string>
     <string name="website">https://khadije.com/ar</string>
+    <string name="update_android">جهاز آندروید لديك قديم جدًا!</string>
+
 
 </resources>

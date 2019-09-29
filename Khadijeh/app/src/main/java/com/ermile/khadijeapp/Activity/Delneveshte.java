@@ -23,6 +23,7 @@ import com.ermile.khadijeapp.R;
 import com.ermile.khadijeapp.api.apiV6;
 import com.ermile.khadijeapp.utility.Dialog;
 import com.ermile.khadijeapp.utility.SaveManager;
+import com.ermile.khadijeapp.utility.set_language_device;
 import com.nex3z.togglebuttongroup.button.OnCheckedChangeListener;
 import com.nex3z.togglebuttongroup.button.ToggleButton;
 
@@ -43,6 +44,12 @@ public class Delneveshte extends AppCompatActivity {
     String sex = "famale";
     ProgressBar progressBar;
     LinearLayout send_del_acdel;
+
+    @Override
+    protected void onResume() {
+        new set_language_device(this);
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

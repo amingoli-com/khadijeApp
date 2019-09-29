@@ -16,6 +16,7 @@ import com.ermile.khadijeapp.R;
 import com.ermile.khadijeapp.api.apiV6;
 import com.ermile.khadijeapp.utility.Dialog;
 import com.ermile.khadijeapp.utility.SaveManager;
+import com.ermile.khadijeapp.utility.set_language_device;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +31,12 @@ public class Language extends AppCompatActivity {
     RecyclerView relv_Language;
     List<item_Language> mItem ;
     LanguageAdaptor mAdapter;
+
+    @Override
+    protected void onResume() {
+        new set_language_device(this);
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -15,6 +15,7 @@ import com.ermile.khadijeapp.R;
 import com.ermile.khadijeapp.api.GetAndroidDetail;
 import com.ermile.khadijeapp.utility.Dialog;
 import com.ermile.khadijeapp.utility.SaveManager;
+import com.ermile.khadijeapp.utility.set_language_device;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import org.json.JSONArray;
@@ -35,6 +36,12 @@ public class Intro extends AppCompatActivity {
     int count = 0;
 
     String next,pravs,skip;
+
+    @Override
+    protected void onResume() {
+        new set_language_device(this);
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

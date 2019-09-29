@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +20,7 @@ import com.ermile.khadijeapp.api.SingUpUser;
 import com.ermile.khadijeapp.api.Token;
 import com.ermile.khadijeapp.utility.CheckVersion;
 import com.ermile.khadijeapp.utility.SaveManager;
+import com.ermile.khadijeapp.utility.set_language_device;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Locale;
@@ -41,13 +43,18 @@ public class Splash extends AppCompatActivity {
     };
 
     @Override
+    protected void onResume() {
+        new set_language_device(this);
+        super.onResume();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         setAppLanguage();
         linearLayout = findViewById(R.id.linear_splash);
     }
-
 
     private void setAppLanguage(){
         String AppLanguage = SaveManager.get(this).getstring_appINFO().get(appLanguage);

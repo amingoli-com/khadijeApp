@@ -19,6 +19,7 @@ import com.ermile.khadijeapp.Activity.Splash;
 import com.ermile.khadijeapp.Item.item_Language;
 import com.ermile.khadijeapp.R;
 import com.ermile.khadijeapp.utility.SaveManager;
+import com.ermile.khadijeapp.utility.set_language_device;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -64,21 +65,12 @@ public class LanguageAdaptor extends RecyclerView.Adapter<LanguageAdaptor.MyView
             public void onClick(View view) {
                 SaveManager.get(mContext).change_appLanguage(holder.titel.getTag().toString());
                 SaveManager.get(mContext).change_LanguageByUser(false);
-                setLocale(holder.titel.getTag().toString());
+                new set_language_device(mContext);
                 Intent refresh = new Intent(mContext, Splash.class);
                 ((Activity)mContext).finish();
                 mContext.startActivity(refresh);
             }
         });
-
-    }
-    public void setLocale(String lang) {
-        Locale myLocale = new Locale(lang);
-        Resources res = mContext.getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
 
     }
 

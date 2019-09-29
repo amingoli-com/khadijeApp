@@ -34,7 +34,7 @@
     <string name="send">Send</string>
     <string name="full_list">Full List</string>
 
-    <string name="version">Version 38</string>
+    <string name="version">Version 40</string>
     <string name="send_delneveshteh">Send Self</string>
     <string name="tost_exit">Please click BACK again to exit</string>
     <string name="update_now">Update Now</string>
@@ -42,5 +42,6 @@
     <string name="msg_token_fmt">msg_token_fmt</string>
     <string name="later">Later</string>
     <string name="website">https://khadije.com/en</string>
+    <string name="update_android">Your Android is too old!</string>
 
 </resources>
