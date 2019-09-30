@@ -43,6 +43,9 @@
     <string name="later">بعداً</string>
     <string name="website">https://khadije.com/ar</string>
     <string name="update_android">جهاز آندروید لديك قديم جدًا!</string>
+    <string name="next">التالي</string>
+    <string name="prev">سابق</string>
+    <string name="start">بداية</string>
 
 
 </resources>

@@ -1,10 +1,12 @@
 package com.ermile.khadijeapp.Adaptor;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,11 +43,26 @@ public class Adaptor_Intro extends RecyclerView.Adapter<Adaptor_Intro.ViewHolder
         String image = itemIntroList.get(position).getImage();
         String title = itemIntroList.get(position).getTitle();
         final String content = itemIntroList.get(position).getDesc();
+
+        String bg_color = itemIntroList.get(position).getBg_color_layout();
+        String title_color = itemIntroList.get(position).getColot_title();
+        String desc_color = itemIntroList.get(position).getColot_desc();
+
         if (image != null){
             Glide.with(context).load(image).into(holder.imageViews);
         }
         holder.title.setText(title);
         holder.content.setText(content);
+
+        if (bg_color != null){
+            holder.linearLayout.setBackgroundColor(Color.parseColor(bg_color));
+        }
+        if (title_color != null){
+            holder.title.setTextColor(Color.parseColor(title_color));
+        }
+        if (desc_color != null){
+            holder.title.setTextColor(Color.parseColor(desc_color));
+        }
     }
 
     // total number of rows
@@ -57,11 +74,13 @@ public class Adaptor_Intro extends RecyclerView.Adapter<Adaptor_Intro.ViewHolder
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout linearLayout;
         ImageView imageViews;
         TextView title,content;
 
         ViewHolder(View itemView) {
             super(itemView);
+            linearLayout = itemView.findViewById(R.id.linear_inro_item);
             imageViews = itemView.findViewById(R.id.intro_img);
             title = itemView.findViewById(R.id.intro_title);
             content = itemView.findViewById(R.id.intro_desc);

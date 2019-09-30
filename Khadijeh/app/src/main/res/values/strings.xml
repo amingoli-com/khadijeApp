@@ -43,5 +43,8 @@
     <string name="later">Later</string>
     <string name="website">https://khadije.com/en</string>
     <string name="update_android">Your Android is too old!</string>
+    <string name="next">Next</string>
+    <string name="prev">Prev</string>
+    <string name="start">Start</string>
 
 </resources>
