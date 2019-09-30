@@ -96,7 +96,8 @@ public class ListNews extends AppCompatActivity {
                         null,null,null,
                         image_news,title_news,text_news,id_news,
                         null,
-                        null,null,null,null));
+                        null,null,null,null,
+                        null));
                 recylerview_listNews.setLayoutManager(LayoutManager_list);
                 recylerview_listNews.setItemAnimator(new DefaultItemAnimator());
             }

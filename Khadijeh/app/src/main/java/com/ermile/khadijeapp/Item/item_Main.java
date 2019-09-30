@@ -38,8 +38,9 @@ public class item_Main {
     public String news_id;
     public String hr_url_img;
     public String slide_image,slide_title,slide_desc,slide_id;
+    public String versionName;
 
-    public item_Main(int type, String baner_img, String baner_url, String link1_img, String link1_url, String link2_img_1, String link2_img_2, String link2_url_1, String link2_url_2, String link3_url_img, String link3_title, String link3_desc, String link3_link, String link4_url_img1, String link4_text_1, String l4_url_1, String link4_type_1, String link4_url_img2, String link4_text_2, String l4_url_2, String link4_type_2, String link4_url_img3, String link4_text_3, String l4_url_3, String link4_type_3, String link4_url_img4, String link4_text_4, String l4_url_4, String link4_type_4, String titleLink_title, String titleLink_go, String titleLink_url, String titleNONE_title, String salavat_count, String salavat_readText, String salavat_text, String newsText_title, String newsText_desc, String newsText_img, String news_url_img, String news_title, String news_desc, String news_id, String hr_url_img, String slide_image, String slide_title, String slide_desc, String slide_id) {
+    public item_Main(int type, String baner_img, String baner_url, String link1_img, String link1_url, String link2_img_1, String link2_img_2, String link2_url_1, String link2_url_2, String link3_url_img, String link3_title, String link3_desc, String link3_link, String link4_url_img1, String link4_text_1, String l4_url_1, String link4_type_1, String link4_url_img2, String link4_text_2, String l4_url_2, String link4_type_2, String link4_url_img3, String link4_text_3, String l4_url_3, String link4_type_3, String link4_url_img4, String link4_text_4, String l4_url_4, String link4_type_4, String titleLink_title, String titleLink_go, String titleLink_url, String titleNONE_title, String salavat_count, String salavat_readText, String salavat_text, String newsText_title, String newsText_desc, String newsText_img, String news_url_img, String news_title, String news_desc, String news_id, String hr_url_img, String slide_image, String slide_title, String slide_desc, String slide_id, String versionName) {
         this.type = type;
         this.baner_img = baner_img;
         this.baner_url = baner_url;
@@ -88,5 +89,6 @@ public class item_Main {
         this.slide_title = slide_title;
         this.slide_desc = slide_desc;
         this.slide_id = slide_id;
+        this.versionName = versionName;
     }
 }

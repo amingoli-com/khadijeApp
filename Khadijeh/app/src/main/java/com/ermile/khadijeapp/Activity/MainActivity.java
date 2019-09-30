@@ -23,6 +23,7 @@ import com.ermile.khadijeapp.Item.item_link_2_4;
 import com.ermile.khadijeapp.R;
 import com.ermile.khadijeapp.Service.Notification;
 import com.ermile.khadijeapp.Static.tag;
+import com.ermile.khadijeapp.Static.value;
 import com.ermile.khadijeapp.api.apiV6;
 import com.ermile.khadijeapp.utility.Dialog;
 import com.ermile.khadijeapp.utility.SaveManager;
@@ -46,9 +47,9 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onResume() {
+        super.onResume();
         new set_language_device(this);
         startService(new Intent(MainActivity.this, Notification.class));
-        super.onResume();
     }
 
     @Override
@@ -186,7 +187,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 null,
-                null,null,null,null));
+                null,null,null,null,
+                null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -205,7 +207,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 null,
-                null,responeArray,null,null));
+                null,responeArray,null,null,
+                null));
 
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
@@ -223,7 +226,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 null,
-                null,null,null,null));
+                null,null,null,null,
+                null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -254,7 +258,8 @@ public class MainActivity extends AppCompatActivity  {
                     null,null,null,
                     null,null,null,null,
                     null,
-                    null,null,null,null));
+                    null,null,null,null,
+                    null));
             recylerview.setLayoutManager(LayoutManager);
             recylerview.setItemAnimator(new DefaultItemAnimator());
 
@@ -280,7 +285,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 null,
-                null,null,null,null));
+                null,null,null,null,
+                null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -320,7 +326,8 @@ public class MainActivity extends AppCompatActivity  {
                     null,null,null,
                     null,null,null,null,
                     null,
-                    null,null,null,null));
+                    null,null,null,null,
+                    null));
             recylerview.setLayoutManager(LayoutManager);
             recylerview.setItemAnimator(new DefaultItemAnimator());
 
@@ -345,7 +352,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 null,
-                null,null,null,null));
+                null,null,null,null,
+                null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -363,7 +371,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 null,
-                null,null,null,null));
+                null,null,null,null,
+                null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -381,7 +390,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 null,
-                null,null,null,null));
+                null,null,null,null,
+                null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -399,7 +409,8 @@ public class MainActivity extends AppCompatActivity  {
                 title,link,null,
                 null,null,null,null,
                 null,
-                null,null,null,null));
+                null,null,null,null,
+                null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -436,7 +447,8 @@ public class MainActivity extends AppCompatActivity  {
                         null,null,null,
                         image_news,title_news,text_news,id_news,
                         null,
-                        null,null,null,null));
+                        null,null,null,null,
+                        null));
                 recylerview.setLayoutManager(LayoutManager);
                 recylerview.setItemAnimator(new DefaultItemAnimator());
             }
@@ -463,7 +475,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 img_url,
-                null,null,null,null));
+                null,null,null,null,
+                null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -481,7 +494,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 null,
-                null,null,null,null));
+                null,null,null,null,
+                null));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
@@ -499,7 +513,8 @@ public class MainActivity extends AppCompatActivity  {
                 null,null,null,
                 null,null,null,null,
                 null,
-                null,null,null,null));
+                null,null,null,null,
+                value.versionName));
         recylerview.setLayoutManager(LayoutManager);
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }

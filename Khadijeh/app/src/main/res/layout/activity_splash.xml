@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/linear_splash"
     android:gravity="center"
+    android:background="#fff"
     tools:context=".Activity.Splash">
 
     <LinearLayout

@@ -83,7 +83,8 @@ public class News extends AppCompatActivity {
                             title,String.valueOf(html_content),thumb,
                             null,null,null,null,
                             null,
-                            null,null,null,null));
+                            null,null,null,null,
+                            null));
                     recylerviewss.setLayoutManager(LayoutManager);
                     recylerviewss.setItemAnimator(new DefaultItemAnimator());
 
@@ -107,7 +108,8 @@ public class News extends AppCompatActivity {
                         null,null,null,
                         null,null,null,null,
                         null,
-                        null,responeArray,null,null));
+                        null,responeArray,null,null,
+                        null));
 
                 recylerviewss.setLayoutManager(LayoutManager);
                 recylerviewss.setItemAnimator(new DefaultItemAnimator());

@@ -1,5 +1,6 @@
 package com.ermile.khadijeapp.Adaptor;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -163,12 +165,14 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         TextView title, desc;
         ImageView imageView_news;
+        CardView cardView;
 
         holder_show_news(View itemView) {
             super(itemView);
 
             this.title = itemView.findViewById(R.id.title_show_news);
             this.desc = itemView.findViewById(R.id.text_show_news);
+            this.cardView = itemView.findViewById(R.id.carview_show_news);
             this.imageView_news = itemView.findViewById(R.id.imag_show_news);
         }
     }
@@ -344,6 +348,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int listPosition) {
         final Intent go = new Intent(mContext, Web_View.class);
@@ -568,6 +573,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                 case item_Main.NEWS_TEXT:
                     if (object.newsText_img != null){
+                        ((holder_show_news)holder).cardView.setVisibility(View.VISIBLE);
                         Glide.with(mContext).load(object.newsText_img).into(((holder_show_news) holder).imageView_news);
                     }
                     ((holder_show_news) holder).title.setText(object.newsText_title);
@@ -646,6 +652,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((holder_language)holder).textView.setOnClickListener(langOnclick);
                     break;
                 case item_Main.VERSION:
+                    ((holder_version)holder).version.setText(mContext.getString(R.string.version)+object.versionName);
                     View.OnClickListener clickVersion = new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

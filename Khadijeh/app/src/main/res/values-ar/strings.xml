@@ -34,7 +34,7 @@
     <string name="send">الإرسال</string>
     <string name="full_list">قائمة كاملة</string>
 
-    <string name="version">النسخة ۴۰</string>
+    <string name="version">"النسخة "</string>
     <string name="send_delneveshteh">ارسال التعبير</string>
     <string name="tost_exit">للخروج المس زر الرجوع مرة أخرى</string>
     <string name="update_now">تحديث الان</string>
