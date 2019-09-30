@@ -75,11 +75,9 @@
 
         <EditText
             android:textSize="@dimen/_10sdp"
-            android:inputType="textLongMessage"
-            android:maxLines="1"
+            android:maxLines="600"
             android:id="@+id/addel_edt_text"
             android:hint="@string/edt_writ_del"
-            android:minHeight="150dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
