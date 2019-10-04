@@ -161,31 +161,37 @@ public class Web_View extends AppCompatActivity {
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
                         view.loadUrl(url, sernd_headers);
 
-
-                        for (int i = 0; i < 3; i++) {
-                            if (url.startsWith(url_pay[i])) {
-                                Intent browser = new Intent(Intent.ACTION_VIEW);
-                                browser.setData(Uri.parse(url));
-                                startActivity(browser);
-                                finish();
-                                return true;
-                            }
-                            else if (!url.substring(0,19).startsWith(url_site)){
-                                Intent browser = new Intent(Intent.ACTION_VIEW);
-                                browser.setData(Uri.parse(url));
-                                startActivity(browser);
-                                finish();
-                            }
-                            else if (url.startsWith(url_del[i])){
-                                startActivity(new Intent(Web_View.this,Delneveshte.class));
-                                finish();
-                            }
-                            else if ((url.startsWith(url_news[i])))
-                            {
-                                startActivity(new Intent(Web_View.this,ListNews.class));
-                                finish();
+                        if (url.startsWith("tel:")) {
+                            Intent intent = new Intent(Intent.ACTION_DIAL,
+                                    Uri.parse(url));
+                            startActivity(intent);
+                        }else {
+                            for (int i = 0; i < 3; i++) {
+                                if (url.startsWith(url_pay[i])) {
+                                    Intent browser = new Intent(Intent.ACTION_VIEW);
+                                    browser.setData(Uri.parse(url));
+                                    startActivity(browser);
+                                    finish();
+                                    return true;
+                                }
+                                else if (!url.substring(0,19).startsWith(url_site)){
+                                    Intent browser = new Intent(Intent.ACTION_VIEW);
+                                    browser.setData(Uri.parse(url));
+                                    startActivity(browser);
+                                    finish();
+                                }
+                                else if (url.startsWith(url_del[i])){
+                                    startActivity(new Intent(Web_View.this,Delneveshte.class));
+                                    finish();
+                                }
+                                else if ((url.startsWith(url_news[i])))
+                                {
+                                    startActivity(new Intent(Web_View.this,ListNews.class));
+                                    finish();
+                                }
                             }
                         }
+
                         return false;
                     }
                     @Override
