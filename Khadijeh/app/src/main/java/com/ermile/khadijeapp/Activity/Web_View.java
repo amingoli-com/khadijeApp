@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.webkit.ValueCallback;
@@ -34,7 +35,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Web_View extends AppCompatActivity {
-    Map<String, String> sernd_headers = new HashMap<>();
+
+    boolean errorUrl = true;
+    Map<String, String> send_headers = new HashMap<>();
     private String URL = null;
     int a = 0;
 
@@ -56,6 +59,7 @@ public class Web_View extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        errorUrl = true;
         new set_language_device(this);
         super.onResume();
     }
@@ -76,12 +80,12 @@ public class Web_View extends AppCompatActivity {
 
 
 
-            sernd_headers.put("x-app-request", "android");
-            sernd_headers.put("apikey",apikey);
-            sernd_headers.put("usercode",usercode);
-            sernd_headers.put("zonid",zonid);
-            sernd_headers.put("versionCode",String.valueOf(value.versionCode));
-            sernd_headers.put("versionName",value.versionName);
+            send_headers.put("x-app-request", "android");
+            send_headers.put("apikey",apikey);
+            send_headers.put("usercode",usercode);
+            send_headers.put("zonid",zonid);
+            send_headers.put("versionCode",String.valueOf(value.versionCode));
+            send_headers.put("versionName",value.versionName);
 
             swipeRefreshLayout = findViewById(R.id.swipRefresh_WebView);
             webView_object = findViewById(R.id.webView_WebView);
@@ -100,10 +104,10 @@ public class Web_View extends AppCompatActivity {
                     @SuppressLint("NewApi")
                     @Override
                     public void onRefresh() {
-                        webView_object.loadUrl(webView_object.getUrl(), sernd_headers);
+                        webView_object.loadUrl(webView_object.getUrl(), send_headers);
                     }
                 });
-                webView_object.loadUrl(URL, sernd_headers);
+                webView_object.loadUrl(URL, send_headers);
                 webView_object.setWebChromeClient(new WebChromeClient(){
 
                     public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
@@ -152,19 +156,32 @@ public class Web_View extends AppCompatActivity {
                     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
                         finish();
                         if (a == 0){
-                            Toast.makeText(Web_View.this, getString(R.string.errorNet_title_snackBar), Toast.LENGTH_SHORT).show();
+                            Log.d("WebView_onReceivedError", errorUrl + "WebView: "+view.getUrl());
+                            if (errorUrl){
+                                Toast.makeText(Web_View.this, getString(R.string.errorNet_title_snackBar), Toast.LENGTH_SHORT).show();
+                            }
                             a++;
                         }
                     }
                     // in refresh send header
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                        view.loadUrl(url, sernd_headers);
-
-                        if (url.startsWith("tel:")) {
-                            Intent intent = new Intent(Intent.ACTION_DIAL,
-                                    Uri.parse(url));
-                            startActivity(intent);
+                        view.loadUrl(url, send_headers);
+                        if (url.startsWith(WebView.SCHEME_TEL) ||
+                                url.startsWith("sms:") ||
+                                url.startsWith(WebView.SCHEME_MAILTO) ||
+                                url.startsWith(WebView.SCHEME_GEO) ||
+                                url.startsWith("maps:") ||
+                                url.startsWith("tg:")
+                        ) {
+                            view.loadUrl(URL, send_headers);
+                            errorUrl = false;
+                            try {
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setData(Uri.parse(url));
+                                startActivity(intent);
+                            } catch (android.content.ActivityNotFoundException e) {
+                            }
                         }else {
                             for (int i = 0; i < 3; i++) {
                                 if (url.startsWith(url_pay[i])) {
@@ -275,17 +292,29 @@ public class Web_View extends AppCompatActivity {
 
     }
 
-
-
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
-        if(webView_object.canGoBack())
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        else if(webView_object.canGoBack())
         {
             webView_object.goBack();
-        }
-        else {
+        }else {
             super.onBackPressed();
+            return;
         }
+
+
+        doubleBackToExitPressedOnce = true;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 300);
     }
 
 }
