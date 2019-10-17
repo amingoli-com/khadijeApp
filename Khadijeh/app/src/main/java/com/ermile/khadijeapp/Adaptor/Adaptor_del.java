@@ -5,10 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
     private List<item_del> mData;
     private LayoutInflater mInflater;
     private Context context;
+    private boolean duble = false;
 
     // data is passed into the constructor
     public Adaptor_del(Context context, List<item_del> data) {
@@ -84,52 +87,35 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
         databases.close();
         checkID_del.close();
 
-        final String url = context.getString(R.string.url_del_like);
 
-        View.OnClickListener clickLike = new View.OnClickListener() {
+
+
+        final View.OnClickListener clickLike = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SQLiteDatabase databases = new Database(context).getReadableDatabase();
-                @SuppressLint("Recycle") Cursor checkID_del = databases.rawQuery(Database.select_del(id),null);
-                if (checkID_del.getCount() == 0 ){
-                    final String getPlusApp = holder.plus.getText().toString();
-                    int plusApp = Integer.valueOf(getPlusApp);
-                    ++plusApp;
-                    holder.plus.setText(String.valueOf(plusApp));
-                    holder.bg_img_plus.setColorFilter(Color.RED);
-
-                    String apikey = SaveManager.get(context).getstring_appINFO().get(SaveManager.apiKey);
-                    apiV6.like_del(url,apikey, id, new apiV6.likeListener() {
-                        @Override
-                        public void liked(String respone) {
-                            try {
-                                JSONArray array = new JSONArray(respone);
-                                SQLiteDatabase database = new Database(context).getWritableDatabase();
-                                database.execSQL(Database.insetTo_del(id,"true"));
-                                database.close();
-
-                                for (int i = 0; i < array.length(); i++) {
-                                    JSONObject object = array.getJSONObject(i);
-                                    String text = object.getString("text");
-                                    Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        @Override
-                        public void filed(String error) {
-
-                        }
-                    });
-                }
-                databases.close();
-                checkID_del.close();
+                Like(holder.plus,holder.bg_img_plus,id);
             }
         };
 
         holder.bg_img_plus.setOnClickListener(clickLike);
         holder.plus.setOnClickListener(clickLike);
+
+        holder.dubelClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (duble){
+                    Like(holder.plus,holder.bg_img_plus,id);
+                }
+                duble = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        duble = false;
+                    }
+                }, 200);
+            }
+        });
+
     }
 
     // total number of rows
@@ -139,10 +125,52 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
     }
 
 
+    private void Like(TextView plus, ImageView bg_img_plus, final String id){
+        final String url = context.getString(R.string.url_del_like);
+        SQLiteDatabase databases = new Database(context).getReadableDatabase();
+        @SuppressLint("Recycle") Cursor checkID_del = databases.rawQuery(Database.select_del(id),null);
+        if (checkID_del.getCount() == 0 ){
+            final String getPlusApp = plus.getText().toString();
+            int plusApp = Integer.valueOf(getPlusApp);
+            ++plusApp;
+            plus.setText(String.valueOf(plusApp));
+            bg_img_plus.setColorFilter(Color.RED);
+
+            String apikey = SaveManager.get(context).getstring_appINFO().get(SaveManager.apiKey);
+            apiV6.like_del(url,apikey, id, new apiV6.likeListener() {
+                @Override
+                public void liked(String respone) {
+                    try {
+                        JSONArray array = new JSONArray(respone);
+                        SQLiteDatabase database = new Database(context).getWritableDatabase();
+                        database.execSQL(Database.insetTo_del(id,"true"));
+                        database.close();
+
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject object = array.getJSONObject(i);
+                            String text = object.getString("text");
+                            Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                @Override
+                public void filed(String error) {
+
+                }
+            });
+        }
+        databases.close();
+        checkID_del.close();
+    }
+
+
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name,text,plus;
         ImageView avatar,bg_img_plus;
+        RelativeLayout dubelClick;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -151,6 +179,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
             plus = itemView.findViewById(R.id.plus_del);
             bg_img_plus = itemView.findViewById(R.id.img_like);
             avatar = itemView.findViewById(R.id.imgSex_del);
+            dubelClick = itemView.findViewById(R.id.outSide_itemDelneveshte);
         }
 
     }
