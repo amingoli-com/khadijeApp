@@ -286,14 +286,22 @@ public class apiV6 {
     }
 
 
-    public static void del(String url,final String apikey, final delListener delListener){
-        StringRequest getDelRQ = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
+    public static void del(String url,int page,final String apikey, final delListener delListener){
+        StringRequest getDelRQ = new StringRequest(Request.Method.GET, url+"?page="+page, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject mainObject = new JSONObject(response);
                     boolean ok = mainObject.getBoolean("ok");
                     if (ok){
+                        if (!mainObject.isNull("pagination")){
+                            JSONObject pagination = mainObject.getJSONObject("pagination");
+                            if (!pagination.isNull("total_page")){
+                                int total_page = pagination.getInt("total_page");
+                                delListener.total_page(total_page);
+                            }
+                        }else {delListener.total_page(3);}
+
                         JSONArray result = mainObject.getJSONArray("result");
                         delListener.result(String.valueOf(result));
                     }else {
@@ -327,6 +335,7 @@ public class apiV6 {
 
     public interface delListener{
         void result(String respone);
+        void total_page(int endPage);
         void error(String error);
     }
 

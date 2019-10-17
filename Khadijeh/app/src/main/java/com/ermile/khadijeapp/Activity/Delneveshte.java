@@ -3,6 +3,7 @@ package com.ermile.khadijeapp.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Checkable;
@@ -45,6 +46,12 @@ public class Delneveshte extends AppCompatActivity {
     ProgressBar progressBar;
     LinearLayout send_del_acdel;
 
+    String url;
+    String apikey;
+    boolean oneAddDelneveshte = false;
+    int pageDelneveshte = 1;
+    int endPageDelneveshte = 2;
+
     @Override
     protected void onResume() {
         new set_language_device(this);
@@ -56,7 +63,9 @@ public class Delneveshte extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delneveshte);
 
-        String url = getString(R.string.url_del);
+        url = getString(R.string.url_del);
+        apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
+
         itemDels = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview_del);
         adaptorDel = new Adaptor_del(this,itemDels);
@@ -75,9 +84,39 @@ public class Delneveshte extends AppCompatActivity {
             }
         });
 
-        String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
 
-        apiV6.del(url,apikey,new apiV6.delListener() {
+        addItemDelneveshte(pageDelneveshte);
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                LinearLayoutManager layoutManager=LinearLayoutManager.class.cast(recyclerView.getLayoutManager());
+                int totalItemCount = layoutManager.getItemCount();
+                int lastVisible = layoutManager.findLastVisibleItemPosition();
+
+                boolean endHasBeenReached = lastVisible + 5 >= totalItemCount;
+                if (totalItemCount > 0 && endHasBeenReached) {
+                    if (!oneAddDelneveshte){
+                        if (pageDelneveshte < endPageDelneveshte){
+                            progressBar.setVisibility(View.VISIBLE);
+                            pageDelneveshte++;
+                            addItemDelneveshte(pageDelneveshte);
+                        }
+                        oneAddDelneveshte = true;
+                    }
+
+                    Log.d("Delneshte", endPageDelneveshte+" onScrolled: "+pageDelneveshte);
+                }
+            }
+        });
+
+    }
+
+
+
+    private void addItemDelneveshte(int Page){
+        apiV6.del(url,Page,apikey,new apiV6.delListener() {
             @Override
             public void result(String respone) {
                 try {
@@ -99,17 +138,26 @@ public class Delneveshte extends AppCompatActivity {
                         itemDels.add(new item_del(name,content,null,plus,sex,id,false));
                         recyclerView.setLayoutManager(LayoutManager);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-
+                        adaptorDel.notifyDataSetChanged();
 
                     }
-                    send_del_acdel.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
+                    oneAddDelneveshte = false;
+                    if (send_del_acdel.getVisibility() == View.GONE || recyclerView.getVisibility() == View.GONE){
+                        send_del_acdel.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+                    if (progressBar.getVisibility() == View.VISIBLE){
+                        progressBar.setVisibility(View.GONE);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void total_page(int endPage) {
+                endPageDelneveshte = endPage;
             }
 
             @Override
@@ -119,8 +167,6 @@ public class Delneveshte extends AppCompatActivity {
 
             }
         });
-
-
     }
 
 
