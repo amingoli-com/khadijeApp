@@ -231,6 +231,7 @@ public class Delneveshte extends AppCompatActivity {
     private void add_del(String name,String number,String text,String sexs){
         String url = getString(R.string.url_add_del);
         String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
+        Log.d("add_del", "add_del: "+" name "+name+" text "+text+" number "+number+" sexs: "+sexs);
         apiV6.sendDel(url, apikey,name, text, number, sexs, new apiV6.sendelListener() {
             @Override
             public void result(String respone) {

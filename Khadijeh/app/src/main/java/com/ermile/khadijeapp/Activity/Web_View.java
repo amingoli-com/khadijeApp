@@ -1,10 +1,12 @@
 package com.ermile.khadijeapp.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -13,6 +15,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -37,9 +40,10 @@ import java.util.Map;
 public class Web_View extends AppCompatActivity {
 
     boolean errorUrl = true;
+    boolean errorNet = false;
     Map<String, String> send_headers = new HashMap<>();
     private String URL = null;
-    int a = 0;
+    int oneStart = 0;
 
     SwipeRefreshLayout swipeRefreshLayout;
     WebView webView_object;
@@ -154,14 +158,14 @@ public class Web_View extends AppCompatActivity {
                 webView_object.setWebViewClient(new WebViewClient() {
                     @Override
                     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
-                        finish();
-                        if (a == 0){
-                            Log.d("WebView_onReceivedError", errorUrl + "WebView: "+view.getUrl());
-                            if (errorUrl){
-                                Toast.makeText(Web_View.this, getString(R.string.errorNet_title_snackBar), Toast.LENGTH_SHORT).show();
+                        if (error.getDescription().equals("net::ERR_INTERNET_DISCONNECTED")){
+                            if (oneStart == 0)
+                            {
+                                Dialog_WebView(false);
+                                oneStart++;
                             }
-                            a++;
                         }
+                        Log.d("WebView_onReceivedError", "ErrorCode= "+error.getErrorCode() +" | ErrorDescription= "+error.getDescription());
                     }
                     // in refresh send header
                     @Override
@@ -185,6 +189,8 @@ public class Web_View extends AppCompatActivity {
                         }else {
                             for (int i = 0; i < 3; i++) {
                                 if (url.startsWith(url_pay[i])) {
+                                    Log.d("WebView_onReceivedError", "url_pay");
+
                                     Intent browser = new Intent(Intent.ACTION_VIEW);
                                     browser.setData(Uri.parse(url));
                                     startActivity(browser);
@@ -192,17 +198,23 @@ public class Web_View extends AppCompatActivity {
                                     return true;
                                 }
                                 else if (!url.substring(0,19).startsWith(url_site)){
+                                    Log.d("WebView_onReceivedError", "substring(0,19)");
+
                                     Intent browser = new Intent(Intent.ACTION_VIEW);
                                     browser.setData(Uri.parse(url));
                                     startActivity(browser);
                                     finish();
                                 }
                                 else if (url.startsWith(url_del[i])){
+                                    Log.d("WebView_onReceivedError", "url_del");
+
                                     startActivity(new Intent(Web_View.this,Delneveshte.class));
                                     finish();
                                 }
                                 else if ((url.startsWith(url_news[i])))
                                 {
+                                    Log.d("WebView_onReceivedError", "url_news");
+
                                     startActivity(new Intent(Web_View.this,ListNews.class));
                                     finish();
                                 }
@@ -212,8 +224,18 @@ public class Web_View extends AppCompatActivity {
                         return false;
                     }
                     @Override
-                    public void onPageFinished(WebView view, String url) {
+                    public void onPageFinished(WebView view, String url)
+                    {
+
                         swipeRefreshLayout.setRefreshing(false);
+                        if
+                        (
+                           webView_object.getVisibility() == View.INVISIBLE
+                           && !errorNet
+                        )
+                            {
+                                webView_object.setVisibility(View.VISIBLE);
+                            }
                     }
                 });
             }
@@ -315,6 +337,40 @@ public class Web_View extends AppCompatActivity {
                 doubleBackToExitPressedOnce=false;
             }
         }, 300);
+    }
+
+
+    private void Dialog_WebView(boolean Cancelable) {
+        errorNet = true;
+        webView_object.setVisibility(View.INVISIBLE);
+        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        /*Title*/
+        builderSingle.setTitle(getString(R.string.errorNet_title_snackBar));
+        /*Message*/
+        builderSingle.setMessage("");
+        /*Button*/
+        builderSingle.setPositiveButton(getString(R.string.errorNet_button_snackBar),
+                /*Open Url*/
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        swipeRefreshLayout.setRefreshing(true);
+                        webView_object.reload();
+                        errorNet = false;
+                        oneStart = 0;
+
+                    }
+                });
+
+        builderSingle.setNeutralButton(getString(R.string.later), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+
+            }
+        });
+        builderSingle.setCancelable(Cancelable);
+        builderSingle.show();
     }
 
 }

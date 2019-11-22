@@ -10,6 +10,11 @@
     android:gravity="center|top"
     android:layoutDirection="rtl"
     android:layout_height="wrap_content">
+    
+    
+    <!--<ImageView
+        android:layout_width=""
+        android:layout_height=""-->
 
 
     <LinearLayout
